@@ -16,13 +16,19 @@ def assignment_1():
         [807, 1679, 1779, 1428, 1456, 1273, 2160, 559, 1014, 1514, ],
     ]
 
+    # vector of required truckloads at each store.
     R = [18, 7, 21, 15, 17, 10, 6, 8, 7, 7]
     
+    # matrix of truckloads from each DC to each store.
+    # indexed as X[d][s]
     X = [[model.addVar(name=f'DC{d} to S{s}') for s in S] for d in D]
     
+    # adds constraints
     for s in S:
+        # required truckloads at each store.
         model.addConstr(g.quicksum(X[d][s] for d in D) >= R[s])
     
+    # minimise total cost of transport.
     model.setObjective(
         g.quicksum(g.quicksum(C[d][s]*X[d][s] for d in D) for s in S),
         g.GRB.MINIMIZE
@@ -33,6 +39,7 @@ def assignment_1():
     for s in S:
         for d in D:
             v = X[d][s]
+            # print all non-zero variables.
             if v.x:
                 print(v.varName, v.x)
 
