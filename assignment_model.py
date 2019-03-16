@@ -3,9 +3,9 @@ from gurobipy import *
 def assignment(comm=2): 
     model = Model('WonderMarket Model 1')
 
-    # set of store numbers
+    # set of stores
     S = [f'S{i}' for i in range(10)]
-    # set of distribution centre numbers
+    # set of distribution centres
     D = [f'DC{i}' for i in range(3)]
 
     # matrix of costs of transporting 1 truckload from d to s
@@ -19,7 +19,7 @@ def assignment(comm=2):
     # maximum capacity at each distribution centre.
     M = dict(zip(D, [72, 76, 40]))
 
-    # vector of required truckloads at each store.
+    # required truckloads at each store.
     R = dict(zip(S, [18, 7, 21, 15, 17, 10, 6, 8, 7, 7]))
     
     # matrix of truckloads from each DC to each store.
