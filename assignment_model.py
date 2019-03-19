@@ -1,8 +1,14 @@
 from gurobipy import *
 
-def assignment(comm=2): 
-    model = Model('WonderMarket Model 1')
+def table(row_format, rows):
+    s = ''
+    for r in rows:
+        s += row_format.format(*r) + '\n'
+    return s
 
+def assignment(comm: int): 
+    model = Model('WonderMarket Model')
+    
     # set of stores
     S = [f'S{i}' for i in range(10)]
     # set of distribution centres
@@ -27,12 +33,18 @@ def assignment(comm=2):
     X = model.addVars(D, S, obj=C, name='X')
 
     # adds constraints.
+    constrs = {}
     # comm 1: required truckloads at each store.
-    model.addConstrs(X.sum('*', s) >= R[s] for s in S)
+    constrs['demand'] = model.addConstrs(X.sum('*', s) >= R[s] for s in S)
 
     # comm 2: maximum capacity at each distribution centre.
     if comm >= 2:
-        model.addConstrs(X.sum(d, '*') <= M[d] for d in D)
+        constrs['capacity'] = model.addConstrs(X.sum(d, '*') <= M[d] for d in D)
+
+    if comm >= 3:
+        # together, DC0 and DC2 can only provide 85 truckloads
+        # per week.
+        constrs['northside'] = model.addConstr(X.sum('DC0', '*') + X.sum('DC2', '*') <= 85)
     
     # minimise total cost of transport.
     model.modelSense = GRB.MINIMIZE
@@ -43,13 +55,33 @@ def assignment(comm=2):
     print(f'Optimised for communication {comm}.')
     print('Objective value:', model.objVal)
     print()
+    rows = []
     for s in S:
         for d in D:
             v = X[d, s]
             # print all non-zero variables.
             if v.x:
-                print(f'{v.varName} ', v.x)
-        print()
+                print(f'{v.varName} = {v.x}')
+                rows.append((v.varName, v.RC, v.obj, v.SAObjLow, v.SAObjUp))
+
+    print()
+    print('Objective Analysis')
+    #      X[DC2,S0]:  0.0 |   807.0 | -1304.0   967.0
+    print('var name    rc      obj      objLow  objHigh')
+    print(table('{}: {:4} | {:7} | {:7} {:7}', rows))
+
+    print()
+    print('Constraint Analysis')
+    for name, c_dict in constrs.items():
+        print('===', name, '===')
+        print('constr       slack  RHSLow RHSUp')
+        if not isinstance(c_dict, dict):
+            c_dict = {'': c_dict}
+        rows = []
+        for v, c in c_dict.items():
+            rows.append((f'{v} {c.sense} {c.rhs}', c.slack, c.SARHSLow, c.SARHSUp))
+        print(table('{:<10} | {:4} | {:>4}  {}', rows))
+        
 
 if __name__ == "__main__":
-    assignment(2)
+    assignment(3)
