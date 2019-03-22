@@ -27,6 +27,9 @@ def assignment(comm: int):
 
     # required truckloads at each store.
     R = dict(zip(S, [18, 7, 21, 15, 17, 10, 6, 8, 7, 7]))
+
+    # set of distribution centres on the north-side.
+    N = ['DC0', 'DC2']
     
     # matrix of truckloads from each DC to each store.
     # indexed as X[d][s]
@@ -44,7 +47,7 @@ def assignment(comm: int):
     if comm >= 3:
         # together, DC0 and DC2 can only provide 85 truckloads
         # per week.
-        constrs['northside'] = model.addConstr(X.sum('DC0', '*') + X.sum('DC2', '*') <= 85)
+        constrs['northside'] = model.addConstr(quicksum(X.sum(d, '*') for d in N) <= 85)
     
     # minimise total cost of transport.
     model.modelSense = GRB.MINIMIZE
@@ -64,23 +67,10 @@ def assignment(comm: int):
                 print(f'{v.varName} = {v.x}')
                 rows.append((v.varName, v.RC, v.obj, v.SAObjLow, v.SAObjUp))
 
+    import gurobi_pprint
+    gurobi_pprint.print_variable_analysis(X)
     print()
-    print('Objective Analysis')
-    #      X[DC2,S0]:  0.0 |   807.0 | -1304.0   967.0
-    print('var name    rc      obj      objLow  objHigh')
-    print(table('{}: {:4} | {:7} | {:7} {:7}', rows))
-
-    print()
-    print('Constraint Analysis')
-    for name, c_dict in constrs.items():
-        print('===', name, '===')
-        print('constr       slack  RHSLow RHSUp')
-        if not isinstance(c_dict, dict):
-            c_dict = {'': c_dict}
-        rows = []
-        for v, c in c_dict.items():
-            rows.append((f'{v} {c.sense} {c.rhs}', c.slack, c.SARHSLow, c.SARHSUp))
-        print(table('{:<10} | {:4} | {:>4}  {}', rows))
+    gurobi_pprint.print_constr_analysis(constrs)
         
 
 if __name__ == "__main__":
