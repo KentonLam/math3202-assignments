@@ -6,37 +6,47 @@ def table(row_format, rows):
         s += row_format.format(*r) + '\n'
     return s
 
+### DATA ###
 
+# set of stores
+Stores = [f'S{i}' for i in range(10)]
+# set of distribution centres
+DCs = [f'DC{i}' for i in range(3)]
 
-def run_assignment(comm: int, surge_demands=None): 
+# == comm 1 ==
+# matrix of costs of transporting 1 truckload from d to s
+# indexed as C[d][s]
+Cost = [
+    [1828, 1058, 2014, 2134, 1952, 2677, 2548, 2292, 2704, 1153, ],
+    [2271, 1746, 2919, 1982, 2704, 2577, 2063, 2807, 2924, 1736, ],
+    [807, 1679, 1779, 1428, 1456, 1273, 2160, 559, 1014, 1514, ],
+]
+# required truckloads at each store.
+Demand = dict(zip(Stores, [18, 7, 21, 15, 17, 10, 6, 8, 7, 7]))
+
+# == comm 2 ==
+# maximum capacity at each distribution centre.
+Capacity = dict(zip(DCs, [72, 76, 40]))
+
+# == comm 3 ==
+# set of distribution centres on the north-side.
+Northside = ['DC0', 'DC2']
+# maximum capacity of northside DCs.
+NorthsideMax = 85
+
+# == comm 4 ==
+# surge demand scenarios for each store.
+Surges = [
+    # ['S0', 'S1', 'S2', 'S3', 'S4', 'S5', 'S6', 'S7', 'S8', 'S9'],
+    [18, 7, 21, 29, 17, 10, 6, 8, 7, 7], # Scenario 1
+    [18, 7, 21, 15, 17, 10, 6, 31, 7, 7],
+    [19, 7, 21, 15, 17, 10, 6, 8, 7, 7],
+    [18, 7, 21, 15, 17, 10, 6, 8, 30, 7],
+    [18, 7, 21, 15, 18, 54, 6, 8, 7, 7],
+]
+
+def run_assignment_model(comm: int, surge_demands=None): 
     model = Model('WonderMarket Model')
-
-    # set of stores
-    Stores = [f'S{i}' for i in range(10)]
-    # set of distribution centres
-    DCs = [f'DC{i}' for i in range(3)]
-
-    # == comm 1 ==
-    # matrix of costs of transporting 1 truckload from d to s
-    # indexed as C[d][s]
-    Cost = [
-        [1828, 1058, 2014, 2134, 1952, 2677, 2548, 2292, 2704, 1153, ],
-        [2271, 1746, 2919, 1982, 2704, 2577, 2063, 2807, 2924, 1736, ],
-        [807, 1679, 1779, 1428, 1456, 1273, 2160, 559, 1014, 1514, ],
-    ]
-
-    # required truckloads at each store.
-    Demand = dict(zip(Stores, [18, 7, 21, 15, 17, 10, 6, 8, 7, 7]))
-
-    # == comm 2 ==
-    # maximum capacity at each distribution centre.
-    Capacity = dict(zip(DCs, [72, 76, 40]))
-
-    # == comm 3 ==
-    # set of distribution centres on the north-side.
-    Northside = ['DC0', 'DC2']
-    # maximum capacity of northside DCs.
-    NorthsideMax = 85
 
     # matrix of truckloads from each DC to each store.
     # indexed as X[d][s]
@@ -93,26 +103,19 @@ def run_assignment(comm: int, surge_demands=None):
     print()
     gurobi_pprint.print_constr_analysis(constrs)
         
-def assignment_4():
+comm_1 = lambda: run_assignment_model(1)
+comm_2 = lambda: run_assignment_model(2)
+comm_3 = lambda: run_assignment_model(3)
+
+def comm_4():
     print('Starting communication 4 scenarios...')
     print()
 
-    # == comm 4 ==
-    # required surge demands at each store.
-    Surges = [
-        # ['Scenario', 'S0', 'S1', 'S2', 'S3', 'S4', 'S5', 'S6', 'S7', 'S8', 'S9'],
-        [18, 7, 21, 29, 17, 10, 6, 8, 7, 7],
-        [18, 7, 21, 15, 17, 10, 6, 31, 7, 7],
-        [19, 7, 21, 15, 17, 10, 6, 8, 7, 7],
-        [18, 7, 21, 15, 17, 10, 6, 8, 30, 7],
-        [18, 7, 21, 15, 18, 54, 6, 8, 7, 7],
-    ]
-
     for i, surge in enumerate(Surges):
         print(f'== SURGE SCENARIO {i} ==')
-        run_assignment(4, surge)
+        run_assignment_model(4, surge)
         print()
         print()
 
 if __name__ == "__main__":
-    assignment_4()
+    comm_4()
