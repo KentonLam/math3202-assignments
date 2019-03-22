@@ -9,14 +9,14 @@ row_generator = {
     'constraints': TableSpec(
         'Constraint Analysis', 
         ('constr', '', 'rhs', 'slack', 'pi', 'rhs low', 'rhs high'),
-        ' {:>1} {:>5} | {:>6} {:>6} | {:>6} {:>6}', 
+        '  {:>1} {:>5} | {:>6} {:>6} | {:>7} {:>7}', 
         lambda n, c: (n, c.sense, r(c.rhs), r(c.slack), r(c.pi), r(c.SARHSLow), r(c.SARHSUp))
     ),
     'variables': TableSpec(
         'Variable Analysis', 
         ('variable', 'x', 'coeff', 'rc', 'obj low', 'obj high'),
-        ' = {:>5} * {:>8} | {:>6} | {:>6} {:>6}', 
-        lambda n, c: (n, r(c.x), r(c.obj), r(c.rc), r(c.SAObjLow), r(c.SAObjUp))),
+        '  = {:>5} * {:>6} | {:>6} | {:>7} {:>7}', 
+        lambda n, c: (c.varName, r(c.x), r(c.obj), r(c.rc), r(c.SAObjLow), r(c.SAObjUp))),
 }
 
 def _dict_to_rows(constrs_list, generator, prefix=''):
