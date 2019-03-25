@@ -94,6 +94,20 @@ surge ('S5', 10)  >  10.0 |    0.0 2577.0 |    10.0    41.0
  surge ('S8', 7)  >   7.0 |   -0.0    0.0 | -1e+100     7.0
  surge ('S9', 7)  >   7.0 |    0.0 1736.0 |     7.0    38.0
 
+Store Assignments
+store | assignments
+   S0 | DC2
+   S1 | DC0
+   S2 | DC0
+   S3 | DC1
+   S4 | DC0
+   S5 | DC1 DC2
+   S6 | DC1
+   S7 | DC2
+   S8 | DC2
+   S9 | DC1
+
+
 
 == SURGE SCENARIO 1 ==
 Optimize a model with 24 rows, 30 columns and 110 nonzeros
@@ -188,6 +202,20 @@ surge ('S7', 31)  >  31.0 |    0.0 2023.0 |    15.0    33.0
  surge ('S8', 7)  >   7.0 |   -0.0    0.0 | -1e+100     7.0
  surge ('S9', 7)  >   7.0 |    0.0 1736.0 |     7.0    29.0
 
+Store Assignments
+store | assignments
+   S0 | DC1 DC2
+   S1 | DC0
+   S2 | DC0
+   S3 | DC1
+   S4 | DC0
+   S5 | DC1
+   S6 | DC1
+   S7 | DC2
+   S8 | DC2
+   S9 | DC1
+
+
 
 == SURGE SCENARIO 2 ==
 Optimize a model with 24 rows, 30 columns and 110 nonzeros
@@ -204,7 +232,7 @@ Iteration    Objective       Primal Inf.    Dual Inf.      Time
        0    0.0000000e+00   1.462500e+01   0.000000e+00      0s
       16    1.8199300e+05   0.000000e+00   0.000000e+00      0s
 
-Solved in 16 iterations and 0.00 seconds
+Solved in 16 iterations and 0.01 seconds
 Optimal objective  1.819930000e+05
 
 Optimised for communication 4.
@@ -281,6 +309,20 @@ surge ('S5', 10)  >  10.0 |    0.0 2577.0 |    10.0    54.0
  surge ('S7', 8)  >   8.0 |    0.0 1863.0 |     8.0    14.0
  surge ('S8', 7)  >   7.0 |   -0.0    0.0 | -1e+100     7.0
  surge ('S9', 7)  >   7.0 |    0.0 1736.0 |     7.0    51.0
+
+Store Assignments
+store | assignments
+   S0 | DC2
+   S1 | DC0
+   S2 | DC0
+   S3 | DC1
+   S4 | DC0
+   S5 | DC1 DC2
+   S6 | DC1
+   S7 | DC2
+   S8 | DC2
+   S9 | DC1
+
 
 
 == SURGE SCENARIO 3 ==
@@ -375,6 +417,20 @@ surge ('S5', 10)  >  10.0 |    0.0 2577.0 |    10.0    32.0
  surge ('S7', 8)  >   8.0 |    0.0 2023.0 |     8.0    10.0
 surge ('S8', 30)  >  30.0 |    0.0 2478.0 |    14.0    32.0
  surge ('S9', 7)  >   7.0 |    0.0 1736.0 |     7.0    29.0
+
+Store Assignments
+store | assignments
+   S0 | DC1 DC2
+   S1 | DC0
+   S2 | DC0
+   S3 | DC1
+   S4 | DC0
+   S5 | DC1
+   S6 | DC1
+   S7 | DC2
+   S8 | DC2
+   S9 | DC1
+
 
 
 == SURGE SCENARIO 4 ==
@@ -471,4 +527,30 @@ surge ('S5', 54)  >  54.0 |    0.0 2577.0 |    10.0    54.0
  surge ('S8', 7)  >   7.0 |   -0.0    0.0 | -1e+100     7.0
  surge ('S9', 7)  >   7.0 |    0.0 1736.0 |     7.0     7.0
 
+Store Assignments
+store | assignments
+   S0 | DC2
+   S1 | DC0 DC1
+   S2 | DC0
+   S3 | DC1
+   S4 | DC0
+   S5 | DC1 DC2
+   S6 | DC1
+   S7 | DC2
+   S8 | DC2
+   S9 | DC1
 
+
+
+Store Assignments
+store | assignments
+   S0 | DC2 , DC1 DC2 , DC2 , DC1 DC2 , DC2 ,
+   S1 | DC0 , DC0 , DC0 , DC0 , DC0 DC1 ,
+   S2 | DC0 , DC0 , DC0 , DC0 , DC0 ,
+   S3 | DC1 , DC1 , DC1 , DC1 , DC1 ,
+   S4 | DC0 , DC0 , DC0 , DC0 , DC0 ,
+   S5 | DC1 DC2 , DC1 , DC1 DC2 , DC1 , DC1 DC2 ,
+   S6 | DC1 , DC1 , DC1 , DC1 , DC1 ,
+   S7 | DC2 , DC2 , DC2 , DC2 , DC2 ,
+   S8 | DC2 , DC2 , DC2 , DC2 , DC2 ,
+   S9 | DC1 , DC1 , DC1 , DC1 , DC1 ,

@@ -1,4 +1,5 @@
 from gurobipy import *
+from collections import defaultdict
 
 def table(row_format, rows):
     s = ''
@@ -88,20 +89,25 @@ def run_assignment_model(comm: int, surge_demands=None):
     else:
         print(f'Optimisation failed (status {model.status}).')
     print()
-    rows = []
+
+    assignments = defaultdict(list)
     for s in Stores:
         for d in DCs:
             v = X[d, s]
             # print all non-zero variables.
             if v.x:
+                assignments[s].append(d)
                 print(f'{v.varName} = {v.x}')
-                rows.append((v.varName, v.RC, v.obj, v.SAObjLow, v.SAObjUp))
 
     import gurobi_pprint
     print()
     gurobi_pprint.print_variable_analysis(X)
     print()
     gurobi_pprint.print_constr_analysis(constrs)
+    print()
+    print_assignments(assignments)
+    print()
+    return assignments
         
 comm_1 = lambda: run_assignment_model(1)
 comm_2 = lambda: run_assignment_model(2)
@@ -111,11 +117,25 @@ def comm_4():
     print('Starting communication 4 scenarios...')
     print()
 
+    all_assignments = defaultdict(list)
+
     for i, surge in enumerate(Surges):
         print(f'== SURGE SCENARIO {i} ==')
-        run_assignment_model(4, surge)
+        for s, d in run_assignment_model(4, surge).items():
+            all_assignments[s].extend(d)
+            all_assignments[s].append(',')
+
         print()
         print()
+
+    print_assignments(all_assignments)
+
+def print_assignments(assignments):
+    print('Store Assignments')
+    print('store | assignments')
+    for s, d in assignments.items():
+        print('{:>5}'.format(s), '|', ' '.join(d))
+
 
 if __name__ == "__main__":
     comm_4()
