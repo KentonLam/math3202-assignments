@@ -43,7 +43,8 @@ Northside = ['DC0', 'DC2']
 NorthsideMax = 85
 
 # == comm 4 ==
-Surges = [f'S{i}' for i in range(5)]
+# surge scenario names.
+Surges = [f's{i}' for i in range(5)]
 # surge demand scenarios for each store.
 SurgeDemands = make_tupledict([
     # ['S0', 'S1', 'S2', 'S3', 'S4', 'S5', 'S6', 'S7', 'S8', 'S9'],
@@ -128,7 +129,8 @@ def comm_4():
     all_assignments = defaultdict(list)
 
     for i, surge in enumerate(Surges):
-        demands = dict(zip(Stores, SurgeDemands.select(surge, '*')))
+        surge_keys = filter(lambda k: k[0] == surge, SurgeDemands.keys())
+        demands = {s: SurgeDemands[surge, s] for s in Stores}
         print(f'== SURGE SCENARIO {i} ==')
         for s, d in run_assignment_model(4, demands).items():
             all_assignments[s].extend(d)
