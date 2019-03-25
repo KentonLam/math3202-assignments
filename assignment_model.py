@@ -24,17 +24,17 @@ DCs = [f'DC{i}' for i in range(3)]
 # == comm 1 ==
 # matrix of cost per truckload of transporting from d to s.
 # indexed as C[d][s]
-Cost = make_tupledict([
+Costs = make_tupledict([
     [1828, 1058, 2014, 2134, 1952, 2677, 2548, 2292, 2704, 1153, ],
     [2271, 1746, 2919, 1982, 2704, 2577, 2063, 2807, 2924, 1736, ],
     [807, 1679, 1779, 1428, 1456, 1273, 2160, 559, 1014, 1514, ],
 ], DCs, Stores)
 # required truckloads at each store.
-Demand = dict(zip(Stores, [18, 7, 21, 15, 17, 10, 6, 8, 7, 7]))
+Demands = dict(zip(Stores, [18, 7, 21, 15, 17, 10, 6, 8, 7, 7]))
 
 # == comm 2 ==
 # maximum capacity at each distribution centre.
-Capacity = dict(zip(DCs, [72, 76, 40]))
+Capacities = dict(zip(DCs, [72, 76, 40]))
 
 # == comm 3 ==
 # set of distribution centres on the north-side.
@@ -58,7 +58,7 @@ SurgeDemands = make_tupledict([
 # demand. for example: normal demand = 2, surge demand = 3 results in 
 # SurgeMultipliers[u, s] = 3/2 = 1.5.
 SurgeMultipliers = tupledict(
-    {(u, s): SurgeDemands[u, s]/Demand[s] for s in Stores for u in Surges}
+    {(u, s): SurgeDemands[u, s]/Demands[s] for s in Stores for u in Surges}
 )
 
 def run_assignment_model(comm: int):
@@ -66,7 +66,7 @@ def run_assignment_model(comm: int):
     model = Model('WonderMarket Model')
     if comm < 4:
         Surges = ['none']
-        SurgeDemands = {('none', s): Demand[s] for s in Stores}
+        SurgeDemands = {('none', s): Demands[s] for s in Stores}
         SurgeMultipliers = defaultdict(lambda: 1)
 
 
@@ -92,14 +92,14 @@ def run_assignment_model(comm: int):
     # a multiplier of its regular demand. X[d,s,u] stores the precise amount
     # of product from d to s during surge u.
     constrs['fractions'] = model.addConstrs(
-        X[d, s, u] / Demand[s] == Y[d, s] * SurgeMultipliers[u, s] 
+        X[d, s, u] / Demands[s] == Y[d, s] * SurgeMultipliers[u, s] 
         for s in Stores for d in DCs for u in Surges
     )
 
     # to make calculating the objective easier, we compute some totals here,
     # using equality.
     constrs['totals'] = model.addConstrs(
-        Z[u] == quicksum(X.sum(d, s, u) * Cost[d, s] for d in DCs for s in Stores)
+        Z[u] == quicksum(X.sum(d, s, u) * Costs[d, s] for d in DCs for s in Stores)
         for u in Surges
     )
 
@@ -114,7 +114,7 @@ def run_assignment_model(comm: int):
         if comm >= 2:
             # comm 2: maximum capacity at each distribution centre.
             surge_constrs['capacity'] = model.addConstrs(
-                X.sum(d, '*', u) <= Capacity[d] for d in DCs)
+                X.sum(d, '*', u) <= Capacities[d] for d in DCs)
 
         if comm >= 3:
             # comm 3: capacity limit on DCs on north side.
