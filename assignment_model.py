@@ -32,11 +32,6 @@ Cost = make_tupledict([
 # required truckloads at each store.
 Demand = dict(zip(Stores, [18, 7, 21, 15, 17, 10, 6, 8, 7, 7]))
 
-# coefficients to return cost of shipping a fraction of store s's demand 
-# from DC d. see variables Y.
-CostFractions = tupledict(
-    {(d, s): Cost[d,s]*Demand[s] for s in Stores for d in DCs})
-
 # == comm 2 ==
 # maximum capacity at each distribution centre.
 Capacity = dict(zip(DCs, [72, 76, 40]))
@@ -48,7 +43,7 @@ Northside = ['DC0', 'DC2']
 NorthsideMax = 85
 
 # == comm 4 ==
-# surge scenario names.
+# surge scenario names. S has already been used for stores, so we use U here.
 Surges = [f'U{i}' for i in range(5)]
 # surge demand scenarios for each store.
 SurgeDemands = make_tupledict([
@@ -59,21 +54,23 @@ SurgeDemands = make_tupledict([
     [18, 7, 21, 15, 17, 10, 6, 8, 30, 7],
     [18, 7, 21, 15, 18, 54, 6, 8, 7, 7],
 ], Surges, Stores)
-
+# for each surge and store, this is the ratio of surge demand over normal 
+# demand. for example: normal demand = 2, surge demand = 3 results in 
+# SurgeMultipliers[u, s] = 3/2 = 1.5.
 SurgeMultipliers = tupledict(
     {(u, s): SurgeDemands[u, s]/Demand[s] for s in Stores for u in Surges}
 )
-print(SurgeMultipliers)
 
 def run_assignment_model(comm: int, surge_demands=None): 
     model = Model('WonderMarket Model')
 
     # matrix of truckloads from each DC to each store during each surge.
-    # indexed as X[d][s][u]
+    # indexed as X[d,s,u].
     X = model.addVars(DCs, Stores, Surges, name='X')
 
     # fraction of each store's REGULAR demand to be fulfilled by each 
-    # distribution centre. 
+    # distribution centre. see constrs['fractions'] below.
+    # indexed as Y[d,s].
     Y = model.addVars(DCs, Stores, name='Y')
 
     # total transport cost during each surge scenario.
