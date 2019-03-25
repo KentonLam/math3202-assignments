@@ -1,0 +1,148 @@
+Academic license - for non-commercial use only
+Optimize a model with 44 rows, 61 columns and 151 nonzeros
+Coefficient statistics:
+  Matrix range     [5e-02, 3e+03]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [6e+00, 8e+01]
+Presolve removed 31 rows and 31 columns
+Presolve time: 0.00s
+Presolved: 13 rows, 30 columns, 60 nonzeros
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    0.0000000e+00   1.450000e+01   0.000000e+00      0s
+      14    1.7495200e+05   0.000000e+00   0.000000e+00      0s
+
+Solved in 14 iterations and 0.00 seconds
+Optimal objective  1.749520000e+05
+
+Optimised for communication 2.
+Objective value: 174952.0
+
+
+Variable Analysis
+      variable  =     x *  coeff |     rc | obj low obj high
+X[DC0,S0,none]  =   3.0 *    0.0 |    0.0 |  -467.0   283.0
+X[DC1,S0,none]  =   0.0 *    0.0 |  443.0 |  -443.0  1e+100
+X[DC2,S0,none]  =  15.0 *    0.0 |    0.0 |  -283.0   467.0
+X[DC0,S1,none]  =   7.0 *    0.0 |    0.0 | -1058.0   688.0
+X[DC1,S1,none]  =   0.0 *    0.0 |  688.0 |  -688.0  1e+100
+X[DC2,S1,none]  =   0.0 *    0.0 | 1642.0 | -1642.0  1e+100
+X[DC0,S2,none]  =  21.0 *    0.0 |    0.0 | -2014.0   786.0
+X[DC1,S2,none]  =   0.0 *    0.0 |  905.0 |  -905.0  1e+100
+X[DC2,S2,none]  =   0.0 *    0.0 |  786.0 |  -786.0  1e+100
+X[DC0,S3,none]  =   0.0 *    0.0 |  152.0 |  -152.0  1e+100
+X[DC1,S3,none]  =  15.0 *    0.0 |    0.0 | -1982.0   152.0
+X[DC2,S3,none]  =   0.0 *    0.0 |  467.0 |  -467.0  1e+100
+X[DC0,S4,none]  =  17.0 *    0.0 |    0.0 | -1952.0   525.0
+X[DC1,S4,none]  =   0.0 *    0.0 |  752.0 |  -752.0  1e+100
+X[DC2,S4,none]  =   0.0 *    0.0 |  525.0 |  -525.0  1e+100
+X[DC0,S5,none]  =   0.0 *    0.0 |  383.0 |  -383.0  1e+100
+X[DC1,S5,none]  =   0.0 *    0.0 |  283.0 |  -283.0  1e+100
+X[DC2,S5,none]  =  10.0 *    0.0 |    0.0 | -2294.0   283.0
+X[DC0,S6,none]  =   0.0 *    0.0 |  485.0 |  -485.0  1e+100
+X[DC1,S6,none]  =   6.0 *    0.0 |    0.0 | -2063.0   485.0
+X[DC2,S6,none]  =   0.0 *    0.0 | 1118.0 | -1118.0  1e+100
+X[DC0,S7,none]  =   0.0 *    0.0 |  712.0 |  -712.0  1e+100
+X[DC1,S7,none]  =   0.0 *    0.0 | 1227.0 | -1227.0  1e+100
+X[DC2,S7,none]  =   8.0 *    0.0 |    0.0 | -1580.0   712.0
+X[DC0,S8,none]  =   0.0 *    0.0 |  669.0 |  -669.0  1e+100
+X[DC1,S8,none]  =   0.0 *    0.0 |  889.0 |  -889.0  1e+100
+X[DC2,S8,none]  =   7.0 *    0.0 |    0.0 | -2035.0   669.0
+X[DC0,S9,none]  =   7.0 *    0.0 |    0.0 | -1153.0   583.0
+X[DC1,S9,none]  =   0.0 *    0.0 |  583.0 |  -583.0  1e+100
+X[DC2,S9,none]  =   0.0 *    0.0 | 1382.0 | -1382.0  1e+100
+Variable Analysis
+ variable  =     x *  coeff |     rc | obj low obj high
+Y[DC0,S0]  = 0.1667 *    0.0 |    0.0 | -8406.0  5094.0
+Y[DC1,S0]  =   0.0 *    0.0 |    0.0 | -7974.0  1e+100
+Y[DC2,S0]  = 0.8333 *    0.0 |    0.0 | -5094.0  8406.0
+Y[DC0,S1]  =   1.0 *    0.0 |    0.0 | -7406.0  4816.0
+Y[DC1,S1]  =   0.0 *    0.0 |    0.0 | -4816.0  1e+100
+Y[DC2,S1]  =   0.0 *    0.0 |    0.0 | -11494.0  1e+100
+Y[DC0,S2]  =   1.0 *    0.0 |    0.0 | -42294.0 16506.0
+Y[DC1,S2]  =   0.0 *    0.0 |    0.0 | -19005.0  1e+100
+Y[DC2,S2]  =   0.0 *    0.0 |    0.0 | -16506.0  1e+100
+Y[DC0,S3]  =   0.0 *    0.0 |    0.0 | -2280.0  1e+100
+Y[DC1,S3]  =   1.0 *    0.0 |    0.0 | -29730.0  2280.0
+Y[DC2,S3]  =   0.0 *    0.0 |    0.0 | -7005.0  1e+100
+Y[DC0,S4]  =   1.0 *    0.0 |    0.0 | -33184.0  8925.0
+Y[DC1,S4]  =   0.0 *    0.0 |    0.0 | -12784.0  1e+100
+Y[DC2,S4]  =   0.0 *    0.0 |    0.0 | -8925.0  1e+100
+Y[DC0,S5]  =   0.0 *    0.0 |    0.0 | -3830.0  1e+100
+Y[DC1,S5]  =   0.0 *    0.0 |    0.0 | -2830.0  1e+100
+Y[DC2,S5]  =   1.0 *    0.0 |    0.0 | -22940.0  2830.0
+Y[DC0,S6]  =   0.0 *    0.0 |    0.0 | -2910.0  1e+100
+Y[DC1,S6]  =   1.0 *    0.0 |    0.0 | -12378.0  2910.0
+Y[DC2,S6]  =   0.0 *    0.0 |    0.0 | -6708.0  1e+100
+Y[DC0,S7]  =   0.0 *    0.0 |    0.0 | -5696.0  1e+100
+Y[DC1,S7]  =   0.0 *    0.0 |    0.0 | -9816.0  1e+100
+Y[DC2,S7]  =   1.0 *    0.0 |    0.0 | -12640.0  5696.0
+Y[DC0,S8]  =   0.0 *    0.0 |    0.0 | -4683.0  1e+100
+Y[DC1,S8]  =   0.0 *    0.0 |    0.0 | -6223.0  1e+100
+Y[DC2,S8]  =   1.0 *    0.0 |    0.0 | -14245.0  4683.0
+Y[DC0,S9]  =   1.0 *    0.0 |    0.0 | -8071.0  4081.0
+Y[DC1,S9]  =   0.0 *    0.0 |    0.0 | -4081.0  1e+100
+Y[DC2,S9]  =   0.0 *    0.0 |    0.0 | -9674.0  1e+100
+Variable Analysis
+variable  =     x *  coeff |     rc | obj low obj high
+Z[none]  = 174952.0 *    1.0 |    0.0 |     0.0  1e+100
+Constraint Analysis
+                         constr      rhs |  slack     pi | rhs low rhs high
+fractions ('S0', 'DC0', 'none')  =   0.0 |    0.0   -0.0 | -1e+100  0.1667
+fractions ('S0', 'DC1', 'none')  =   0.0 |    0.0   -0.0 | -1e+100     0.0
+fractions ('S0', 'DC2', 'none')  =   0.0 |    0.0   -0.0 | -1e+100  0.8333
+fractions ('S1', 'DC0', 'none')  =   0.0 |    0.0   -0.0 | -1e+100     1.0
+fractions ('S1', 'DC1', 'none')  =   0.0 |    0.0   -0.0 | -1e+100     0.0
+fractions ('S1', 'DC2', 'none')  =   0.0 |    0.0   -0.0 | -1e+100     0.0
+fractions ('S2', 'DC0', 'none')  =   0.0 |    0.0   -0.0 | -1e+100     1.0
+fractions ('S2', 'DC1', 'none')  =   0.0 |    0.0   -0.0 | -1e+100     0.0
+fractions ('S2', 'DC2', 'none')  =   0.0 |    0.0   -0.0 | -1e+100     0.0
+fractions ('S3', 'DC0', 'none')  =   0.0 |    0.0   -0.0 | -1e+100     0.0
+fractions ('S3', 'DC1', 'none')  =   0.0 |    0.0   -0.0 | -1e+100     1.0
+fractions ('S3', 'DC2', 'none')  =   0.0 |    0.0   -0.0 | -1e+100     0.0
+fractions ('S4', 'DC0', 'none')  =   0.0 |    0.0   -0.0 | -1e+100     1.0
+fractions ('S4', 'DC1', 'none')  =   0.0 |    0.0   -0.0 | -1e+100     0.0
+fractions ('S4', 'DC2', 'none')  =   0.0 |    0.0   -0.0 | -1e+100     0.0
+fractions ('S5', 'DC0', 'none')  =   0.0 |    0.0   -0.0 | -1e+100     0.0
+fractions ('S5', 'DC1', 'none')  =   0.0 |    0.0   -0.0 | -1e+100     0.0
+fractions ('S5', 'DC2', 'none')  =   0.0 |    0.0   -0.0 | -1e+100     1.0
+fractions ('S6', 'DC0', 'none')  =   0.0 |    0.0   -0.0 | -1e+100     0.0
+fractions ('S6', 'DC1', 'none')  =   0.0 |    0.0   -0.0 | -1e+100     1.0
+fractions ('S6', 'DC2', 'none')  =   0.0 |    0.0   -0.0 | -1e+100     0.0
+fractions ('S7', 'DC0', 'none')  =   0.0 |    0.0   -0.0 | -1e+100     0.0
+fractions ('S7', 'DC1', 'none')  =   0.0 |    0.0   -0.0 | -1e+100     0.0
+fractions ('S7', 'DC2', 'none')  =   0.0 |    0.0   -0.0 | -1e+100     1.0
+fractions ('S8', 'DC0', 'none')  =   0.0 |    0.0   -0.0 | -1e+100     0.0
+fractions ('S8', 'DC1', 'none')  =   0.0 |    0.0   -0.0 | -1e+100     0.0
+fractions ('S8', 'DC2', 'none')  =   0.0 |    0.0   -0.0 | -1e+100     1.0
+fractions ('S9', 'DC0', 'none')  =   0.0 |    0.0   -0.0 | -1e+100     1.0
+fractions ('S9', 'DC1', 'none')  =   0.0 |    0.0   -0.0 | -1e+100     0.0
+fractions ('S9', 'DC2', 'none')  =   0.0 |    0.0   -0.0 | -1e+100     0.0
+                    totals none  =   0.0 |    0.0    1.0 | -174952.0  1e+100
+               none s_demand S0  >  18.0 |    0.0 1828.0 |    15.0    35.0
+               none s_demand S1  >   7.0 |    0.0 1058.0 |    -0.0    24.0
+               none s_demand S2  >  21.0 |    0.0 2014.0 |    -0.0    38.0
+               none s_demand S3  >  15.0 |    0.0 1982.0 |    -0.0    70.0
+               none s_demand S4  >  17.0 |    0.0 1952.0 |    -0.0    34.0
+               none s_demand S5  >  10.0 |    0.0 2294.0 |     7.0    25.0
+               none s_demand S6  >   6.0 |    0.0 2063.0 |    -0.0    61.0
+               none s_demand S7  >   8.0 |    0.0 1580.0 |     5.0    23.0
+               none s_demand S8  >   7.0 |    0.0 2035.0 |     4.0    22.0
+               none s_demand S9  >   7.0 |    0.0 1153.0 |    -0.0    24.0
+              none capacity DC0  <  72.0 |   17.0    0.0 |    55.0  1e+100
+              none capacity DC1  <  76.0 |   55.0    0.0 |    21.0  1e+100
+              none capacity DC2  <  40.0 |    0.0 -1021.0 |    25.0    43.0
+
+Store Assignments
+store |    DC0    DC1    DC2
+   S0 | 0.1667        0.8333
+   S1 |    1.0              
+   S2 |    1.0              
+   S3 |           1.0       
+   S4 |    1.0              
+   S5 |                  1.0
+   S6 |           1.0       
+   S7 |                  1.0
+   S8 |                  1.0
+   S9 |    1.0              
