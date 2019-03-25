@@ -1,6 +1,8 @@
 from gurobipy import *
 from collections import defaultdict
 
+import gurobi_pprint
+
 def table(row_format, rows):
     s = ''
     for r in rows:
@@ -136,8 +138,6 @@ def run_assignment_model(comm: int):
     else:
         print(f'Optimisation failed (status {model.status}).')
     print()
-
-    import gurobi_pprint
     print()
     # group by surge, then store, then DC.
     x_ = {(d,s,u): X[d,s,u] for u in Surges for s in Stores for d in DCs}
@@ -162,4 +162,9 @@ def print_assignments(Y):
 
 
 if __name__ == "__main__":
-    run_assignment_model(4)
+    from sys import argv
+    if len(argv) < 2:
+        comm = 4
+    else:
+        comm = int(argv[1])
+    run_assignment_model(comm)
