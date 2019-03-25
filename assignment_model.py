@@ -145,11 +145,25 @@ def run_assignment_model(comm: int):
     x_ = {(d,s,u): X[d,s,u] for u in Surges for s in Stores for d in DCs}
     y_ = {(d, s): Y[d,s] for s in Stores for d in DCs}
 
+    print('== FULL ANALYSIS ==')
     print_variable_analysis(x_)
+    print()
     print_variable_analysis(y_)
+    print()
     print_variable_analysis(Z)
-
+    print()
     print_constr_analysis(constrs)
+
+    print()
+    print()
+    print('== ANALYSIS NON-ZERO ==')
+    print_variable_analysis(x_, True)
+    print()
+    print_variable_analysis(y_, True)
+    print()
+    print_variable_analysis(Z, True)
+    print()
+    print_constr_analysis(constrs, True)
     
     print()
     print_assignments(Y)
@@ -176,7 +190,8 @@ def main():
 # helper functions to print constraint and variable analysis.
 
 #region gurobi_pprint
-TableSpec = namedtuple('TableSpec', 'title header format generator')
+
+TableSpec = namedtuple('TableSpec', 'title header format generator empty')
 
 r = lambda i: round(i, 4)
 row_generator = {
@@ -184,13 +199,16 @@ row_generator = {
         'Constraint Analysis', 
         ('constr', '', 'rhs', 'slack', 'pi', 'rhs low', 'rhs high'),
         '  {:>1} {:>5} | {:>6} {:>6} | {:>7} {:>7}', 
-        lambda n, c: (n, c.sense, r(c.rhs), r(c.slack), r(c.pi), r(c.SARHSLow), r(c.SARHSUp))
+        lambda n, c: (n, c.sense, r(c.rhs), r(c.slack), r(c.pi), r(c.SARHSLow), r(c.SARHSUp)),
+        lambda t: t[2] == 0
     ),
     'variables': TableSpec(
         'Variable Analysis', 
         ('variable', 'x', 'coeff', 'rc', 'obj low', 'obj high'),
         '  = {:>5} * {:>6} | {:>6} | {:>7} {:>7}', 
-        lambda n, c: (c.varName, r(c.x), r(c.obj), r(c.rc), r(c.SAObjLow), r(c.SAObjUp))),
+        lambda n, c: (c.varName, r(c.x), r(c.obj), r(c.rc), r(c.SAObjLow), r(c.SAObjUp)),
+        lambda t: t[1] == 0
+    )
 }
 
 def _dict_to_rows(constrs_list, generator, prefix=''):
@@ -206,7 +224,7 @@ def _dict_to_rows(constrs_list, generator, prefix=''):
         out.extend(rows)
     return out
 
-def _print_analysis(constr_dict, mode):
+def _print_analysis(constr_dict, mode, drop_empty=False):
     rows = _dict_to_rows(constr_dict, row_generator[mode].generator)
     max_lens = []
     for i in range(len(rows[0])):
@@ -215,18 +233,27 @@ def _print_analysis(constr_dict, mode):
             this_max_len = min(this_max_len, 10)
         max_lens.append(this_max_len)
     
+    # f_str_list = list(map(lambda l: f'{{:>{l}}}', max_lens))
+    # f_str_list[0] = f'{{:>{max_lens[0]}}}'
+    # f_str_list[1] = '{:2}'
+    
     f_str = f'{{:>{max_lens[0]}}}' + row_generator[mode].format
 
     print(row_generator[mode].title)
     print(f_str.format(*row_generator[mode].header))
     for r in rows:
+        if drop_empty and row_generator[mode].empty(r):
+            continue
+        # print(f_str)
+        # print(r)
         print(f_str.format(*r))
     
-def print_constr_analysis(constrs):
-    return _print_analysis(constrs, 'constraints')
+def print_constr_analysis(constrs, drop_zero=False):
+    return _print_analysis(constrs, 'constraints', drop_zero)
 
-def print_variable_analysis(variables): 
-    return _print_analysis(variables, 'variables')
+def print_variable_analysis(variables, drop_zero=False): 
+    return _print_analysis(variables, 'variables', drop_zero)
+
 #endregion
 
 if __name__ == "__main__":
