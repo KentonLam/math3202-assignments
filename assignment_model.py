@@ -49,7 +49,7 @@ NorthsideMax = 85
 
 # == comm 4 ==
 # surge scenario names.
-Surges = [f's{i}' for i in range(5)]
+Surges = [f'U{i}' for i in range(5)]
 # surge demand scenarios for each store.
 SurgeDemands = make_tupledict([
     # ['S0', 'S1', 'S2', 'S3', 'S4', 'S5', 'S6', 'S7', 'S8', 'S9'],
@@ -60,46 +60,67 @@ SurgeDemands = make_tupledict([
     [18, 7, 21, 15, 18, 54, 6, 8, 7, 7],
 ], Surges, Stores)
 
+SurgeMultipliers = tupledict(
+    {(u, s): SurgeDemands[u, s]/Demand[s] for s in Stores for u in Surges}
+)
+print(SurgeMultipliers)
+
 def run_assignment_model(comm: int, surge_demands=None): 
     model = Model('WonderMarket Model')
 
     # matrix of truckloads from each DC to each store during each surge.
-    # indexed as X[d][s]
-    X = model.addVars(DCs, Stores, name='X')
+    # indexed as X[d][s][u]
+    X = model.addVars(DCs, Stores, Surges, name='X')
 
-    # fraction of each store's demand to be fulfilled by each distribution
-    # centre. 
-    Y = model.addVars(DCs, Stores, obj=CostFractions, name='Y')
+    # fraction of each store's REGULAR demand to be fulfilled by each 
+    # distribution centre. 
+    Y = model.addVars(DCs, Stores, name='Y')
 
-    # adds constraints.
+    # total transport cost during each surge scenario.
+    Z = model.addVars(Surges, obj=1, name='Z')
+
+    # dictionary to store our constraints.
     constrs = {}
 
+    # link X and Y. 
+    # for all s in Stores, the sum of Y[d,s] across d in DCs is always 1.
+    # this is because Y is proportions of each store's total normal demand.
+    # to handle surges, we consider the required demand at each store using
+    # a multiplier of its regular demand. X[d,s,u] stores the precise amount
+    # of product from d to s during surge u.
     constrs['fractions'] = model.addConstrs(
-        X[d, s] / Demand[s] == Y[d, s] for s in Stores for d in DCs for u in Surges)
+        X[d, s, u] / Demand[s] == Y[d, s] * SurgeMultipliers[u, s] 
+        for s in Stores for d in DCs for u in Surges
+    )
 
-    # comm 1: required truckloads at each store.
-    constrs['demand'] = model.addConstrs(X.sum('*', s) >= Demand[s] for s in Stores)
+    # to make calculating the objective easier, we compute some totals here,
+    # using equality.
+    constrs['totals'] = model.addConstrs(
+        Z[u] == quicksum(X.sum(d, s, u) * Cost[d, s] for d in DCs for s in Stores)
+        for u in Surges
+    )
 
-    # comm 2: maximum capacity at each distribution centre.
-    if comm >= 2:
-        constrs['capacity'] = model.addConstrs(X.sum(d, '*') <= Capacity[d] for d in DCs)
+    # assume only one surge occurs at a time. handle independently.
+    for u in Surges:
+        constrs[f'{u}'] = surge_constrs = {}
 
-    # comm 3: capacity limit on DCs on north side.
-    if comm >= 3:
+        # comm 4: required truckloads at each store during each surge.
+        # replaces comm 1.
+        surge_constrs['s_demand'] = model.addConstrs(
+            X.sum('*', s, u) >= SurgeDemands[u, s] for s in Stores)
+
+        # comm 2: maximum capacity at each distribution centre.
+        surge_constrs['capacity'] = model.addConstrs(
+            X.sum(d, '*', u) <= Capacity[d] for d in DCs)
+
+        # comm 3: capacity limit on DCs on north side.
         # together, DC0 and DC2 can only provide 85 truckloads
         # per week.
-        constrs['northside'] = model.addConstr(quicksum(X.sum(d, '*') for d in Northside) <= NorthsideMax)
-    
-    # comm 4: surge demand scenarios.
-    if comm >= 4:
-        # surge_dict = dict(zip(Stores, surge_demands))
-        constrs['surge'] = model.addConstrs(
-            (X.sum('*', s) >= d for s, d in surge_demands.items()), 
-            name=surge_demands)
-
+        surge_constrs['northside'] = model.addConstr(
+            quicksum(X.sum(d, '*', u) for d in Northside) <= NorthsideMax)
+        
     # minimise total cost of transport.
     model.modelSense = GRB.MINIMIZE
-
     model.optimize()
 
     print()
@@ -112,26 +133,14 @@ def run_assignment_model(comm: int, surge_demands=None):
         print(f'Optimisation failed (status {model.status}).')
     print()
 
-    assignments = defaultdict(list)
-    for s in Stores:
-        for d in DCs:
-            v = X[d, s]
-            # print all non-zero variables.
-            if v.x:
-                assignments[s].append(d)
-                print(f'{v.varName} = {v.x}')
-
     import gurobi_pprint
     print()
     gurobi_pprint.print_variable_analysis(X)
     y_ = {(d, s): Y[d,s] for s in Stores for d in DCs}
     gurobi_pprint.print_variable_analysis(y_)
+    gurobi_pprint.print_variable_analysis(Z)
     print()
     # gurobi_pprint.print_constr_analysis(constrs)
-    print()
-    print_assignments(assignments)
-    print()
-    return assignments
         
 comm_1 = lambda: run_assignment_model(1)
 comm_2 = lambda: run_assignment_model(2)
@@ -143,16 +152,7 @@ def comm_4():
 
     all_assignments = defaultdict(list)
 
-    for i, surge in enumerate(Surges):
-        surge_keys = filter(lambda k: k[0] == surge, SurgeDemands.keys())
-        demands = {s: SurgeDemands[surge, s] for s in Stores}
-        print(f'== SURGE SCENARIO {i} ==')
-        for s, d in run_assignment_model(4, demands).items():
-            all_assignments[s].extend(d)
-            all_assignments[s].append(',')
-
-        print()
-        print()
+    run_assignment_model(4, None)
 
     print_assignments(all_assignments)
 
