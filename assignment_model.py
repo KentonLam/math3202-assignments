@@ -32,6 +32,11 @@ Costs = make_tupledict([
 # required truckloads at each store.
 Demands = dict(zip(Stores, [18, 7, 21, 15, 17, 10, 6, 8, 7, 7]))
 
+# coefficients to return cost of shipping a fraction of store s's demand 
+# from DC d. see variables Y.
+CostFractions = tupledict(
+    {(d, s): Costs[d,s]*Demands[s] for s in Stores for d in DCs})
+
 # == comm 2 ==
 # maximum capacity at each distribution centre.
 Capacities = dict(zip(DCs, [72, 76, 40]))
@@ -81,10 +86,10 @@ def run_assignment_model(comm: int):
     # fraction of each store's REGULAR demand to be fulfilled by each 
     # distribution centre. see constrs['fractions'] below.
     # indexed as Y[d,s].
-    Y = model.addVars(DCs, Stores, name='Y')
+    Y = model.addVars(DCs, Stores, obj=CostFractions, name='Y')
 
     # total transport cost during each surge scenario.
-    Z = model.addVars(Surges, obj=1, name='Z')
+    Z = model.addVars(Surges, name='Z')
 
     # dictionary to store our constraints.
     constrs = {}
