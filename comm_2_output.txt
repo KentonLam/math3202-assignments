@@ -20,6 +20,7 @@ Optimised for communication 2.
 Objective value: 174952.0
 
 
+== FULL ANALYSIS ==
 Variable Analysis
       variable  =     x *  coeff |     rc | obj low obj high
 X[DC0,S0,none]  =   3.0 *    0.0 |    0.0 |  -467.0   283.0
@@ -52,6 +53,7 @@ X[DC2,S8,none]  =   7.0 *    0.0 |    0.0 | -2035.0   669.0
 X[DC0,S9,none]  =   7.0 *    0.0 |    0.0 | -1153.0   583.0
 X[DC1,S9,none]  =   0.0 *    0.0 |  583.0 |  -583.0  1e+100
 X[DC2,S9,none]  =   0.0 *    0.0 | 1382.0 | -1382.0  1e+100
+
 Variable Analysis
  variable  =     x *  coeff |     rc | obj low obj high
 Y[DC0,S0]  = 0.1667 *    0.0 |    0.0 | -8406.0  5094.0
@@ -84,9 +86,11 @@ Y[DC2,S8]  =   1.0 *    0.0 |    0.0 | -14245.0  4683.0
 Y[DC0,S9]  =   1.0 *    0.0 |    0.0 | -8071.0  4081.0
 Y[DC1,S9]  =   0.0 *    0.0 |    0.0 | -4081.0  1e+100
 Y[DC2,S9]  =   0.0 *    0.0 |    0.0 | -9674.0  1e+100
+
 Variable Analysis
 variable  =     x *  coeff |     rc | obj low obj high
 Z[none]  = 174952.0 *    1.0 |    0.0 |     0.0  1e+100
+
 Constraint Analysis
                          constr      rhs |  slack     pi | rhs low rhs high
 fractions ('S0', 'DC0', 'none')  =   0.0 |    0.0   -0.0 | -1e+100  0.1667
@@ -120,6 +124,56 @@ fractions ('S9', 'DC0', 'none')  =   0.0 |    0.0   -0.0 | -1e+100     1.0
 fractions ('S9', 'DC1', 'none')  =   0.0 |    0.0   -0.0 | -1e+100     0.0
 fractions ('S9', 'DC2', 'none')  =   0.0 |    0.0   -0.0 | -1e+100     0.0
                     totals none  =   0.0 |    0.0    1.0 | -174952.0  1e+100
+               none s_demand S0  >  18.0 |    0.0 1828.0 |    15.0    35.0
+               none s_demand S1  >   7.0 |    0.0 1058.0 |    -0.0    24.0
+               none s_demand S2  >  21.0 |    0.0 2014.0 |    -0.0    38.0
+               none s_demand S3  >  15.0 |    0.0 1982.0 |    -0.0    70.0
+               none s_demand S4  >  17.0 |    0.0 1952.0 |    -0.0    34.0
+               none s_demand S5  >  10.0 |    0.0 2294.0 |     7.0    25.0
+               none s_demand S6  >   6.0 |    0.0 2063.0 |    -0.0    61.0
+               none s_demand S7  >   8.0 |    0.0 1580.0 |     5.0    23.0
+               none s_demand S8  >   7.0 |    0.0 2035.0 |     4.0    22.0
+               none s_demand S9  >   7.0 |    0.0 1153.0 |    -0.0    24.0
+              none capacity DC0  <  72.0 |   17.0    0.0 |    55.0  1e+100
+              none capacity DC1  <  76.0 |   55.0    0.0 |    21.0  1e+100
+              none capacity DC2  <  40.0 |    0.0 -1021.0 |    25.0    43.0
+
+
+== ANALYSIS NON-ZERO ==
+Variable Analysis
+      variable  =     x *  coeff |     rc | obj low obj high
+X[DC0,S0,none]  =   3.0 *    0.0 |    0.0 |  -467.0   283.0
+X[DC2,S0,none]  =  15.0 *    0.0 |    0.0 |  -283.0   467.0
+X[DC0,S1,none]  =   7.0 *    0.0 |    0.0 | -1058.0   688.0
+X[DC0,S2,none]  =  21.0 *    0.0 |    0.0 | -2014.0   786.0
+X[DC1,S3,none]  =  15.0 *    0.0 |    0.0 | -1982.0   152.0
+X[DC0,S4,none]  =  17.0 *    0.0 |    0.0 | -1952.0   525.0
+X[DC2,S5,none]  =  10.0 *    0.0 |    0.0 | -2294.0   283.0
+X[DC1,S6,none]  =   6.0 *    0.0 |    0.0 | -2063.0   485.0
+X[DC2,S7,none]  =   8.0 *    0.0 |    0.0 | -1580.0   712.0
+X[DC2,S8,none]  =   7.0 *    0.0 |    0.0 | -2035.0   669.0
+X[DC0,S9,none]  =   7.0 *    0.0 |    0.0 | -1153.0   583.0
+
+Variable Analysis
+ variable  =     x *  coeff |     rc | obj low obj high
+Y[DC0,S0]  = 0.1667 *    0.0 |    0.0 | -8406.0  5094.0
+Y[DC2,S0]  = 0.8333 *    0.0 |    0.0 | -5094.0  8406.0
+Y[DC0,S1]  =   1.0 *    0.0 |    0.0 | -7406.0  4816.0
+Y[DC0,S2]  =   1.0 *    0.0 |    0.0 | -42294.0 16506.0
+Y[DC1,S3]  =   1.0 *    0.0 |    0.0 | -29730.0  2280.0
+Y[DC0,S4]  =   1.0 *    0.0 |    0.0 | -33184.0  8925.0
+Y[DC2,S5]  =   1.0 *    0.0 |    0.0 | -22940.0  2830.0
+Y[DC1,S6]  =   1.0 *    0.0 |    0.0 | -12378.0  2910.0
+Y[DC2,S7]  =   1.0 *    0.0 |    0.0 | -12640.0  5696.0
+Y[DC2,S8]  =   1.0 *    0.0 |    0.0 | -14245.0  4683.0
+Y[DC0,S9]  =   1.0 *    0.0 |    0.0 | -8071.0  4081.0
+
+Variable Analysis
+variable  =     x *  coeff |     rc | obj low obj high
+Z[none]  = 174952.0 *    1.0 |    0.0 |     0.0  1e+100
+
+Constraint Analysis
+                         constr      rhs |  slack     pi | rhs low rhs high
                none s_demand S0  >  18.0 |    0.0 1828.0 |    15.0    35.0
                none s_demand S1  >   7.0 |    0.0 1058.0 |    -0.0    24.0
                none s_demand S2  >  21.0 |    0.0 2014.0 |    -0.0    38.0
