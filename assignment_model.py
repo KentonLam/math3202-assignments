@@ -7,6 +7,13 @@ def table(row_format, rows):
         s += row_format.format(*r) + '\n'
     return s
 
+def make_tupledict(matrix, rows, cols):
+    d = tupledict()
+    for r, row in enumerate(matrix):
+        for c, item in enumerate(row):
+            d[rows[r], cols[c]] = item
+    return d
+
 ### DATA ###
 
 # set of stores
@@ -17,11 +24,11 @@ DCs = [f'DC{i}' for i in range(3)]
 # == comm 1 ==
 # matrix of costs of transporting 1 truckload from d to s
 # indexed as C[d][s]
-Cost = [
+Cost = make_tupledict([
     [1828, 1058, 2014, 2134, 1952, 2677, 2548, 2292, 2704, 1153, ],
     [2271, 1746, 2919, 1982, 2704, 2577, 2063, 2807, 2924, 1736, ],
     [807, 1679, 1779, 1428, 1456, 1273, 2160, 559, 1014, 1514, ],
-]
+], DCs, Stores)
 # required truckloads at each store.
 Demand = dict(zip(Stores, [18, 7, 21, 15, 17, 10, 6, 8, 7, 7]))
 
@@ -36,15 +43,16 @@ Northside = ['DC0', 'DC2']
 NorthsideMax = 85
 
 # == comm 4 ==
+Surges = [f'S{i}' for i in range(5)]
 # surge demand scenarios for each store.
-Surges = [
+SurgeDemands = make_tupledict([
     # ['S0', 'S1', 'S2', 'S3', 'S4', 'S5', 'S6', 'S7', 'S8', 'S9'],
     [18, 7, 21, 29, 17, 10, 6, 8, 7, 7], # Scenario 1
     [18, 7, 21, 15, 17, 10, 6, 31, 7, 7],
     [19, 7, 21, 15, 17, 10, 6, 8, 7, 7],
     [18, 7, 21, 15, 17, 10, 6, 8, 30, 7],
     [18, 7, 21, 15, 18, 54, 6, 8, 7, 7],
-]
+], Surges, Stores)
 
 def run_assignment_model(comm: int, surge_demands=None): 
     model = Model('WonderMarket Model')
@@ -70,10 +78,10 @@ def run_assignment_model(comm: int, surge_demands=None):
     
     # comm 4: surge demand scenarios.
     if comm >= 4:
-        surge_dict = dict(zip(Stores, surge_demands))
+        # surge_dict = dict(zip(Stores, surge_demands))
         constrs['surge'] = model.addConstrs(
-            (X.sum('*', s) >= d for s, d in surge_dict.items()), 
-            name=surge_dict)
+            (X.sum('*', s) >= d for s, d in surge_demands.items()), 
+            name=surge_demands)
 
     # minimise total cost of transport.
     model.modelSense = GRB.MINIMIZE
@@ -120,8 +128,9 @@ def comm_4():
     all_assignments = defaultdict(list)
 
     for i, surge in enumerate(Surges):
+        demands = dict(zip(Stores, SurgeDemands.select(surge, '*')))
         print(f'== SURGE SCENARIO {i} ==')
-        for s, d in run_assignment_model(4, surge).items():
+        for s, d in run_assignment_model(4, demands).items():
             all_assignments[s].extend(d)
             all_assignments[s].append(',')
 
