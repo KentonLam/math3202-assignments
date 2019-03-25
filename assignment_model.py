@@ -22,7 +22,7 @@ Stores = [f'S{i}' for i in range(10)]
 DCs = [f'DC{i}' for i in range(3)]
 
 # == comm 1 ==
-# matrix of costs of transporting 1 truckload from d to s
+# matrix of cost per truckload of transporting from d to s.
 # indexed as C[d][s]
 Cost = make_tupledict([
     [1828, 1058, 2014, 2134, 1952, 2677, 2548, 2292, 2704, 1153, ],
@@ -31,6 +31,11 @@ Cost = make_tupledict([
 ], DCs, Stores)
 # required truckloads at each store.
 Demand = dict(zip(Stores, [18, 7, 21, 15, 17, 10, 6, 8, 7, 7]))
+
+# coefficients to return cost of shipping a fraction of store s's demand 
+# from DC d. see variables Y.
+CostFractions = tupledict(
+    {(d, s): Cost[d,s]*Demand[s] for s in Stores for d in DCs})
 
 # == comm 2 ==
 # maximum capacity at each distribution centre.
@@ -58,12 +63,20 @@ SurgeDemands = make_tupledict([
 def run_assignment_model(comm: int, surge_demands=None): 
     model = Model('WonderMarket Model')
 
-    # matrix of truckloads from each DC to each store.
+    # matrix of truckloads from each DC to each store during each surge.
     # indexed as X[d][s]
-    X = model.addVars(DCs, Stores, obj=Cost, name='X')
+    X = model.addVars(DCs, Stores, name='X')
+
+    # fraction of each store's demand to be fulfilled by each distribution
+    # centre. 
+    Y = model.addVars(DCs, Stores, obj=CostFractions, name='Y')
 
     # adds constraints.
     constrs = {}
+
+    constrs['fractions'] = model.addConstrs(
+        X[d, s] / Demand[s] == Y[d, s] for s in Stores for d in DCs for u in Surges)
+
     # comm 1: required truckloads at each store.
     constrs['demand'] = model.addConstrs(X.sum('*', s) >= Demand[s] for s in Stores)
 
@@ -111,8 +124,10 @@ def run_assignment_model(comm: int, surge_demands=None):
     import gurobi_pprint
     print()
     gurobi_pprint.print_variable_analysis(X)
+    y_ = {(d, s): Y[d,s] for s in Stores for d in DCs}
+    gurobi_pprint.print_variable_analysis(y_)
     print()
-    gurobi_pprint.print_constr_analysis(constrs)
+    # gurobi_pprint.print_constr_analysis(constrs)
     print()
     print_assignments(assignments)
     print()
