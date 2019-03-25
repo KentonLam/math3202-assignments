@@ -154,10 +154,11 @@ def run_assignment_model(comm: int):
         
 def print_assignments(Y):
     print('Store Assignments')
-    print('store | DC0    DC1    DC2   ')
+    print('store |    DC0    DC1    DC2')
     for s in Stores:
         fractions = [Y[d,s].x for d in DCs]
-        print('{:>5} | {:>6.4f} {:>6.4f} {:>6.4f}'.format(s, *fractions))
+        fractions = map(lambda x: round(x, 4) if x else '', fractions)
+        print('{:>5} | {:>6} {:>6} {:>6}'.format(s, *fractions))
 
 
 if __name__ == "__main__":
