@@ -65,7 +65,8 @@ def run_assignment_model(comm: int):
     global Surges, SurgeDemands, SurgeMultipliers
     assert 1 <= comm <= 4, "Invalid communication number."
     if comm < 4:
-        # for backwards compatibility with previous communications.
+        # for backwards compatibility with previous communications where
+        # there were no surges.
         Surges = ['none']
         SurgeDemands = {('none', s): Demands[s] for s in Stores}
         SurgeMultipliers = defaultdict(lambda: 1)
@@ -158,6 +159,7 @@ def print_assignments(Y):
     print('store |    DC0    DC1    DC2')
     for s in Stores:
         fractions = [Y[d,s].x for d in DCs]
+        # if the variable is 0, don't print anything. makes table easier to read.
         fractions = map(lambda x: round(x, 4) if x else '', fractions)
         print('{:>5} | {:>6} {:>6} {:>6}'.format(s, *fractions))
 
