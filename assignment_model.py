@@ -27,6 +27,9 @@ Stores = [f'S{i}' for i in range(10)]
 # set of distribution centres
 DCs = [f'DC{i}' for i in range(3)]
 
+# comm 4: surge scenario names. S has already been used for stores, so we use U here.
+Surges = [f'U{i}' for i in range(5)]
+
 ### DATA ###
 
 # == comm 1 ==
@@ -40,9 +43,10 @@ Costs = make_tupledict([
 # required truckloads at each store.
 Demands = dict(zip(Stores, [18, 7, 21, 15, 17, 10, 6, 8, 7, 7]))
 
-# coefficients to return cost of shipping a fraction of store s's demand 
-# from DC d. see variables Y.
-CostFractions = tupledict(
+# TotalCost[d,s] is the cost of shipping ALL of store s's regular demand
+# from DC d. this is multiplied with Y variables to compute the objective 
+# value.
+TotalCost = tupledict(
     {(d, s): Costs[d,s]*Demands[s] for s in Stores for d in DCs})
 
 # == comm 2 ==
@@ -56,8 +60,6 @@ Northside = ['DC0', 'DC2']
 NorthsideMax = 85
 
 # == comm 4 ==
-# surge scenario names. S has already been used for stores, so we use U here.
-Surges = [f'U{i}' for i in range(5)]
 # surge demand scenarios for each store.
 SurgeDemands = make_tupledict([
     # ['S0', 'S1', 'S2', 'S3', 'S4', 'S5', 'S6', 'S7', 'S8', 'S9'],
@@ -80,8 +82,8 @@ def run_assignment_model(comm: int):
     if comm < 4:
         # for backwards compatibility with previous communications where
         # there were no surges.
-        Surges = ['none']
-        SurgeDemands = {('none', s): Demands[s] for s in Stores}
+        Surges = ['no surge']
+        SurgeDemands = {('no surge', s): Demands[s] for s in Stores}
         SurgeMultipliers = defaultdict(lambda: 1)
 
     # the gurobi model.
@@ -91,10 +93,10 @@ def run_assignment_model(comm: int):
     # indexed as X[d,s,u].
     X = model.addVars(DCs, Stores, Surges, name='X')
 
-    # fraction of each store's REGULAR demand to be fulfilled by each 
-    # distribution centre. see constrs['fractions'] below.
-    # indexed as Y[d,s].
-    Y = model.addVars(DCs, Stores, obj=CostFractions, name='Y')
+    # matrix of truckloads from each DC to each store during NORMAL DEMAND.
+    # indexed as Y[d,s]. obj=Costs defines the objective coefficient
+    # of these variables.
+    Y = model.addVars(DCs, Stores, obj=Costs, name='Y')
 
     # total transport cost during each surge scenario.
     Z = model.addVars(Surges, name='Z')
@@ -108,16 +110,25 @@ def run_assignment_model(comm: int):
     # to handle surges, we consider the required demand at each store using
     # a multiplier of its regular demand. X[d,s,u] stores the precise amount
     # of product from d to s during surge u.
-    constrs['fractions'] = model.addConstrs(
-        X[d, s, u] / Demands[s] == Y[d, s] * SurgeMultipliers[u, s] 
+    model.addConstrs(
+        X[d, s, u] == Y[d, s] * SurgeMultipliers[u, s] 
         for s in Stores for d in DCs for u in Surges
     )
+    
 
     # to make calculating the objective easier, we compute some totals here,
     # using equality.
-    constrs['totals'] = model.addConstrs(
-        Z[u] == quicksum(X.sum(d, s, u) * Costs[d, s] for d in DCs for s in Stores)
+    model.addConstrs(
+        Z[u] == quicksum(X[d,s,u] * Costs[d, s] for d in DCs for s in Stores)
         for u in Surges
+    )
+    # these equality constraints are not in the constrs dict as their
+    # sensitivity analysis isn't very useful.
+
+    # required truckloads for normal demand at each store.
+    # constrained using Y variables.
+    constrs['n_demand'] = model.addConstrs(
+        Y.sum('*', s) >= Demands[s] for s in Stores
     )
 
     # assume only one surge occurs at a time. handle independently.
@@ -125,8 +136,9 @@ def run_assignment_model(comm: int):
         constrs[f'{u}'] = surge_constrs = {}
 
         # comm 1 or 4: required truckloads at each store during each surge.
+        # uses X variables.
         surge_constrs['s_demand'] = model.addConstrs(
-            X.sum('*', s, u) >= SurgeDemands[u, s] for s in Stores)
+            X.sum('*', s, u) >= SurgeDemands[u, s] for s in Stores if SurgeDemands[u,s] != Demands[s])
 
         if comm >= 2:
             # comm 2: maximum capacity at each distribution centre.
@@ -184,7 +196,7 @@ def run_assignment_model(comm: int):
     assignments = defaultdict(list)
     for s in Stores:
         for d in DCs:
-            assignments[s].append(Y[d,s].x)
+            assignments[s].append(Y[d,s].x/Demands[s])
     
     return assignments
         
@@ -192,7 +204,7 @@ def print_assignments(Y):
     print('Store Assignments')
     print('store |    DC0    DC1    DC2')
     for s in Stores:
-        fractions = [Y[d,s].x for d in DCs]
+        fractions = [Y[d,s].x/Demands[s] for d in DCs]
         # if the variable is 0, don't print anything. makes table easier to read.
         fractions = map(lambda x: round(x, 4) if x else '', fractions)
         print('{:>5} | {:>6} {:>6} {:>6}'.format(s, *fractions))
