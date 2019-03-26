@@ -1,25 +1,33 @@
 from gurobipy import *
 from collections import defaultdict, namedtuple
 
-def table(row_format, rows):
-    s = ''
-    for r in rows:
-        s += row_format.format(*r) + '\n'
-    return s
-
 def make_tupledict(matrix, rows, cols):
+    """Converts a matrix (in list of lists form) to a dictionary with tuples
+    as keys.
+    
+    Arguments:
+        matrix {List[List[int | float]]} -- matrix as list of lists (row-major order).
+        rows {List[Any]} -- list of row keys.
+        cols {List[Any]} -- list of column keys.
+    
+    Returns:
+        Dict[Tuple[Any, Any], int|float] -- dictionary indexed by (row_key, col_key)
+        tuples.
+    """
     d = tupledict()
     for r, row in enumerate(matrix):
         for c, item in enumerate(row):
             d[rows[r], cols[c]] = item
     return d
 
-### DATA ###
+### SETS ###
 
 # set of stores
 Stores = [f'S{i}' for i in range(10)]
 # set of distribution centres
 DCs = [f'DC{i}' for i in range(3)]
+
+### DATA ###
 
 # == comm 1 ==
 # matrix of cost per truckload of transporting from d to s.
@@ -63,7 +71,7 @@ SurgeDemands = make_tupledict([
 # demand. for example: normal demand = 2, surge demand = 3 results in 
 # SurgeMultipliers[u, s] = 3/2 = 1.5.
 SurgeMultipliers = tupledict(
-    {(u, s): SurgeDemands[u, s]/Demands[s] for s in Stores for u in Surges}
+    {(u, s): SurgeDemands[u, s] / Demands[s] for s in Stores for u in Surges}
 )
 
 def run_assignment_model(comm: int):
@@ -172,6 +180,13 @@ def run_assignment_model(comm: int):
     
     print()
     print_assignments(Y)
+
+    assignments = defaultdict(list)
+    for s in Stores:
+        for d in DCs:
+            assignments[s].append(Y[d,s].x)
+    
+    return assignments
         
 def print_assignments(Y):
     print('Store Assignments')
@@ -182,6 +197,12 @@ def print_assignments(Y):
         fractions = map(lambda x: round(x, 4) if x else '', fractions)
         print('{:>5} | {:>6} {:>6} {:>6}'.format(s, *fractions))
 
+def latex_table(fmt, rows):
+    s = ''
+    for r in rows:
+        s += fmt.format(*r)
+    return s
+
 # entry point of application.
 def main():
     from sys import argv
@@ -189,7 +210,9 @@ def main():
         comm = 4
     else:
         comm = int(argv[1])
-    run_assignment_model(comm)
+    a = run_assignment_model(comm)
+    rows = [[k]+v for k, v in a.items()]
+    print(latex_table('{} & {:.2%} & {:.2%} & {:.2%} \\\\\n', rows))
 
 
 # helper functions to print constraint and variable analysis.
@@ -252,7 +275,7 @@ def _print_analysis(constr_dict, mode, drop_empty=False):
         # print(f_str)
         # print(r)
         print(f_str.format(*r))
-    
+
 def print_constr_analysis(constrs, drop_zero=False):
     return _print_analysis(constrs, 'constraints', drop_zero)
 
