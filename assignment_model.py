@@ -43,12 +43,6 @@ Costs = make_tupledict([
 # required truckloads at each store.
 Demands = dict(zip(Stores, [18, 7, 21, 15, 17, 10, 6, 8, 7, 7]))
 
-# TotalCost[d,s] is the cost of shipping ALL of store s's regular demand
-# from DC d. this is multiplied with Y variables to compute the objective 
-# value.
-TotalCost = tupledict(
-    {(d, s): Costs[d,s]*Demands[s] for s in Stores for d in DCs})
-
 # == comm 2 ==
 # maximum capacity at each distribution centre.
 Capacities = dict(zip(DCs, [72, 76, 40]))
@@ -105,8 +99,6 @@ def run_assignment_model(comm: int):
     constrs = {}
 
     # link X and Y. 
-    # for all s in Stores, the sum of Y[d,s] across d in DCs is always 1.
-    # this is because Y is proportions of each store's total normal demand.
     # to handle surges, we consider the required demand at each store using
     # a multiplier of its regular demand. X[d,s,u] stores the precise amount
     # of product from d to s during surge u.
@@ -116,12 +108,12 @@ def run_assignment_model(comm: int):
     )
     
 
-    # to make calculating the objective easier, we compute some totals here,
-    # using equality.
-    model.addConstrs(
-        Z[u] == quicksum(X[d,s,u] * Costs[d, s] for d in DCs for s in Stores)
-        for u in Surges
-    )
+    # to make calculating the objective easier, we compute some totals here
+    # for each surge.
+    # model.addConstrs(
+    #     Z[u] == quicksum(X[d,s,u] * Costs[d, s] for d in DCs for s in Stores)
+    #     for u in Surges
+    # )
     # these equality constraints are not in the constrs dict as their
     # sensitivity analysis isn't very useful.
 
@@ -130,6 +122,14 @@ def run_assignment_model(comm: int):
     constrs['n_demand'] = model.addConstrs(
         Y.sum('*', s) >= Demands[s] for s in Stores
     )
+
+    if comm >= 2: # comm 2: max capacity at DC for normal demand.
+        constrs['n_capacity'] = model.addConstrs(
+            Y.sum(d, '*') <= Capacities[d] for d in DCs)
+
+    if comm >= 3: # comm 3: northside capacity limit for normal demand.
+        constrs['n_northside'] = model.addConstr(
+            quicksum(Y.sum(d, '*') for d in Northside) <= NorthsideMax)
 
     # assume only one surge occurs at a time. handle independently.
     for u in Surges:
@@ -142,14 +142,14 @@ def run_assignment_model(comm: int):
 
         if comm >= 2:
             # comm 2: maximum capacity at each distribution centre.
-            surge_constrs['capacity'] = model.addConstrs(
+            surge_constrs['s_capacity'] = model.addConstrs(
                 X.sum(d, '*', u) <= Capacities[d] for d in DCs)
 
         if comm >= 3:
             # comm 3: capacity limit on DCs on north side.
             # together, DC0 and DC2 can only provide 85 truckloads
             # per week.
-            surge_constrs['northside'] = model.addConstr(
+            surge_constrs['s_northside'] = model.addConstr(
                 quicksum(X.sum(d, '*', u) for d in Northside) <= NorthsideMax)
         
     # minimise total cost of transport.
@@ -190,6 +190,21 @@ def run_assignment_model(comm: int):
     print()
     print_constr_analysis(constrs, True)
     
+    print()
+    print()
+    print('== SURGE ASSIGNMENTS ==')
+    for u in Surges:
+        print()
+        print('Surge', u)
+        sums = {d: 0 for d in DCs}
+        for s in Stores:
+            for d in DCs:
+                if X[d,s,u].x:
+                    print(X[d,s,u].varname, X[d,s,u].x)
+                    sums[d] += X[d,s,u].x
+        print('Sums:', dict(sums))
+
+    print()
     print()
     print_assignments(Y)
 
