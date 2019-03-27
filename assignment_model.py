@@ -76,13 +76,13 @@ def run_assignment_model(comm: int):
     if comm < 4:
         # for backwards compatibility with previous communications where
         # there were no surges.
-        Surges = ['no surge']
-        SurgeDemands = {('no surge', s): Demands[s] for s in Stores}
-        SurgeMultipliers = defaultdict(lambda: 1)
+        Surges = []
+        SurgeDemands = None
+        SurgeMultipliers = None
 
     # the gurobi model.
     model = Model('WonderMarket Model')
-    
+
     # matrix of truckloads from each DC to each store during each surge.
     # indexed as X[d,s,u].
     # X = tupledict()
@@ -179,7 +179,7 @@ def run_assignment_model(comm: int):
     print()
     # print_variable_analysis(Z)
     print()
-    # print_constr_analysis(constrs)
+    print_constr_analysis(constrs)
 
     print()
     print()
@@ -190,7 +190,7 @@ def run_assignment_model(comm: int):
     print()
     # print_variable_analysis(Z, True)
     print()
-    print_constr_analysis(constrs, True)
+    # print_constr_analysis(constrs, True)
     
     print()
     print()
