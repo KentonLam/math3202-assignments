@@ -82,18 +82,20 @@ def run_assignment_model(comm: int):
 
     # the gurobi model.
     model = Model('WonderMarket Model')
-
+    
     # matrix of truckloads from each DC to each store during each surge.
     # indexed as X[d,s,u].
-    X = model.addVars(DCs, Stores, Surges, name='X')
+    # X = tupledict()
+    # X used to be variables in the model. we now derive them directly from Y
+    # and SurgeMultipliers.
 
     # matrix of truckloads from each DC to each store during NORMAL DEMAND.
     # indexed as Y[d,s]. obj=Costs defines the objective coefficient
     # of these variables.
     Y = model.addVars(DCs, Stores, obj=Costs, name='Y')
 
-    # total transport cost during each surge scenario.
-    Z = model.addVars(Surges, name='Z')
+    # unused: total transport cost during each surge scenario. 
+    # Z = model.addVars(Surges, name='Z')
 
     # dictionary to store our constraints.
     constrs = {}
@@ -102,10 +104,12 @@ def run_assignment_model(comm: int):
     # to handle surges, we consider the required demand at each store using
     # a multiplier of its regular demand. X[d,s,u] stores the precise amount
     # of product from d to s during surge u.
-    model.addConstrs(
-        X[d, s, u] == Y[d, s] * SurgeMultipliers[u, s] 
+    X = tupledict({
+        (d, s, u): Y[d, s] * SurgeMultipliers[u, s] 
         for s in Stores for d in DCs for u in Surges
-    )
+    })
+    # using a tupledict gives us access to the .sum() method to simplify 
+    # constraints.
     
 
     # to make calculating the objective easier, we compute some totals here
@@ -114,8 +118,6 @@ def run_assignment_model(comm: int):
     #     Z[u] == quicksum(X[d,s,u] * Costs[d, s] for d in DCs for s in Stores)
     #     for u in Surges
     # )
-    # these equality constraints are not in the constrs dict as their
-    # sensitivity analysis isn't very useful.
 
     # required truckloads for normal demand at each store.
     # constrained using Y variables.
@@ -152,7 +154,7 @@ def run_assignment_model(comm: int):
             surge_constrs['s_northside'] = model.addConstr(
                 quicksum(X.sum(d, '*', u) for d in Northside) <= NorthsideMax)
         
-    # minimise total cost of transport.
+    # minimise total cost of transport. objective function set using obj= above.
     model.modelSense = GRB.MINIMIZE
     model.optimize()
 
@@ -167,42 +169,50 @@ def run_assignment_model(comm: int):
     print()
     print()
     # group by surge, then store, then DC.
-    x_ = {(d,s,u): X[d,s,u] for u in Surges for s in Stores for d in DCs}
+    # x_ = {(d,s,u): X[d,s,u] for u in Surges for s in Stores for d in DCs}
     y_ = {(d, s): Y[d,s] for s in Stores for d in DCs}
 
     print('== FULL ANALYSIS ==')
-    print_variable_analysis(x_)
+    # print_variable_analysis(x_)
     print()
     print_variable_analysis(y_)
     print()
-    print_variable_analysis(Z)
+    # print_variable_analysis(Z)
     print()
-    print_constr_analysis(constrs)
+    # print_constr_analysis(constrs)
 
     print()
     print()
     print('== ANALYSIS NON-ZERO ==')
-    print_variable_analysis(x_, True)
+    # print_variable_analysis(x_, True)
     print()
     print_variable_analysis(y_, True)
     print()
-    print_variable_analysis(Z, True)
+    # print_variable_analysis(Z, True)
     print()
     print_constr_analysis(constrs, True)
     
     print()
     print()
-    print('== SURGE ASSIGNMENTS ==')
+    print('== SURGE ANALYSIS ==')
     for u in Surges:
         print()
         print('Surge', u)
-        sums = {d: 0 for d in DCs}
+        dc_sums = {d: 0 for d in DCs}
+        store_sums = {s: 0 for s in Stores}
+        cost = 0
         for s in Stores:
             for d in DCs:
-                if X[d,s,u].x:
-                    print(X[d,s,u].varname, X[d,s,u].x)
-                    sums[d] += X[d,s,u].x
-        print('Sums:', dict(sums))
+                name = f'X[{d},{s},{u}]'
+                val = X[d,s,u].getValue()
+                if val:
+                    print(name, '=', val)
+                    dc_sums[d] += val
+                    cost += val * Costs[d,s]
+                    store_sums[s] += val
+        print('Store sums:', store_sums)
+        print('DC sums:', dc_sums)
+        print('Cost:', cost)
 
     print()
     print()
@@ -224,7 +234,7 @@ def print_assignments(Y):
         fractions = map(lambda x: round(x, 4) if x else '', fractions)
         print('{:>5} | {:>6} {:>6} {:>6}'.format(s, *fractions))
 
-def latex_table(fmt, rows):
+def table(fmt, rows):
     s = ''
     for r in rows:
         s += fmt.format(*r)
@@ -239,7 +249,7 @@ def main():
         comm = int(argv[1])
     a = run_assignment_model(comm)
     rows = [[k]+v for k, v in a.items()]
-    print(latex_table('{} & {:.2%} & {:.2%} & {:.2%} \\\\\n', rows))
+    print(table('{} & {:.2%} & {:.2%} & {:.2%} \\\\\n', rows))
 
 
 # helper functions to print constraint and variable analysis.
