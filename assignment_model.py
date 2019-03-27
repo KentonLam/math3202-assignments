@@ -66,9 +66,10 @@ SurgeDemands = make_tupledict([
 # for each surge and store, this is the ratio of surge demand over normal 
 # demand. for example: normal demand = 2, surge demand = 3 results in 
 # SurgeMultipliers[u, s] = 3/2 = 1.5.
-SurgeMultipliers = tupledict(
-    {(u, s): SurgeDemands[u, s] / Demands[s] for s in Stores for u in Surges}
-)
+SurgeMultipliers = {
+    (u, s): SurgeDemands[u, s] / Demands[s] 
+    for s in Stores for u in Surges
+}
 
 def run_assignment_model(comm: int):
     global Surges, SurgeDemands, SurgeMultipliers
@@ -195,6 +196,10 @@ def run_assignment_model(comm: int):
     print()
     print()
     print('== SURGE ANALYSIS ==')
+    print()
+    print('Surge multipliers')
+    
+    print(SurgeMultipliers)
     for u in Surges:
         print()
         print('Surge', u)
