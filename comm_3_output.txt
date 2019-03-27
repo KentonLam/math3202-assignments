@@ -1,16 +1,15 @@
 Academic license - for non-commercial use only
-Optimize a model with 45 rows, 61 columns and 171 nonzeros
+Optimize a model with 14 rows, 30 columns and 80 nonzeros
 Coefficient statistics:
-  Matrix range     [1e+00, 3e+03]
+  Matrix range     [1e+00, 1e+00]
   Objective range  [6e+02, 3e+03]
   Bounds range     [0e+00, 0e+00]
   RHS range        [6e+00, 9e+01]
-Presolve removed 31 rows and 31 columns
 Presolve time: 0.00s
 Presolved: 14 rows, 30 columns, 80 nonzeros
 
 Iteration    Objective       Primal Inf.    Dual Inf.      Time
-       0    0.0000000e+00   1.450000e+01   0.000000e+00      0s
+       0    0.0000000e+00   1.160000e+02   0.000000e+00      0s
       16    1.7988200e+05   0.000000e+00   0.000000e+00      0s
 
 Solved in 16 iterations and 0.00 seconds
@@ -21,108 +20,60 @@ Objective value: 179882.0
 
 
 == FULL ANALYSIS ==
-Variable Analysis
-          variable  =     x *  coeff |     rc | obj low obj high
-X[DC0,S0,no surge]  =   0.0 *    0.0 |  300.0 |  -300.0  1e+100
-X[DC1,S0,no surge]  =   0.0 *    0.0 |    0.0 |  -160.0  1e+100
-X[DC2,S0,no surge]  =  18.0 *    0.0 |    0.0 | -2111.0   160.0
-X[DC0,S1,no surge]  =   7.0 *    0.0 |    0.0 | -1641.0   105.0
-X[DC1,S1,no surge]  =   0.0 *    0.0 |    0.0 |  -105.0  1e+100
-X[DC2,S1,no surge]  =   0.0 *    0.0 | 1342.0 | -1342.0  1e+100
-X[DC0,S2,no surge]  =  21.0 *    0.0 |    0.0 | -2597.0   322.0
-X[DC1,S2,no surge]  =   0.0 *    0.0 |    0.0 |  -322.0  1e+100
-X[DC2,S2,no surge]  =   0.0 *    0.0 |  486.0 |  -486.0  1e+100
-X[DC0,S3,no surge]  =   0.0 *    0.0 |  735.0 |  -735.0  1e+100
-X[DC1,S3,no surge]  =  15.0 *    0.0 |    0.0 | -1982.0   735.0
-X[DC2,S3,no surge]  =   0.0 *    0.0 |  750.0 |  -750.0  1e+100
-X[DC0,S4,no surge]  =  17.0 *    0.0 |    0.0 | -2535.0   169.0
-X[DC1,S4,no surge]  =   0.0 *    0.0 |    0.0 |  -169.0  1e+100
-X[DC2,S4,no surge]  =   0.0 *    0.0 |  225.0 |  -225.0  1e+100
-X[DC0,S5,no surge]  =   0.0 *    0.0 |  683.0 |  -683.0  1e+100
-X[DC1,S5,no surge]  =   3.0 *    0.0 |    0.0 |  -225.0   160.0
-X[DC2,S5,no surge]  =   7.0 *    0.0 |    0.0 |  -160.0   225.0
-X[DC0,S6,no surge]  =   0.0 *    0.0 | 1068.0 | -1068.0  1e+100
-X[DC1,S6,no surge]  =   6.0 *    0.0 |    0.0 | -2063.0  1068.0
-X[DC2,S6,no surge]  =   0.0 *    0.0 | 1401.0 | -1401.0  1e+100
-X[DC0,S7,no surge]  =   0.0 *    0.0 | 1012.0 | -1012.0  1e+100
-X[DC1,S7,no surge]  =   0.0 *    0.0 |    0.0 |  -944.0  1e+100
-X[DC2,S7,no surge]  =   8.0 *    0.0 |    0.0 | -1863.0   944.0
-X[DC0,S8,no surge]  =   0.0 *    0.0 |  969.0 |  -969.0  1e+100
-X[DC1,S8,no surge]  =   0.0 *    0.0 |    0.0 |  -606.0  1e+100
-X[DC2,S8,no surge]  =   7.0 *    0.0 |    0.0 | -2318.0   606.0
-X[DC0,S9,no surge]  =   0.0 *    0.0 |    0.0 |  -105.0   300.0
-X[DC1,S9,no surge]  =   7.0 *    0.0 |    0.0 |  -300.0   105.0
-X[DC2,S9,no surge]  =   0.0 *    0.0 | 1082.0 | -1082.0  1e+100
 
 Variable Analysis
  variable  =     x *  coeff |     rc | obj low obj high
-Y[DC0,S0]  =   0.0 * 1828.0 |    0.0 |  1528.0  1e+100
+Y[DC0,S0]  =   0.0 * 1828.0 |  300.0 |  1528.0  1e+100
 Y[DC1,S0]  =   0.0 * 2271.0 |  160.0 |  2111.0  1e+100
 Y[DC2,S0]  =  18.0 *  807.0 |    0.0 | -1304.0   967.0
 Y[DC0,S1]  =   7.0 * 1058.0 |    0.0 |  -583.0  1163.0
 Y[DC1,S1]  =   0.0 * 1746.0 |  105.0 |  1641.0  1e+100
-Y[DC2,S1]  =   0.0 * 1679.0 |    0.0 |   337.0  1e+100
+Y[DC2,S1]  =   0.0 * 1679.0 | 1342.0 |   337.0  1e+100
 Y[DC0,S2]  =  21.0 * 2014.0 |    0.0 |  -583.0  2336.0
 Y[DC1,S2]  =   0.0 * 2919.0 |  322.0 |  2597.0  1e+100
-Y[DC2,S2]  =   0.0 * 1779.0 |    0.0 |  1293.0  1e+100
-Y[DC0,S3]  =   0.0 * 2134.0 |    0.0 |  1399.0  1e+100
+Y[DC2,S2]  =   0.0 * 1779.0 |  486.0 |  1293.0  1e+100
+Y[DC0,S3]  =   0.0 * 2134.0 |  735.0 |  1399.0  1e+100
 Y[DC1,S3]  =  15.0 * 1982.0 |    0.0 |     0.0  2717.0
-Y[DC2,S3]  =   0.0 * 1428.0 |    0.0 |   678.0  1e+100
+Y[DC2,S3]  =   0.0 * 1428.0 |  750.0 |   678.0  1e+100
 Y[DC0,S4]  =  17.0 * 1952.0 |    0.0 |  -583.0  2121.0
 Y[DC1,S4]  =   0.0 * 2704.0 |  169.0 |  2535.0  1e+100
-Y[DC2,S4]  =   0.0 * 1456.0 |    0.0 |  1231.0  1e+100
-Y[DC0,S5]  =   0.0 * 2677.0 |    0.0 |  1994.0  1e+100
+Y[DC2,S4]  =   0.0 * 1456.0 |  225.0 |  1231.0  1e+100
+Y[DC0,S5]  =   0.0 * 2677.0 |  683.0 |  1994.0  1e+100
 Y[DC1,S5]  =   3.0 * 2577.0 |    0.0 |  2352.0  2737.0
 Y[DC2,S5]  =   7.0 * 1273.0 |    0.0 |  1113.0  1498.0
-Y[DC0,S6]  =   0.0 * 2548.0 |    0.0 |  1480.0  1e+100
+Y[DC0,S6]  =   0.0 * 2548.0 | 1068.0 |  1480.0  1e+100
 Y[DC1,S6]  =   6.0 * 2063.0 |    0.0 |     0.0  3131.0
-Y[DC2,S6]  =   0.0 * 2160.0 |    0.0 |   759.0  1e+100
-Y[DC0,S7]  =   0.0 * 2292.0 |    0.0 |  1280.0  1e+100
+Y[DC2,S6]  =   0.0 * 2160.0 | 1401.0 |   759.0  1e+100
+Y[DC0,S7]  =   0.0 * 2292.0 | 1012.0 |  1280.0  1e+100
 Y[DC1,S7]  =   0.0 * 2807.0 |  944.0 |  1863.0  1e+100
 Y[DC2,S7]  =   8.0 *  559.0 |    0.0 | -1304.0  1503.0
-Y[DC0,S8]  =   0.0 * 2704.0 |    0.0 |  1735.0  1e+100
+Y[DC0,S8]  =   0.0 * 2704.0 |  969.0 |  1735.0  1e+100
 Y[DC1,S8]  =   0.0 * 2924.0 |  606.0 |  2318.0  1e+100
 Y[DC2,S8]  =   7.0 * 1014.0 |    0.0 | -1304.0  1620.0
 Y[DC0,S9]  =   0.0 * 1153.0 |    0.0 |  1048.0  1453.0
 Y[DC1,S9]  =   7.0 * 1736.0 |    0.0 |  1436.0  1841.0
-Y[DC2,S9]  =   0.0 * 1514.0 |    0.0 |   432.0  1e+100
+Y[DC2,S9]  =   0.0 * 1514.0 | 1082.0 |   432.0  1e+100
 
-Variable Analysis
-   variable  =     x *  coeff |     rc | obj low obj high
-Z[no surge]  = 179882.0 *    0.0 |    0.0 |    -1.0  1e+100
 
 Constraint Analysis
-               constr      rhs |  slack     pi | rhs low rhs high
-          n_demand S0  >  18.0 |    0.0 2111.0 |    15.0    25.0
-          n_demand S1  >   7.0 |    0.0 1641.0 |    -0.0     7.0
-          n_demand S2  >  21.0 |    0.0 2597.0 |    14.0    21.0
-          n_demand S3  >  15.0 |    0.0 1982.0 |    -0.0    60.0
-          n_demand S4  >  17.0 |    0.0 2535.0 |    10.0    17.0
-          n_demand S5  >  10.0 |    0.0 2577.0 |     7.0    55.0
-          n_demand S6  >   6.0 |    0.0 2063.0 |    -0.0    51.0
-          n_demand S7  >   8.0 |    0.0 1863.0 |     5.0    15.0
-          n_demand S8  >   7.0 |    0.0 2318.0 |     4.0    14.0
-          n_demand S9  >   7.0 |    0.0 1736.0 |    -0.0    52.0
-no surge capacity DC0  <  72.0 |   27.0    0.0 |    45.0  1e+100
-no surge capacity DC1  <  76.0 |   45.0    0.0 |    31.0  1e+100
-no surge capacity DC2  <  40.0 |    0.0 -721.0 |    33.0    40.0
-   no surge northside  <  85.0 |    0.0 -583.0 |    85.0    92.0
+        constr      rhs |  slack     pi | rhs low rhs high
+   n_demand S0  >  18.0 |    0.0 2111.0 |    15.0    25.0
+   n_demand S1  >   7.0 |    0.0 1641.0 |    -0.0     7.0
+   n_demand S2  >  21.0 |    0.0 2597.0 |    14.0    21.0
+   n_demand S3  >  15.0 |    0.0 1982.0 |    -0.0    60.0
+   n_demand S4  >  17.0 |    0.0 2535.0 |    10.0    17.0
+   n_demand S5  >  10.0 |    0.0 2577.0 |     7.0    55.0
+   n_demand S6  >   6.0 |    0.0 2063.0 |    -0.0    51.0
+   n_demand S7  >   8.0 |    0.0 1863.0 |     5.0    15.0
+   n_demand S8  >   7.0 |    0.0 2318.0 |     4.0    14.0
+   n_demand S9  >   7.0 |    0.0 1736.0 |    -0.0    52.0
+n_capacity DC0  <  72.0 |   27.0    0.0 |    45.0  1e+100
+n_capacity DC1  <  76.0 |   45.0    0.0 |    31.0  1e+100
+n_capacity DC2  <  40.0 |    0.0 -721.0 |    33.0    40.0
+   n_northside  <  85.0 |    0.0 -583.0 |    85.0    92.0
 
 
 == ANALYSIS NON-ZERO ==
-Variable Analysis
-          variable  =     x *  coeff |     rc | obj low obj high
-X[DC2,S0,no surge]  =  18.0 *    0.0 |    0.0 | -2111.0   160.0
-X[DC0,S1,no surge]  =   7.0 *    0.0 |    0.0 | -1641.0   105.0
-X[DC0,S2,no surge]  =  21.0 *    0.0 |    0.0 | -2597.0   322.0
-X[DC1,S3,no surge]  =  15.0 *    0.0 |    0.0 | -1982.0   735.0
-X[DC0,S4,no surge]  =  17.0 *    0.0 |    0.0 | -2535.0   169.0
-X[DC1,S5,no surge]  =   3.0 *    0.0 |    0.0 |  -225.0   160.0
-X[DC2,S5,no surge]  =   7.0 *    0.0 |    0.0 |  -160.0   225.0
-X[DC1,S6,no surge]  =   6.0 *    0.0 |    0.0 | -2063.0  1068.0
-X[DC2,S7,no surge]  =   8.0 *    0.0 |    0.0 | -1863.0   944.0
-X[DC2,S8,no surge]  =   7.0 *    0.0 |    0.0 | -2318.0   606.0
-X[DC1,S9,no surge]  =   7.0 *    0.0 |    0.0 |  -300.0   105.0
 
 Variable Analysis
  variable  =     x *  coeff |     rc | obj low obj high
@@ -138,26 +89,11 @@ Y[DC2,S7]  =   8.0 *  559.0 |    0.0 | -1304.0  1503.0
 Y[DC2,S8]  =   7.0 * 1014.0 |    0.0 | -1304.0  1620.0
 Y[DC1,S9]  =   7.0 * 1736.0 |    0.0 |  1436.0  1841.0
 
-Variable Analysis
-   variable  =     x *  coeff |     rc | obj low obj high
-Z[no surge]  = 179882.0 *    0.0 |    0.0 |    -1.0  1e+100
 
-Constraint Analysis
-               constr      rhs |  slack     pi | rhs low rhs high
-          n_demand S0  >  18.0 |    0.0 2111.0 |    15.0    25.0
-          n_demand S1  >   7.0 |    0.0 1641.0 |    -0.0     7.0
-          n_demand S2  >  21.0 |    0.0 2597.0 |    14.0    21.0
-          n_demand S3  >  15.0 |    0.0 1982.0 |    -0.0    60.0
-          n_demand S4  >  17.0 |    0.0 2535.0 |    10.0    17.0
-          n_demand S5  >  10.0 |    0.0 2577.0 |     7.0    55.0
-          n_demand S6  >   6.0 |    0.0 2063.0 |    -0.0    51.0
-          n_demand S7  >   8.0 |    0.0 1863.0 |     5.0    15.0
-          n_demand S8  >   7.0 |    0.0 2318.0 |     4.0    14.0
-          n_demand S9  >   7.0 |    0.0 1736.0 |    -0.0    52.0
-no surge capacity DC0  <  72.0 |   27.0    0.0 |    45.0  1e+100
-no surge capacity DC1  <  76.0 |   45.0    0.0 |    31.0  1e+100
-no surge capacity DC2  <  40.0 |    0.0 -721.0 |    33.0    40.0
-   no surge northside  <  85.0 |    0.0 -583.0 |    85.0    92.0
+
+
+== SURGE ANALYSIS ==
+
 
 Store Assignments
 store |    DC0    DC1    DC2
