@@ -1,0 +1,5 @@
+If a RHS changes within SA bounds, does the variable 
+value change?
+
+SA needed in boss report?
+

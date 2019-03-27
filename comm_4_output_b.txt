@@ -1,0 +1,23 @@
+Academic license - for non-commercial use only
+Optimize a model with 40 rows, 30 columns and 348 nonzeros
+Coefficient statistics:
+  Matrix range     [1e+00, 5e+00]
+  Objective range  [6e+02, 3e+03]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [6e+00, 9e+01]
+Presolve removed 6 rows and 0 columns
+Presolve time: 0.00s
+Presolved: 34 rows, 30 columns, 330 nonzeros
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    0.0000000e+00   3.325000e+01   0.000000e+00      0s
+
+Solved in 17 iterations and 0.01 seconds
+Infeasible model
+
+Optimised for communication 4.
+INFEASIBLE MODEL.
+
+
+== FULL ANALYSIS ==
+

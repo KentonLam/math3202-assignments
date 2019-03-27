@@ -1,0 +1,16 @@
+- Normal cost: $199661.44
+- Surge costs:
+ - 227409.44
+ - 246009.15
+ - 200468.44
+ - 251438.63
+ - 305536.20
+- Effect of progressive communications.
+ - 1: 150212
+ - 2: 174952
+ - 3: 179882
+- With the exception of scenario 4, the capacity at DC1 is never fully used.
+ - Maximum reduction of 22 (to 54).
+ - But this makes scenario 4 infeasible.
+- Northside capacity limit is significant.
+ - Some scenarios (including no surge) have 35 unused truckloads/week between DC0 and DC2.
