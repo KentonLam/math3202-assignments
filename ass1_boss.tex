@@ -10,7 +10,7 @@
 
 \author{Kenton Lam}
 \date{{MATH3202 Assignment 1 \\ Due 29/03/2019 12:00 pm}}
-\title{WonderMarket Internal Report}
+\title{WonderMarket \\ Section A -- Internal Report}
 
 
 \begin{document}
@@ -75,7 +75,11 @@ This minimises the total transport cost during normal demand.
 \end{align*}
 
 \section{Constraints}
-First, we ensure the solution is valid for normal demand.
+First, we have the constraint that all variables are non-negative.
+\begin{align*}
+    Y_{d,s} &\ge 0 &&\forall~d \in D,~s \in S.
+\end{align*}
+We ensure the solution is valid for normal demand.
 \begin{align*}
     \sum_{d \in D} Y_{d,s} &\ge \mathrm{Demand}_{u,s} &&\forall~s \in S \\ 
     \sum_{s \in S} Y_{d,s} &\le \mathrm{Capacity}_d &&\forall~d \in D \\ 

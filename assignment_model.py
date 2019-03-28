@@ -1,23 +1,35 @@
 from gurobipy import *
 from collections import defaultdict, namedtuple
 
-def make_tupledict(matrix, rows, cols):
+from itertools import product
+
+def get_elem(matrix, indexes):
+    """
+    Given indexes = [a, b, c, ...], returns 
+    matrix[a][b][c][...].
+    """
+    obj = matrix
+    for ind in indexes:
+        obj = obj[ind]
+    return obj
+
+def make_tupledict(matrix, *names):
     """Converts a matrix (in list of lists form) to a dictionary with tuples
     as keys.
     
     Arguments:
-        matrix {List[List[int | float]]} -- matrix as list of lists (row-major order).
-        rows {List[Any]} -- list of row keys.
-        cols {List[Any]} -- list of column keys.
+        matrix {List[List[...]]} -- matrix as list of lists (row-major order).
+        names {List[List[Any]]} -- row/column names, in the order they are 
+        in the list format.
     
     Returns:
-        Dict[Tuple[Any, Any], int|float] -- dictionary indexed by (row_key, col_key)
-        tuples.
+        Dict[Tuple[...], int|float] -- dictionary indexed by name tuples.
     """
     d = tupledict()
-    for r, row in enumerate(matrix):
-        for c, item in enumerate(row):
-            d[rows[r], cols[c]] = item
+    ranges = [range(len(x)) for x in names]
+    for r in product(*ranges):
+        key = tuple(name[i] for name, i in zip(names, r))
+        d[key] = get_elem(matrix, r)
     return d
 
 ### SETS ###
@@ -34,7 +46,7 @@ Surges = [f'U{i}' for i in range(5)]
 
 # == comm 1 ==
 # matrix of cost per truckload of transporting from d to s.
-# indexed as C[d][s]
+# indexed as C[d,s]
 Costs = make_tupledict([
     [1828, 1058, 2014, 2134, 1952, 2677, 2548, 2292, 2704, 1153, ],
     [2271, 1746, 2919, 1982, 2704, 2577, 2063, 2807, 2924, 1736, ],
@@ -200,6 +212,7 @@ def run_assignment_model(comm: int):
     print('Surge multipliers')
     
     print(SurgeMultipliers)
+    # prints truckloads for each store during each surge.
     for u in Surges:
         print()
         print('Surge', u)
@@ -231,6 +244,7 @@ def run_assignment_model(comm: int):
     return assignments
         
 def print_assignments(Y):
+    """Prints a neatly formatted proportion table."""
     print('Store Assignments')
     print('store |    DC0    DC1    DC2')
     for s in Stores:
@@ -240,6 +254,7 @@ def print_assignments(Y):
         print('{:>5} | {:>6} {:>6} {:>6}'.format(s, *fractions))
 
 def table(fmt, rows):
+    """Formats a table with the given row format."""
     s = ''
     for r in rows:
         s += fmt.format(*r)
@@ -254,7 +269,13 @@ def main():
         comm = int(argv[1])
     a = run_assignment_model(comm)
     rows = [[k]+v for k, v in a.items()]
+    rows2 = [[k]+[j*Demands[k] for j in v] for k, v in a.items()]
+
+    # latex generating.
+    print(r'Store & DC0 & DC1 & DC2 \\')
     print(table('{} & {:.2%} & {:.2%} & {:.2%} \\\\\n', rows))
+    print(r'Store & DC0 & DC1 & DC2 \\')
+    print(table('{} & {:.2f} & {:.2f} & {:.2f} \\\\\n', rows2))
 
 
 # helper functions to print constraint and variable analysis.
@@ -319,9 +340,11 @@ def _print_analysis(constr_dict, mode, drop_empty=False):
         print(f_str.format(*r))
 
 def print_constr_analysis(constrs, drop_zero=False):
+    """Prints constraint sensitivity analysis in a table format."""
     return _print_analysis(constrs, 'constraints', drop_zero)
 
 def print_variable_analysis(variables, drop_zero=False): 
+    """Prints variable sensitivity analysis in a table format."""
     return _print_analysis(variables, 'variables', drop_zero)
 
 #endregion
