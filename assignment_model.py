@@ -1,3 +1,10 @@
+"""
+MATH3202 Assignment 1 -- Linear Programming
+Kenton Lam
+
+Due 29/03/2019 12:00pm
+"""
+
 from gurobipy import *
 from collections import defaultdict, namedtuple
 
@@ -271,6 +278,7 @@ def main():
     rows = [[k]+v for k, v in a.items()]
     rows2 = [[k]+[j*Demands[k] for j in v] for k, v in a.items()]
 
+    return
     # latex generating.
     print(r'Store & DC0 & DC1 & DC2 \\')
     print(table('{} & {:.2%} & {:.2%} & {:.2%} \\\\\n', rows))

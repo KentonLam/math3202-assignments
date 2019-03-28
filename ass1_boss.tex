@@ -75,13 +75,14 @@ This minimises the total transport cost during normal demand.
 \end{align*}
 
 \section{Constraints}
-First, we have the constraint that all variables are non-negative.
+First, we have the constraint that all variables are non-negative. Note that this results in 
+$X$ variables being non-negative as well.
 \begin{align*}
     Y_{d,s} &\ge 0 &&\forall~d \in D,~s \in S.
 \end{align*}
 We ensure the solution is valid for normal demand.
 \begin{align*}
-    \sum_{d \in D} Y_{d,s} &\ge \mathrm{Demand}_{u,s} &&\forall~s \in S \\ 
+    \sum_{d \in D} Y_{d,s} &\ge \mathrm{Demand}_{s} &&\forall~s \in S \\ 
     \sum_{s \in S} Y_{d,s} &\le \mathrm{Capacity}_d &&\forall~d \in D \\ 
     \sum_{d \in \mathrm{Northside}} \sum_{s \in S} Y_{d,s} &\le \mathrm{NorthsideMax}
 \end{align*}
