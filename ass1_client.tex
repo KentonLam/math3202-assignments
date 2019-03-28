@@ -7,7 +7,7 @@
 \usepackage[T1]{fontenc}
 
 \author{Kenton Lam}
-\date{{MATH3202 Assignment 1 \\ Due 15/03/2019 12:00 pm}}
+\date{{MATH3202 Assignment 1 \\ Due 29/03/2019 12:00 pm}}
 \title{WonderMarket Client Report}
 
 
@@ -19,7 +19,63 @@
 \end{abstract}
 
 \part{Solution}
+We have considered your requirements of weekly demand, DC capacity, northside capacity and surge demands.
+We propose
+the following assignment of stores to distribution centres.\\[0.8em]
+\begin{tabular}{l  r  r  r }
+    Store & DC0 & DC1 & DC2 \\ 
+S0 & 0.00\% & 0.00\% & 100.00\% \\
+S1 & 100.00\% & 0.00\% & 0.00\% \\
+S2 & 100.00\% & 0.00\% & 0.00\% \\
+S3 & 0.00\% & 100.00\% & 0.00\% \\
+S4 & 58.82\% & 0.00\% & 41.18\% \\
+S5 & 0.00\% & 83.86\% & 16.14\% \\
+S6 & 0.00\% & 100.00\% & 0.00\% \\
+S7 & 0.00\% & 64.77\% & 35.23\% \\
+S8 & 0.00\% & 64.77\% & 35.23\% \\
+S9 & 100.00\% & 0.00\% & 0.00\% \\ 
+\end{tabular}\\[0.8em]
+We have verified that these assignments can scale up to the surge scenarios provided
+without exceeding and of your capacity limits.
+
+\section{Costs}
+Under normal demand, this would cost you \$199661.44 per week. This was the cost 
+that was minimised.
+The costs for each surge scenario are outlined below.\\[0.8em]
+\begin{tabular}{r  r }
+Scenario & Cost  \\ 
+0 & \$227409.44 \\ 
+1& \$246009.15\\
+2 &\$200468.44 \\ 
+3 &\$251438.63\\
+4 &\$305536.20 \\
+\end{tabular}\\[0.8em]
 
 \part{Impact of Constraints}
+\begin{itemize}
+    \item Only considering each store's demand without any capacity constraints 
+(communication 1) resulted in a cost of \$150212.
+
+\item With DC capacity (communication 2) was considered, the cost was  \$174952.
+
+\item With the northside capacity limit (communication 3) as well, the cost was \$179882.
+
+\item Catering to the surge scenarios results in the cost discussed above.
+\end{itemize}
+
+\part{Additional Notes}
+While optimising the assignments with the data you provided us, we made 
+the following observations.
+\begin{itemize}
+    \item With the exception of surge scenario 4, the capacity at DC1 is never 
+fully used. Normal demand and scenarios 0--3 use at most 54 truckloads per week 
+from DC1. However, reducing its throughput (by any amount) would make surge scenario 4
+impossible.
+    \item DC0's capacity of 72 is never fully utilised. At most, 45.6 truckloads are 
+    required from it per week (during scenario 4).
+    \item Surge scenario 4 is the limit of your current system. It requires 161 truckloads 
+    in total. Because DC0 and DC2 together can only supply 85 and DC1 can supply 76, this is 
+    exactly 161 truckloads per week. 
+\end{itemize}
 
 \end{document}

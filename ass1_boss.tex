@@ -2,12 +2,14 @@
 \input{../../../header.tex}
 \input{../../../normal.tex}
 
+\usepackage{booktabs}
+
 \usepackage{lmodern}
 \renewcommand*\familydefault{\sfdefault} %% Only if the base font of the document is to be sans serif
 \usepackage[T1]{fontenc}
 
 \author{Kenton Lam}
-\date{{MATH3202 Assignment 1 \\ Due 15/03/2019 12:00 pm}}
+\date{{MATH3202 Assignment 1 \\ Due 29/03/2019 12:00 pm}}
 \title{WonderMarket Internal Report}
 
 
@@ -24,42 +26,87 @@ WonderMarket operates a number of stores and distribution centres (DCs).
 Each week, each store requires some amount of goods (measured in truckloads)
 to be delivered from one or more of their distribution centres (DC).
 
+After communication 4, we developed a detailed model to mathematically represent
+their objectives.
+
 \section{Sets}
 \begin{tabular}{l l}
-    $S$ & set of stores. \\ 
-    $D$ & set of distribution centres.    
+    $S$ & set of stores (length 10). \\ 
+    $D$ & set of distribution centres (length 3). \\ 
+    $U$ & set of surge scenarios (comm 4, length 5).   
 \end{tabular}
 
 \section{Data}
 \begin{tabular}{l l}
-    $C_{d,s}$ & cost of moving one truckload of goods from DC $d$ to store $s$ (comm 1). \\ 
-    $R_s$ & number of truckloads required at store $s$ per week (comm 1). \\
-    $M_d$ & maximum capacity (truckloads) which can be send from $d$ per week (comm 2).
+    $\mathrm{Cost}_{d,s}$ & cost of moving one truckload of goods from DC $d$ to store $s$ (comm 1). \\ 
+    $\mathrm{Demand}_s$ & number of truckloads required at store $s$ per week normally (comm 1). \\
+    $\mathrm{Capacity}_d$ & maximum capacity (truckloads) which can be send from $d$ per week (comm 2). \\ 
+    $\mathrm{Northside}$ & set of distribution centres on the north side (comm 3). \\ 
+    $\mathrm{NorthsideMax}$ & maximum combined capacity of northside DCs (comm 3). \\ 
+    $\mathrm{SurgeDemand}_{u,s}$ & surge demand during scenario $u$ at store $s$ (comm 4).
+\end{tabular}
+
+\subsection{Derived Data}
+To simplify later calculations, we derived some data from the data given above.\\[0.8em]    
+\begin{tabular}{l l}
+    $\mathrm{SurgeMultiplier}_{u,s}$ & surge demand at store $s$ during surge $u$,  divided by regular \\ 
+    &  demand at store $s$. \\ 
+    &$\mathrm{SurgeMultiplier}_{u,s} = \mathrm{SurgeDemand}_{u,s} / \mathrm{Demand}_s $
 \end{tabular}
 
 \section{Variables}
+The following variables were used in the Gurobi model.\\[0.8em]
 \begin{tabular}{l l}
-    $X_{d,s}$ & number of truckloads to be moved from DC $d$ to store $s$.
+    $Y_{d,s}$ & truckloads to be sent from DC $d$ to store $s$ during normal demand.
+\end{tabular}
+\\[0.8em]
+\noindent Additionally, we had dummy variables which existed only in Python to 
+make writing constraints easier. These were scalar multiplies of $Y$ variables.\\[0.8em]
+\begin{tabular}{l l}
+    $X_{d,s,u}$ & truckloads to be sent from DC $d$ to store $s$ during 
+    surge scenario $u$. \\ 
+    & $X_{d,s,u} = Y_{d,s} \cdot \mathrm{SurgeMultiplier}_{u,s}$
 \end{tabular}
 
 \section{Objective}
+This minimises the total transport cost during normal demand.
 \begin{align*}
-    \min \sum_{s \in S} \sum_{d \in D} C_{d, s} X_{d,s}
+    \min \sum_{s \in S} \sum_{d \in D} \mathrm{TotalCost}_{d, s} Y_{d,s}
 \end{align*}
 
 \section{Constraints}
-\subsection{Communication 1}
-Each store receives sufficient goods. For $s \in S$,
+First, we ensure the solution is valid for normal demand.
 \begin{align*}
-    \sum_{d \in D} X_{d,s} \ge R_s.
+    \sum_{d \in D} Y_{d,s} &\ge \mathrm{Demand}_{u,s} &&\forall~s \in S \\ 
+    \sum_{s \in S} Y_{d,s} &\le \mathrm{Capacity}_d &&\forall~d \in D \\ 
+    \sum_{d \in \mathrm{Northside}} \sum_{s \in S} Y_{d,s} &\le \mathrm{NorthsideMax}
 \end{align*}
 
-\subsection{Communication 2}
-Each distribution centre's capacity is not exceeded. For $d \in D$,
+We ensure our assignments can scale up to each surge scenario while remaining 
+feasible with the given constraints of DC capacity and northside capacity. For $u \in U$,
 \begin{align*}
-    \sum_{s \in S} X_{d,s} \le M_d.
+    \sum_{d \in D} X_{d,s,u} &\ge \mathrm{SurgeDemand}_{u,s} &&\forall~s \in S \\ 
+    \sum_{s \in S} X_{d,s,u} &\le \mathrm{Capacity}_d &&\forall~d \in D \\ 
+    \sum_{d \in \mathrm{Northside}} \sum_{s \in S} X_{d,s,u} &\le \mathrm{NorthsideMax}
 \end{align*}
 
-
+\pagebreak
+\part{Solution}
+Solving this linear model in Gurobi returns the following solution (obtained by dividing 
+each $Y$ variable by the store's normal demand).\\[1em]
+\begin{tabular}{l  r  r  r }
+    Store & DC0 & DC1 & DC2 \\ 
+S0 & 0.00\% & 0.00\% & 100.00\% \\
+S1 & 100.00\% & 0.00\% & 0.00\% \\
+S2 & 100.00\% & 0.00\% & 0.00\% \\
+S3 & 0.00\% & 100.00\% & 0.00\% \\
+S4 & 58.82\% & 0.00\% & 41.18\% \\
+S5 & 0.00\% & 83.86\% & 16.14\% \\
+S6 & 0.00\% & 100.00\% & 0.00\% \\
+S7 & 0.00\% & 64.77\% & 35.23\% \\
+S8 & 0.00\% & 64.77\% & 35.23\% \\
+S9 & 100.00\% & 0.00\% & 0.00\% \\ 
+\end{tabular}\\[1em]
+This would cost WonderMarket \$199661.44 during regular demand.
 
 \end{document}
