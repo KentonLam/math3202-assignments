@@ -70,17 +70,17 @@ Capacities = dict(zip(DCs, [72, 76, 40]))
 # set of distribution centres on the north-side.
 Northside = ['DC0', 'DC2']
 # maximum capacity of northside DCs.
-NorthsideMax = 85
+NorthsideMax = 88
 
 # == comm 4 ==
 # surge demand scenarios for each store.
 SurgeDemands = make_tupledict([
     # ['S0', 'S1', 'S2', 'S3', 'S4', 'S5', 'S6', 'S7', 'S8', 'S9'],
-    [18, 7, 21, 29, 17, 10, 6, 8, 7, 7], # Scenario 1
-    [18, 7, 21, 15, 17, 10, 6, 31, 7, 7],
-    [19, 7, 21, 15, 17, 10, 6, 8, 7, 7],
-    [18, 7, 21, 15, 17, 10, 6, 8, 30, 7],
-    [18, 7, 21, 15, 18, 54, 6, 8, 7, 7],
+    [18,7,21,29,17,10,6,8,7,7],
+    [18,7,21,15,17,10,6,31,7,7],
+    [19,7,21,15,17,10,6,8,7,7],
+    [18,7,21,15,17,10,6,8,30,7],
+    [18,7,21,15,21,54,6,8,7,7]
 ], Surges, Stores)
 # for each surge and store, this is the ratio of surge demand over normal 
 # demand. for example: normal demand = 2, surge demand = 3 results in 
@@ -92,13 +92,18 @@ SurgeMultipliers = {
 
 def run_assignment_model(comm: int):
     global Surges, SurgeDemands, SurgeMultipliers
-    assert 1 <= comm <= 4, "Invalid communication number."
+    assert 1 <= comm <= 8, "Invalid communication number."
     if comm < 4:
         # for backwards compatibility with previous communications where
         # there were no surges.
         Surges = []
         SurgeDemands = None
         SurgeMultipliers = None
+
+    print('+'+'-'*76+'+')
+    print('Communication', comm)
+    print('+'+'-'*76+'+')
+    print()
 
     # the gurobi model.
     model = Model('WonderMarket Model')
@@ -109,16 +114,16 @@ def run_assignment_model(comm: int):
     # X used to be variables in the model. we now derive them directly from Y
     # and SurgeMultipliers.
 
+    if comm >= 5:
+        A = model.addVars(DCs, Stores, name='A', vtype=GRB.BINARY)
+
     # matrix of truckloads from each DC to each store during NORMAL DEMAND.
     # indexed as Y[d,s]. obj=Costs defines the objective coefficient
     # of these variables.
     Y = model.addVars(DCs, Stores, obj=Costs, name='Y')
-
-    # unused: total transport cost during each surge scenario. 
-    # Z = model.addVars(Surges, name='Z')
-
-    # dictionary to store our constraints.
-    constrs = {}
+    # Y = tupledict({(d,s): A[d,s]*Demands[s] for s in Stores for d in DCs})
+    if comm >= 5:
+        model.addConstrs(Y[d,s] == A[d,s]*Demands[s] for s in Stores for d in DCs)
 
     # link X and Y. 
     # to handle surges, we consider the required demand at each store using
@@ -130,14 +135,9 @@ def run_assignment_model(comm: int):
     })
     # using a tupledict gives us access to the .sum() method to simplify 
     # constraints.
-    
 
-    # to make calculating the objective easier, we compute some totals here
-    # for each surge.
-    # model.addConstrs(
-    #     Z[u] == quicksum(X[d,s,u] * Costs[d, s] for d in DCs for s in Stores)
-    #     for u in Surges
-    # )
+    # dictionary to store our constraints.
+    constrs = {}
 
     # required truckloads for normal demand at each store.
     # constrained using Y variables.
@@ -149,7 +149,7 @@ def run_assignment_model(comm: int):
         constrs['n_capacity'] = model.addConstrs(
             Y.sum(d, '*') <= Capacities[d] for d in DCs)
 
-    if comm >= 3: # comm 3: northside capacity limit for normal demand.
+    if comm >= 3 and comm < 5: # comm 3: northside capacity limit for normal demand.
         constrs['n_northside'] = model.addConstr(
             quicksum(Y.sum(d, '*') for d in Northside) <= NorthsideMax)
 
@@ -167,7 +167,7 @@ def run_assignment_model(comm: int):
             surge_constrs['s_capacity'] = model.addConstrs(
                 X.sum(d, '*', u) <= Capacities[d] for d in DCs)
 
-        if comm >= 3:
+        if comm >= 3 and comm < 5:
             # comm 3: capacity limit on DCs on north side.
             # together, DC0 and DC2 can only provide 85 truckloads
             # per week.
@@ -271,7 +271,7 @@ def table(fmt, rows):
 def main():
     from sys import argv
     if len(argv) < 2:
-        comm = 4
+        comm = 5
     else:
         comm = int(argv[1])
     a = run_assignment_model(comm)
@@ -298,14 +298,14 @@ row_generator = {
         'Constraint Analysis', 
         ('constr', '', 'rhs', 'slack', 'pi', 'rhs low', 'rhs high'),
         '  {:>1} {:>5} | {:>6} {:>6} | {:>7} {:>7}', 
-        lambda n, c: (n, c.sense, r(c.rhs), r(c.slack), r(c.pi), r(c.SARHSLow), r(c.SARHSUp)),
+        lambda n, c: (n, c.sense, r(c.rhs), r(c.slack), 0, 0, 0),
         lambda t: t[2] == 0
     ),
     'variables': TableSpec(
         'Variable Analysis', 
         ('variable', 'x', 'coeff', 'rc', 'obj low', 'obj high'),
         '  = {:>5} * {:>6} | {:>6} | {:>7} {:>7}', 
-        lambda n, c: (c.varName, r(c.x), r(c.obj), r(c.rc), r(c.SAObjLow), r(c.SAObjUp)),
+        lambda n, c: (c.varName, r(c.x), r(c.obj), 0, 0, 0),
         lambda t: t[1] == 0
     )
 }
