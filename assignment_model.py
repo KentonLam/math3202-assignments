@@ -36,6 +36,8 @@ def make_tupledict(matrix, *names):
     ranges = [range(len(x)) for x in names]
     for r in product(*ranges):
         key = tuple(name[i] for name, i in zip(names, r))
+        if len(key) == 1:
+            key = key[0]
         d[key] = get_elem(matrix, r)
     return d
 
@@ -90,6 +92,19 @@ SurgeMultipliers = {
     for s in Stores for u in Surges
 }
 
+# == comm 5 ==
+# each store is supplied by only one DC.
+
+# == comm 6 == 
+NewDCs = [f'DC{i+3}' for i in range(4)]
+NewCosts = make_tupledict([
+    [1312,722,1251,1929,1125,2264,2565,1718,2161,996],
+    [1748,1663,670,2603,814,2606,3299,1890,2316,1862],
+    [1273,1776,2489,668,2062,841,1353,1370,1275,1532],
+    [2475,2663,3584,1653,3260,1899,936,2648,2434,2441],
+], NewDCs, Stores)
+NewCapacities = make_tupledict([74, 21, 29, 68], NewDCs)
+
 def run_assignment_model(comm: int):
     global Surges, SurgeDemands, SurgeMultipliers
     assert 1 <= comm <= 8, "Invalid communication number."
@@ -108,12 +123,19 @@ def run_assignment_model(comm: int):
     # the gurobi model.
     model = Model('WonderMarket Model')
 
-    # matrix of truckloads from each DC to each store during each surge.
-    # indexed as X[d,s,u].
-    # X = tupledict()
-    # X used to be variables in the model. we now derive them directly from Y
-    # and SurgeMultipliers.
+    # comm 6: we have 4 candidate DC sites. add their data to the existing DCs.
+    if comm >= 6:
+        DCs.extend(NewDCs)
+        # B[d] where d is a new DC is whether a DC is built at d.
+        B = model.addVars(NewDCs, name='B', vtype=GRB.BINARY)
 
+        Costs.update(NewCosts)
+        for new_dc in NewDCs:
+            # each new DC's capacity is 0 unless it is built.
+            Capacities[new_dc] = B[new_dc]*NewCapacities[new_dc]
+
+    # A[d,s] is a binary variable of whether store s receives deliveries 
+    # from DC d. 
     if comm >= 5:
         A = model.addVars(DCs, Stores, name='A', vtype=GRB.BINARY)
 
@@ -121,11 +143,12 @@ def run_assignment_model(comm: int):
     # indexed as Y[d,s]. obj=Costs defines the objective coefficient
     # of these variables.
     Y = model.addVars(DCs, Stores, obj=Costs, name='Y')
-    # Y = tupledict({(d,s): A[d,s]*Demands[s] for s in Stores for d in DCs})
+    # comm 5: binary variables dicate store assignments.
     if comm >= 5:
         model.addConstrs(Y[d,s] == A[d,s]*Demands[s] for s in Stores for d in DCs)
 
-    # link X and Y. 
+    # matrix of truckloads from each DC to each store during each surge.
+    # indexed as X[d,s,u].
     # to handle surges, we consider the required demand at each store using
     # a multiplier of its regular demand. X[d,s,u] stores the precise amount
     # of product from d to s during surge u.
@@ -153,6 +176,9 @@ def run_assignment_model(comm: int):
         constrs['n_northside'] = model.addConstr(
             quicksum(Y.sum(d, '*') for d in Northside) <= NorthsideMax)
 
+    if comm >= 6: # comm 6: only one new DC can be built.
+        constrs['new_dc'] = model.addConstr(B.sum('*') <= 1)
+
     # assume only one surge occurs at a time. handle independently.
     for u in Surges:
         constrs[f'{u}'] = surge_constrs = {}
@@ -162,15 +188,15 @@ def run_assignment_model(comm: int):
         surge_constrs['s_demand'] = model.addConstrs(
             X.sum('*', s, u) >= SurgeDemands[u, s] for s in Stores if SurgeDemands[u,s] != Demands[s])
 
+        # comm 2: maximum capacity at each distribution centre.
         if comm >= 2:
-            # comm 2: maximum capacity at each distribution centre.
             surge_constrs['s_capacity'] = model.addConstrs(
                 X.sum(d, '*', u) <= Capacities[d] for d in DCs)
 
+        # comm 3: capacity limit on DCs on north side.
+        # together, DC0 and DC2 can only provide 85 truckloads
+        # per week.
         if comm >= 3 and comm < 5:
-            # comm 3: capacity limit on DCs on north side.
-            # together, DC0 and DC2 can only provide 85 truckloads
-            # per week.
             surge_constrs['s_northside'] = model.addConstr(
                 quicksum(X.sum(d, '*', u) for d in Northside) <= NorthsideMax)
         
@@ -195,6 +221,12 @@ def run_assignment_model(comm: int):
     print('== FULL ANALYSIS ==')
     # print_variable_analysis(x_)
     print()
+    if comm >= 5:
+        print_variable_analysis(A)
+        print()
+    if comm >= 6:
+        print_variable_analysis(B)
+        print()
     print_variable_analysis(y_)
     print()
     # print_variable_analysis(Z)
@@ -206,6 +238,9 @@ def run_assignment_model(comm: int):
     print('== ANALYSIS NON-ZERO ==')
     # print_variable_analysis(x_, True)
     print()
+    if comm >= 5:
+        print_variable_analysis(A, True)
+        print()
     print_variable_analysis(y_, True)
     print()
     # print_variable_analysis(Z, True)
