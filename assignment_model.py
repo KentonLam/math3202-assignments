@@ -125,14 +125,20 @@ def run_assignment_model(comm: int):
 
     # comm 6: we have 4 candidate DC sites. add their data to the existing DCs.
     if comm >= 6:
-        DCs.extend(NewDCs)
+        ActualNewDCs = list(NewDCs)
+        if comm >= 7:
+            NewDCs[:0] = DCs # prepend old DCs to NewDCs so binary vars are created.
+        DCs.extend(ActualNewDCs) # append new DC sites to DCs for constraints.
+
         # B[d] where d is a new DC is whether a DC is built at d.
         B = model.addVars(NewDCs, name='B', vtype=GRB.BINARY)
 
         Costs.update(NewCosts)
         for new_dc in NewDCs:
+            # DC could be from old or new DCs.
+            caps = NewCapacities if new_dc in NewCapacities else Capacities
             # each new DC's capacity is 0 unless it is built.
-            Capacities[new_dc] = B[new_dc]*NewCapacities[new_dc]
+            Capacities[new_dc] = B[new_dc]*caps[new_dc]
 
     # A[d,s] is a binary variable of whether store s receives deliveries 
     # from DC d. 
@@ -176,8 +182,12 @@ def run_assignment_model(comm: int):
         constrs['n_northside'] = model.addConstr(
             quicksum(Y.sum(d, '*') for d in Northside) <= NorthsideMax)
 
-    if comm >= 6: # comm 6: only one new DC can be built.
+    if comm >= 6 and comm < 7: # comm 6: only one new DC can be built.
         constrs['new_dc'] = model.addConstr(B.sum('*') <= 1)
+    
+    if comm >= 7: # comm 7: total number of DCs is 4 (one new)
+        constrs['new_dc'] = model.addConstr(B.sum(ActualNewDCs) <= 2)
+        constrs['open_dcs'] = model.addConstr(B.sum('*') <= 4)
 
     # assume only one surge occurs at a time. handle independently.
     for u in Surges:
@@ -287,13 +297,15 @@ def run_assignment_model(comm: int):
         
 def print_assignments(Y):
     """Prints a neatly formatted proportion table."""
+    num = int(len(Y)/len(Stores))
     print('Store Assignments')
-    print('store |    DC0    DC1    DC2')
+    print('store |' + ''.join(f'    DC{i}' for i in range(num)))
+    fmt = ' {:>6}'*num
     for s in Stores:
         fractions = [Y[d,s].x/Demands[s] for d in DCs]
         # if the variable is 0, don't print anything. makes table easier to read.
         fractions = map(lambda x: round(x, 4) if x else '', fractions)
-        print('{:>5} | {:>6} {:>6} {:>6}'.format(s, *fractions))
+        print(('{:>5} |'+fmt).format(s, *fractions))
 
 def table(fmt, rows):
     """Formats a table with the given row format."""
@@ -314,11 +326,13 @@ def main():
     rows2 = [[k]+[j*Demands[k] for j in v] for k, v in a.items()]
 
     return
+    dcs = 3 if comm < 6 else 7
+    s = ' & {:.2%}'*dcs
     # latex generating.
     print(r'Store & DC0 & DC1 & DC2 \\')
-    print(table('{} & {:.2%} & {:.2%} & {:.2%} \\\\\n', rows))
+    print(table(f'{{}} {s} \\\\\n', rows))
     print(r'Store & DC0 & DC1 & DC2 \\')
-    print(table('{} & {:.2f} & {:.2f} & {:.2f} \\\\\n', rows2))
+    print(table(f'{{}} & {s} \\\\\n', rows2))
 
 
 # helper functions to print constraint and variable analysis.
