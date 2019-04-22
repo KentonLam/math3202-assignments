@@ -140,6 +140,12 @@ def run_assignment_model(comm: int):
             # each new DC's capacity is 0 unless it is built.
             Capacities[new_dc] = B[new_dc]*caps[new_dc]
 
+    # comm 8: each DC now has labour costs.
+    if comm >= 8: 
+        # pass
+        P = model.addVars(DCs, name='P', obj=2750, vtype=GRB.INTEGER)
+        F = model.addVars(DCs, name='F', obj=4500, vtype=GRB.INTEGER)
+
     # A[d,s] is a binary variable of whether store s receives deliveries 
     # from DC d. 
     if comm >= 5:
@@ -189,6 +195,9 @@ def run_assignment_model(comm: int):
         constrs['new_dc'] = model.addConstr(B.sum(ActualNewDCs) <= 2)
         constrs['open_dcs'] = model.addConstr(B.sum('*') <= 4)
 
+    if comm >= 8: # comm 8: enough labour for truckloads needed.
+        constrs['labour'] = model.addConstrs(Y.sum(d, '*') <= 9*F[d]+5*P[d] for d in DCs)
+
     # assume only one surge occurs at a time. handle independently.
     for u in Surges:
         constrs[f'{u}'] = surge_constrs = {}
@@ -237,6 +246,10 @@ def run_assignment_model(comm: int):
     if comm >= 6:
         print_variable_analysis(B)
         print()
+    if comm >= 8:
+        print_variable_analysis(P)
+        print_variable_analysis(F)
+        print()
     print_variable_analysis(y_)
     print()
     # print_variable_analysis(Z)
@@ -249,7 +262,14 @@ def run_assignment_model(comm: int):
     # print_variable_analysis(x_, True)
     print()
     if comm >= 5:
-        print_variable_analysis(A, True)
+        print_variable_analysis(A, 1)
+        print()
+    if comm >= 6:
+        print_variable_analysis(B, 1)
+        print()
+    if comm >= 8:
+        print_variable_analysis(P, 1)
+        print_variable_analysis(F, 1)
         print()
     print_variable_analysis(y_, True)
     print()
