@@ -158,7 +158,7 @@ def run_assignment_model(comm: int):
         # total capacity handled by full-time and part-time teams at each DC.
         FTPTSum = tupledict({ d: 9*F[d]+5*P[d] for d in DCs })
 
-    # comm 9: we need to consider labour during surge scenarios, using casual 
+    # comm 9: we need to consider labour during surge scenarios using casual 
     # workers.
     if comm >= 9:
         CasualCosts = {} 
@@ -177,11 +177,11 @@ def run_assignment_model(comm: int):
     # matrix of truckloads from each DC to each store during NORMAL DEMAND.
     # indexed as X[d,s]. obj=Costs defines the objective coefficient
     # of these variables.
-    NormalCosts = Costs 
+    NormalTCosts = Costs 
     if comm >= 9: # comm 9: consider yearly cost.
         # per truckload cost multiplied by number of normal weeks.
-        NormalCosts = { k: NormalWeeks*v for k, v in Costs.items() }
-    X = model.addVars(DCs, Stores, obj=NormalCosts, name='X')
+        NormalTCosts = { k: NormalWeeks*v for k, v in Costs.items() }
+    X = model.addVars(DCs, Stores, obj=NormalTCosts, name='X')
     # comm 5: binary variables dicate store assignments.
     if comm >= 5:
         model.addConstrs(X[d,s] == A[d,s]*Demands[s] for s in Stores for d in DCs)
@@ -190,13 +190,13 @@ def run_assignment_model(comm: int):
     # to handle surges, we consider the required demand at each store using
     # a multiplier of its regular demand. this stores the precise amount
     # of truckloads sent from d to s during surge u.
-    SurgeCosts = 0
+    SurgeTCosts = 0
     if comm >= 9:
         # before comm 9, we ignore surge costs. in comm 9, we need to consider 
         # the cost of each surge which is affected by how long it runs for.
-        SurgeCosts = { (d,s,u): Costs[d,s]*SurgeWeeks[u] 
+        SurgeTCosts = { (d,s,u): Costs[d,s]*SurgeWeeks[u] 
             for d, s, u in product(DCs, Stores, Surges) }
-    Y = model.addVars(DCs, Stores, Surges, name='Y', obj=SurgeCosts)
+    Y = model.addVars(DCs, Stores, Surges, name='Y', obj=SurgeTCosts)
 
     # links X and Y variables. this ensures proportions are kept.
     model.addConstrs(Y[d,s,u] == X[d, s] * SurgeMultipliers[u, s] 
@@ -364,7 +364,7 @@ def run_assignment_model(comm: int):
             w_cost += Y[d,s,u]*Costs[d,s]
         print('Cost (weekly, no labour):', w_cost.getValue())
         if comm >= 9:
-            t_cost = quicksum(Y[d,s,u2]*SurgeCosts[d,s,u] 
+            t_cost = quicksum(Y[d,s,u2]*SurgeTCosts[d,s,u] 
                 for d,s,u2 in Y if u2 == u)
             l_cost = quicksum(C[u,d] * CasualCosts[u,d] 
                 for d in DCs)
@@ -372,6 +372,7 @@ def run_assignment_model(comm: int):
             print('  Transport:', t_cost.getValue())
             print('  Casual labour:', l_cost.getValue())
             print('Weekly:', ((t_cost+l_cost)/SurgeWeeks[u]).getValue())
+            print('Surge duration:', SurgeWeeks[u])
 
     print()
     print()
