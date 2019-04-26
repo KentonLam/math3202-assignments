@@ -107,13 +107,13 @@ NewCapacities = make_tupledict([74, 21, 29, 68], NewDCs)
 
 # == comm 9 == 
 SurgeWeeks = make_tupledict([5, 5, 6, 2, 5], Surges)
-NormalWeeks = 52 - SurgeWeeks.sum('*')
+NormalWeeks = 52 - SurgeWeeks.sum('*').getValue()
 assert NormalWeeks == 29
 
 
 def run_assignment_model(comm: int):
     global Surges, SurgeDemands, SurgeMultipliers
-    assert 1 <= comm <= 8, "Invalid communication number."
+    assert 1 <= comm <= 9, "Invalid communication number."
     if comm < 4:
         # for backwards compatibility with previous communications where
         # there were no surges.
@@ -135,7 +135,7 @@ def run_assignment_model(comm: int):
         DCs.extend(NewDCs) # append new DC sites to DCs for capacity constraints.
 
         # B[d], where d is a new DC, denotes whether a DC is built at d.
-        B = model.addVars(DCs, name='B', vtype=GRB.BINARY)
+        B = model.addVars(DCs, name='Build', vtype=GRB.BINARY)
 
         Costs.update(NewCosts)
         for new_dc in DCs:
@@ -177,10 +177,11 @@ def run_assignment_model(comm: int):
     # matrix of truckloads from each DC to each store during NORMAL DEMAND.
     # indexed as X[d,s]. obj=Costs defines the objective coefficient
     # of these variables.
-    ScaledCosts = Costs 
-    if comm >= 9:
-        ScaledCosts = { k: NormalWeeks*v for k, v in Costs.items() }
-    X = model.addVars(DCs, Stores, obj=ScaledCosts, name='X')
+    NormalCosts = Costs 
+    if comm >= 9: # comm 9: consider yearly cost.
+        # per truckload cost multiplied by number of normal weeks.
+        NormalCosts = { k: NormalWeeks*v for k, v in Costs.items() }
+    X = model.addVars(DCs, Stores, obj=NormalCosts, name='X')
     # comm 5: binary variables dicate store assignments.
     if comm >= 5:
         model.addConstrs(X[d,s] == A[d,s]*Demands[s] for s in Stores for d in DCs)
@@ -193,12 +194,11 @@ def run_assignment_model(comm: int):
     if comm >= 9:
         # before comm 9, we ignore surge costs. in comm 9, we need to consider 
         # the cost of each surge which is affected by how long it runs for.
-        SurgeCosts = {
-            (d,s,u): Costs[d,s]*SurgeWeeks[u] 
-            for d, s, u in product(DCs, Stores, Surges)
-        }
+        SurgeCosts = { (d,s,u): Costs[d,s]*SurgeWeeks[u] 
+            for d, s, u in product(DCs, Stores, Surges) }
     Y = model.addVars(DCs, Stores, Surges, name='Y', obj=SurgeCosts)
 
+    # links X and Y variables. this ensures proportions are kept.
     model.addConstrs(Y[d,s,u] == X[d, s] * SurgeMultipliers[u, s] 
         for s in Stores for d in DCs for u in Surges)
 
@@ -255,7 +255,7 @@ def run_assignment_model(comm: int):
         # comm 9: surge labour costs. 
         if comm >= 9:
             surge_constrs['s_labour'] = model.addConstrs(
-                Y.sum(d, '*', u) <= F[d] for d in DCs
+                Y.sum(d, '*', u) <= FTPTSum[d] + C[u,d] for d in DCs
             )
         
     # minimise total cost of transport. objective function set using obj= above.
@@ -266,6 +266,8 @@ def run_assignment_model(comm: int):
     print(f'Optimised for communication {comm}.')
     if model.status == GRB.OPTIMAL:
         print('Objective value:', model.objVal)
+        if comm >= 9:
+            print('Weekly average:', model.objVal / 52)
     elif model.status == GRB.INFEASIBLE:
         print('INFEASIBLE MODEL.')
     else:
@@ -275,7 +277,8 @@ def run_assignment_model(comm: int):
     # group by surge, then store, then DC.
     x_ = {(d, s): X[d,s] for s in Stores for d in DCs}
     y_ = {(d,s,u): Y[d,s,u] for u in Surges for s in Stores for d in DCs}
-
+    
+    '''
     print('== FULL ANALYSIS ==')
     # print_variable_analysis(x_)
     print()
@@ -295,11 +298,12 @@ def run_assignment_model(comm: int):
         print('Y variables omitted.')
         # print_variable_analysis(y_)
     print()
-    
+    '''
 
     print()
     print()
     print('== ANALYSIS NON-ZERO ==')
+    print('(variables not printed are 0)')
     # print_variable_analysis(x_, True)
     print()
     if comm >= 5:
@@ -310,8 +314,13 @@ def run_assignment_model(comm: int):
         print()
     if comm >= 8:
         print_variable_analysis(P, 1)
+        print()
         print_variable_analysis(F, 1)
         print()
+    if comm >= 9:
+        print_variable_analysis(C, 1)
+        print()
+    print()
     print_variable_analysis(x_, True)
     print()
     if comm >= 9:
@@ -323,8 +332,17 @@ def run_assignment_model(comm: int):
     print('== CONSTAINTS ==')
     print()
     print_constr_analysis(constrs)
-
+    
     print()
+    print()
+    print('== NORMAL DEMAND ANALYSIS ==')
+    print() 
+    print('\n'.join([f'X[{d},{s}] = {X[d,s].x}' for s in Stores for d in DCs if X[d,s].x]))
+    print('Store sums:', {s: X.sum('*', s).getValue() for s in Stores})
+    print('DC sums:', {d: X.sum(d, '*').getValue() for d in DCs})
+    if comm >= 8:
+        print('FTPT sums:', {k: v.getValue() for k, v in FTPTSum.items() })
+
     print()
     print('== SURGE ANALYSIS ==')
     print()
@@ -335,32 +353,41 @@ def run_assignment_model(comm: int):
     for u in Surges:
         print()
         print('Surge', u)
-        dc_sums = {d: 0 for d in DCs}
-        store_sums = {s: 0 for s in Stores}
-        cost = 0
-        for s in Stores:
-            for d in DCs:
-                name = f'X[{d},{s},{u}]'
-                val = Y[d,s,u].x
-                if val:
-                    print(name, '=', val)
-                    dc_sums[d] += val
-                    cost += val * Costs[d,s]
-                    store_sums[s] += val
-        print('Store sums:', store_sums)
-        print('DC sums:', dc_sums)
-        print('Cost:', cost)
+        print('\n'.join([f'Y[{d},{s},{u}] = {Y[d,s,u].x}' for s in Stores for d in DCs if Y[d,s,u].x]))
+        print('Store sums:', {s: Y.sum('*', s, u).getValue() for s in Stores})
+        print('DC sums:', {d: Y.sum(d, '*', u).getValue() for d in DCs})
+        if comm >= 9:
+            print('Casuals:', {d: float(C[u,d].x) for d in DCs if C[u,d].x })
+
+        w_cost = 0
+        for d, s in product(DCs, Stores):
+            w_cost += Y[d,s,u]*Costs[d,s]
+        print('Cost (weekly, no labour):', w_cost.getValue())
+        if comm >= 9:
+            t_cost = quicksum(Y[d,s,u2]*SurgeCosts[d,s,u] 
+                for d,s,u2 in Y if u2 == u)
+            l_cost = quicksum(C[u,d] * CasualCosts[u,d] 
+                for d in DCs)
+            print('Cost (yearly, with labour):', (t_cost+l_cost).getValue())
+            print('  Transport:', t_cost.getValue())
+            print('  Casual labour:', l_cost.getValue())
+            print('Weekly:', ((t_cost+l_cost)/SurgeWeeks[u]).getValue())
 
     print()
     print()
     print_assignments(X)
 
-    assignments = defaultdict(list)
+    print()
+    print('Store &', ' & '.join(DCs), r'\\')
     for s in Stores:
-        for d in DCs:
-            assignments[s].append(X[d,s].x/Demands[s])
+        # proportions
+        p = [float(X[d,s].x/Demands[s]) for d in DCs]
+        p = [str(round(a*100, 2))+'%' if a else '' for a in p]
+        print(' & '.join([s] + p), r'\\')
     
-    return assignments
+    print()
+    print('This was communication', comm, 'with value', model.objVal)
+    
         
 def print_assignments(Y):
     """Prints a neatly formatted proportion table."""
@@ -386,17 +413,19 @@ def main():
     from sys import argv
     comm = int(argv[1])
     a = run_assignment_model(comm)
-    rows = [[k]+v for k, v in a.items()]
+    return
+    rows = [[k]+(v if v else '') for k, v in a.items()]
     rows2 = [[k]+[j*Demands[k] for j in v] for k, v in a.items()]
 
-    return
+    # return
     dcs = 3 if comm < 6 else 7
-    s = ' & {:.2%}'*dcs
+    s = ' & {}'*dcs
+    s2 = ' & {}'*dcs
     # latex generating.
     print(r'Store & DC0 & DC1 & DC2 \\')
     print(table(f'{{}} {s} \\\\\n', rows))
     print(r'Store & DC0 & DC1 & DC2 \\')
-    print(table(f'{{}} & {s} \\\\\n', rows2))
+    print(table(f'{{}} & {s2} \\\\\n', rows2))
 
 
 # helper functions to print constraint and variable analysis.
