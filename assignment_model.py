@@ -413,21 +413,11 @@ def table(fmt, rows):
 # entry point of application.
 def main():
     from sys import argv
-    comm = int(argv[1])
-    a = run_assignment_model(comm)
-    return
-    rows = [[k]+(v if v else '') for k, v in a.items()]
-    rows2 = [[k]+[j*Demands[k] for j in v] for k, v in a.items()]
-
-    # return
-    dcs = 3 if comm < 6 else 7
-    s = ' & {}'*dcs
-    s2 = ' & {}'*dcs
-    # latex generating.
-    print(r'Store & DC0 & DC1 & DC2 \\')
-    print(table(f'{{}} {s} \\\\\n', rows))
-    print(r'Store & DC0 & DC1 & DC2 \\')
-    print(table(f'{{}} & {s2} \\\\\n', rows2))
+    if len(argv) < 2:
+        comm = 9
+    else:
+        comm = int(argv[1])
+    run_assignment_model(comm)
 
 
 # helper functions to print constraint and variable analysis.
