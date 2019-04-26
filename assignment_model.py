@@ -95,7 +95,7 @@ SurgeMultipliers = {
 # == comm 5 ==
 # each store is supplied by only one DC.
 
-# == comm 6 == 
+# == comm 6, 7 == 
 NewDCs = [f'DC{i+3}' for i in range(4)]
 NewCosts = make_tupledict([
     [1312,722,1251,1929,1125,2264,2565,1718,2161,996],
@@ -104,6 +104,12 @@ NewCosts = make_tupledict([
     [2475,2663,3584,1653,3260,1899,936,2648,2434,2441],
 ], NewDCs, Stores)
 NewCapacities = make_tupledict([74, 21, 29, 68], NewDCs)
+
+# == comm 9 == 
+SurgeWeeks = make_tupledict([5, 5, 6, 2, 5], Surges)
+NormalWeeks = 52 - SurgeWeeks.sum('*')
+assert NormalWeeks == 29
+
 
 def run_assignment_model(comm: int):
     global Surges, SurgeDemands, SurgeMultipliers
@@ -125,16 +131,14 @@ def run_assignment_model(comm: int):
 
     # comm 6: we have 4 candidate DC sites. add their data to the existing DCs.
     if comm >= 6:
-        ActualNewDCs = list(NewDCs)
-        if comm >= 7:
-            NewDCs[:0] = DCs # prepend old DCs to NewDCs so binary vars are created.
-        DCs.extend(ActualNewDCs) # append new DC sites to DCs for constraints.
+        OldDCs = list(DCs) # store a copy of existing DCs for constraints.
+        DCs.extend(NewDCs) # append new DC sites to DCs for capacity constraints.
 
-        # B[d] where d is a new DC is whether a DC is built at d.
-        B = model.addVars(NewDCs, name='B', vtype=GRB.BINARY)
+        # B[d], where d is a new DC, denotes whether a DC is built at d.
+        B = model.addVars(DCs, name='B', vtype=GRB.BINARY)
 
         Costs.update(NewCosts)
-        for new_dc in NewDCs:
+        for new_dc in DCs:
             # DC could be from old or new DCs.
             caps = NewCapacities if new_dc in NewCapacities else Capacities
             # each new DC's capacity is 0 unless it is built.
@@ -142,9 +146,28 @@ def run_assignment_model(comm: int):
 
     # comm 8: each DC now has labour costs.
     if comm >= 8: 
-        # pass
-        P = model.addVars(DCs, name='P', obj=2750, vtype=GRB.INTEGER)
-        F = model.addVars(DCs, name='F', obj=4500, vtype=GRB.INTEGER)
+        PTCost = 2750 
+        FTCost = 4500
+        # in comm 9, these are employed year-round.
+        if comm >= 9:
+            PTCost *= 52 
+            FTCost *= 52
+        P = model.addVars(DCs, name='PT', obj=PTCost, vtype=GRB.INTEGER)
+        F = model.addVars(DCs, name='FT', obj=FTCost, vtype=GRB.INTEGER)
+        
+        # total capacity handled by full-time and part-time teams at each DC.
+        FTPTSum = tupledict({ d: 9*F[d]+5*P[d] for d in DCs })
+
+    # comm 9: we need to consider labour during surge scenarios, using casual 
+    # workers.
+    if comm >= 9:
+        CasualCosts = {} 
+        for surge in Surges:
+            for dc in DCs:
+            # how much it will cost to employ 1 casual worker for the 
+            # duration of a particular surge, at each DC.
+                CasualCosts[surge, dc] = SurgeWeeks[surge]*2951
+        C = model.addVars(Surges, DCs, name='CA', obj=CasualCosts, vtype=GRB.INTEGER)
 
     # A[d,s] is a binary variable of whether store s receives deliveries 
     # from DC d. 
@@ -152,24 +175,32 @@ def run_assignment_model(comm: int):
         A = model.addVars(DCs, Stores, name='A', vtype=GRB.BINARY)
 
     # matrix of truckloads from each DC to each store during NORMAL DEMAND.
-    # indexed as Y[d,s]. obj=Costs defines the objective coefficient
+    # indexed as X[d,s]. obj=Costs defines the objective coefficient
     # of these variables.
-    Y = model.addVars(DCs, Stores, obj=Costs, name='Y')
+    ScaledCosts = Costs 
+    if comm >= 9:
+        ScaledCosts = { k: NormalWeeks*v for k, v in Costs.items() }
+    X = model.addVars(DCs, Stores, obj=ScaledCosts, name='X')
     # comm 5: binary variables dicate store assignments.
     if comm >= 5:
-        model.addConstrs(Y[d,s] == A[d,s]*Demands[s] for s in Stores for d in DCs)
+        model.addConstrs(X[d,s] == A[d,s]*Demands[s] for s in Stores for d in DCs)
 
     # matrix of truckloads from each DC to each store during each surge.
-    # indexed as X[d,s,u].
     # to handle surges, we consider the required demand at each store using
-    # a multiplier of its regular demand. X[d,s,u] stores the precise amount
-    # of product from d to s during surge u.
-    X = tupledict({
-        (d, s, u): Y[d, s] * SurgeMultipliers[u, s] 
-        for s in Stores for d in DCs for u in Surges
-    })
-    # using a tupledict gives us access to the .sum() method to simplify 
-    # constraints.
+    # a multiplier of its regular demand. this stores the precise amount
+    # of truckloads sent from d to s during surge u.
+    SurgeCosts = 0
+    if comm >= 9:
+        # before comm 9, we ignore surge costs. in comm 9, we need to consider 
+        # the cost of each surge which is affected by how long it runs for.
+        SurgeCosts = {
+            (d,s,u): Costs[d,s]*SurgeWeeks[u] 
+            for d, s, u in product(DCs, Stores, Surges)
+        }
+    Y = model.addVars(DCs, Stores, Surges, name='Y', obj=SurgeCosts)
+
+    model.addConstrs(Y[d,s,u] == X[d, s] * SurgeMultipliers[u, s] 
+        for s in Stores for d in DCs for u in Surges)
 
     # dictionary to store our constraints.
     constrs = {}
@@ -177,47 +208,55 @@ def run_assignment_model(comm: int):
     # required truckloads for normal demand at each store.
     # constrained using Y variables.
     constrs['n_demand'] = model.addConstrs(
-        Y.sum('*', s) >= Demands[s] for s in Stores
+        X.sum('*', s) >= Demands[s] for s in Stores
     )
 
     if comm >= 2: # comm 2: max capacity at DC for normal demand.
         constrs['n_capacity'] = model.addConstrs(
-            Y.sum(d, '*') <= Capacities[d] for d in DCs)
+            X.sum(d, '*') <= Capacities[d] for d in DCs)
 
     if comm >= 3 and comm < 5: # comm 3: northside capacity limit for normal demand.
         constrs['n_northside'] = model.addConstr(
-            quicksum(Y.sum(d, '*') for d in Northside) <= NorthsideMax)
+            quicksum(X.sum(d, '*') for d in Northside) <= NorthsideMax)
 
     if comm >= 6 and comm < 7: # comm 6: only one new DC can be built.
-        constrs['new_dc'] = model.addConstr(B.sum('*') <= 1)
+        constrs['new_dc'] = model.addConstr(B.sum(NewDCs) <= 1)
+        # ensure all existing DCs are not destroyed.
+        constrs['old_dcs'] = model.addConstr(B.sum(OldDCs) == len(OldDCs))
     
-    if comm >= 7: # comm 7: total number of DCs is 4 (one new)
-        constrs['new_dc'] = model.addConstr(B.sum(ActualNewDCs) <= 2)
-        constrs['open_dcs'] = model.addConstr(B.sum('*') <= 4)
+    if comm >= 7: # comm 7: total number of DCs is at most 4 (1 or 2 new)
+        constrs['new_dc'] = model.addConstr(B.sum(NewDCs) <= 2)
+        constrs['all_dcs'] = model.addConstr(B.sum('*') <= 4)
 
     if comm >= 8: # comm 8: enough labour for truckloads needed.
-        constrs['labour'] = model.addConstrs(Y.sum(d, '*') <= 9*F[d]+5*P[d] for d in DCs)
+        # remember that X is normal demand.
+        constrs['labour'] = model.addConstrs(X.sum(d, '*') <= FTPTSum[d] for d in DCs)
 
     # assume only one surge occurs at a time. handle independently.
     for u in Surges:
         constrs[f'{u}'] = surge_constrs = {}
 
         # comm 1 or 4: required truckloads at each store during each surge.
-        # uses X variables.
         surge_constrs['s_demand'] = model.addConstrs(
-            X.sum('*', s, u) >= SurgeDemands[u, s] for s in Stores if SurgeDemands[u,s] != Demands[s])
+            Y.sum('*', s, u) >= SurgeDemands[u, s] for s in Stores if SurgeDemands[u,s] != Demands[s])
 
         # comm 2: maximum capacity at each distribution centre.
         if comm >= 2:
             surge_constrs['s_capacity'] = model.addConstrs(
-                X.sum(d, '*', u) <= Capacities[d] for d in DCs)
+                Y.sum(d, '*', u) <= Capacities[d] for d in DCs)
 
         # comm 3: capacity limit on DCs on north side.
         # together, DC0 and DC2 can only provide 85 truckloads
         # per week.
         if comm >= 3 and comm < 5:
             surge_constrs['s_northside'] = model.addConstr(
-                quicksum(X.sum(d, '*', u) for d in Northside) <= NorthsideMax)
+                quicksum(Y.sum(d, '*', u) for d in Northside) <= NorthsideMax)
+
+        # comm 9: surge labour costs. 
+        if comm >= 9:
+            surge_constrs['s_labour'] = model.addConstrs(
+                Y.sum(d, '*', u) <= F[d] for d in DCs
+            )
         
     # minimise total cost of transport. objective function set using obj= above.
     model.modelSense = GRB.MINIMIZE
@@ -234,8 +273,8 @@ def run_assignment_model(comm: int):
     print()
     print()
     # group by surge, then store, then DC.
-    # x_ = {(d,s,u): X[d,s,u] for u in Surges for s in Stores for d in DCs}
-    y_ = {(d, s): Y[d,s] for s in Stores for d in DCs}
+    x_ = {(d, s): X[d,s] for s in Stores for d in DCs}
+    y_ = {(d,s,u): Y[d,s,u] for u in Surges for s in Stores for d in DCs}
 
     print('== FULL ANALYSIS ==')
     # print_variable_analysis(x_)
@@ -250,11 +289,13 @@ def run_assignment_model(comm: int):
         print_variable_analysis(P)
         print_variable_analysis(F)
         print()
-    print_variable_analysis(y_)
+    print_variable_analysis(x_)
     print()
-    # print_variable_analysis(Z)
+    if comm >= 9:
+        print('Y variables omitted.')
+        # print_variable_analysis(y_)
     print()
-    print_constr_analysis(constrs)
+    
 
     print()
     print()
@@ -271,12 +312,18 @@ def run_assignment_model(comm: int):
         print_variable_analysis(P, 1)
         print_variable_analysis(F, 1)
         print()
-    print_variable_analysis(y_, True)
+    print_variable_analysis(x_, True)
+    print()
+    if comm >= 9:
+        print_variable_analysis(y_, 1)
     print()
     # print_variable_analysis(Z, True)
     print()
-    # print_constr_analysis(constrs, True)
     
+    print('== CONSTAINTS ==')
+    print()
+    print_constr_analysis(constrs)
+
     print()
     print()
     print('== SURGE ANALYSIS ==')
@@ -294,7 +341,7 @@ def run_assignment_model(comm: int):
         for s in Stores:
             for d in DCs:
                 name = f'X[{d},{s},{u}]'
-                val = X[d,s,u].getValue()
+                val = Y[d,s,u].x
                 if val:
                     print(name, '=', val)
                     dc_sums[d] += val
@@ -306,12 +353,12 @@ def run_assignment_model(comm: int):
 
     print()
     print()
-    print_assignments(Y)
+    print_assignments(X)
 
     assignments = defaultdict(list)
     for s in Stores:
         for d in DCs:
-            assignments[s].append(Y[d,s].x/Demands[s])
+            assignments[s].append(X[d,s].x/Demands[s])
     
     return assignments
         
@@ -337,10 +384,7 @@ def table(fmt, rows):
 # entry point of application.
 def main():
     from sys import argv
-    if len(argv) < 2:
-        comm = 5
-    else:
-        comm = int(argv[1])
+    comm = int(argv[1])
     a = run_assignment_model(comm)
     rows = [[k]+v for k, v in a.items()]
     rows2 = [[k]+[j*Demands[k] for j in v] for k, v in a.items()]
