@@ -121,9 +121,8 @@ def run_assignment_model(comm: int):
         SurgeDemands = None
         SurgeMultipliers = None
 
-    print('+'+'-'*76+'+')
     print('Communication', comm)
-    print('+'+'-'*76+'+')
+    print('='*78)
     print()
 
     # the gurobi model.
@@ -263,6 +262,8 @@ def run_assignment_model(comm: int):
     model.optimize()
 
     print()
+    print('## -- GUROBI OUTPUT -- ##')
+    print('###', model.objVal)
     print(f'Optimised for communication {comm}.')
     if model.status == GRB.OPTIMAL:
         print('Objective value:', model.objVal)
@@ -302,7 +303,7 @@ def run_assignment_model(comm: int):
 
     print()
     print()
-    print('== ANALYSIS NON-ZERO ==')
+    print('## == ANALYSIS NON-ZERO == ##')
     print('(variables not printed are 0)')
     # print_variable_analysis(x_, True)
     print()
@@ -329,13 +330,13 @@ def run_assignment_model(comm: int):
     # print_variable_analysis(Z, True)
     print()
     
-    print('== CONSTAINTS ==')
+    print('## == CONSTRAINTS == ##')
     print()
     print_constr_analysis(constrs)
     
     print()
     print()
-    print('== NORMAL DEMAND ANALYSIS ==')
+    print('## == NORMAL DEMAND ANALYSIS == ##')
     print() 
     print('\n'.join([f'X[{d},{s}] = {X[d,s].x}' for s in Stores for d in DCs if X[d,s].x]))
     print('Store sums:', {s: X.sum('*', s).getValue() for s in Stores})
@@ -344,7 +345,7 @@ def run_assignment_model(comm: int):
         print('FTPT sums:', {k: v.getValue() for k, v in FTPTSum.items() })
 
     print()
-    print('== SURGE ANALYSIS ==')
+    print('## == SURGE ANALYSIS == ##')
     print()
     print('Surge multipliers')
     
@@ -352,7 +353,7 @@ def run_assignment_model(comm: int):
     # prints truckloads for each store during each surge.
     for u in Surges:
         print()
-        print('Surge', u)
+        print('### Surge', u)
         print('\n'.join([f'Y[{d},{s},{u}] = {Y[d,s,u].x}' for s in Stores for d in DCs if Y[d,s,u].x]))
         print('Store sums:', {s: Y.sum('*', s, u).getValue() for s in Stores})
         print('DC sums:', {d: Y.sum(d, '*', u).getValue() for d in DCs})
@@ -375,7 +376,7 @@ def run_assignment_model(comm: int):
             print('Surge duration:', SurgeWeeks[u])
 
     print()
-    print()
+    print('## == STORE ASSIGNMENTS == ##')
     print_assignments(X)
 
     print()
