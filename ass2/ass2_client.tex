@@ -1,6 +1,6 @@
 \documentclass[11pt,a4paper]{article}
-\input{../../../header.tex}
-\input{../../../normal.tex}
+\input{../../../../header.tex}
+\input{../../../../normal.tex}
 
 \usepackage{lmodern}
 \renewcommand*\familydefault{\sfdefault} %% Only if the base font of the document is to be sans serif
@@ -22,111 +22,184 @@ Section B -- Client Report}
 \part{Solution}
 We have considered your requirements of weekly demand, DC capacity, surge demands, 
 proposed new DCs and labour costs.
-We propose the following  for each communication.
+We propose the following strategy for each communication.
 
-\section{Communication 1}
-Only considering each store's demand without any capacity constraints 
-resulted in a cost of \$150212. The solution is described below (in truckloads per week). \\[0.8em]
+\section{Communication 5}
+For this communication, we consider surge scenarios but without the northside capacity 
+limit. 
+Additionally, we require each store to be assigned to only one distribution centre. 
+
+This resulted in a cost of \$205688 per week with the assignments below. This is \$6901 
+more expensive than communication 4, which means the requirement of one DC per store 
+costs more than the savings from removing the northside limit.\\[1em]
 \begin{tabular}{l  r  r  r }
     Store & DC0 & DC1 & DC2 \\
-    S0 & 0.00 & 0.00 & 18.00 \\
-    S1 & 7.00 & 0.00 & 0.00 \\
-    S2 & 0.00 & 0.00 & 21.00 \\
-    S3 & 0.00 & 0.00 & 15.00 \\
-    S4 & 0.00 & 0.00 & 17.00 \\
-    S5 & 0.00 & 0.00 & 10.00 \\
-    S6 & 0.00 & 6.00 & 0.00 \\
-    S7 & 0.00 & 0.00 & 8.00 \\
-    S8 & 0.00 & 0.00 & 7.00 \\
-    S9 & 7.00 & 0.00 & 0.00 \\    
+    S0 &  &  & 100\% \\
+    S1 & 100\% &  &  \\
+    S2 &  &  & 100\% \\
+    S3 &  & 100\% &  \\
+    S4 & 100\% &  &  \\
+    S5 &  & 100\% &  \\
+    S6 &  & 100\% &  \\
+    S7 & 100\% &  &  \\
+    S8 & 100\% &  &  \\
+    S9 & 100\% &  &  \\
 \end{tabular}
 \pagebreak
 
-\section{Communication 2}
-With DC capacity considered, the cost was  \$174952 with 
-the following assignments (truckloads per week). \\[0.8em]
-\begin{tabular}{l  r  r  r }
-    Store & DC0 & DC1 & DC2 \\
-S0 & 3.00 & 0.00 & 15.00 \\
-S1 & 7.00 & 0.00 & 0.00 \\
-S2 & 21.00 & 0.00 & 0.00 \\
-S3 & 0.00 & 15.00 & 0.00 \\
-S4 & 17.00 & 0.00 & 0.00 \\
-S5 & 0.00 & 0.00 & 10.00 \\
-S6 & 0.00 & 6.00 & 0.00 \\
-S7 & 0.00 & 0.00 & 8.00 \\
-S8 & 0.00 & 0.00 & 7.00 \\
-S9 & 7.00 & 0.00 & 0.00 \\
+\section{Communication 6}
+In this communication, we consider 4 possible sites for a new DC. 
+We add these to our model to determine which (if any) of the new 
+DCs would reduce our cost the most.
+Our model would only recommend opening a new DC if it reduced 
+the total cost from communication 5.
+
+We determined \textbf{opening DC3} would be best. This 
+ would reduce the weekly cost to 
+\$160486 which is \$45202 cheaper than communication 5. 
+The store assignments are below. \\[1 em]
+\begin{tabular}{l  r  r  r r r r r}
+    Store & DC0 & DC1 & DC2 & DC3 & DC4 & DC5 & DC6 \\
+    S0 &  &  &  & 100\% &  &  &  \\
+    S1 &  &  &  & 100\% &  &  &  \\
+    S2 &  &  &  & 100\% &  &  &  \\
+    S3 &  & 100\% &  &  &  &  &  \\
+    S4 &  &  &  & 100\% &  &  &  \\
+    S5 &  & 100\% &  &  &  &  &  \\
+    S6 &  & 100\% &  &  &  &  &  \\
+    S7 &  &  & 100\% &  &  &  &  \\
+    S8 &  &  & 100\% &  &  &  &  \\
+    S9 &  &  &  & 100\% &  &  &  \\
 \end{tabular}
 
-\section{Communication 3}
-With the northside capacity limit as well, the cost was \$179882 with the following 
-assignments (truckloads per week).\\[0.8em]
-\begin{tabular}{l r r r}
-    Store & DC0 & DC1 & DC2 \\
-S0 & 0.00 & 0.00 & 18.00 \\
-S1 & 7.00 & 0.00 & 0.00 \\
-S2 & 21.00 & 0.00 & 0.00 \\
-S3 & 0.00 & 15.00 & 0.00 \\
-S4 & 17.00 & 0.00 & 0.00 \\
-S5 & 0.00 & 3.00 & 7.00 \\
-S6 & 0.00 & 6.00 & 0.00 \\
-S7 & 0.00 & 0.00 & 8.00 \\
-S8 & 0.00 & 0.00 & 7.00 \\
-S9 & 0.00 & 7.00 & 0.00 \\
-\end{tabular}
-\pagebreak
 
-\section{Communication 4}
-Considering the surge scenarios, we developed the following assignment, with a 
-regular (non-surge) cost of \$199661.44 per week.
-We have verified that these assignments can scale up to the surge scenarios provided
-without exceeding any of your capacity limits.
-The following are the percentages of demand each store should receive 
-from each distribution centre. \\[0.8em]
-\begin{tabular}{l r r r}
-    Store & DC0 & DC1 & DC2 \\
-S0 & 0.00\% & 0.00\% & 100.00\% \\
-S1 & 100.00\% & 0.00\% & 0.00\% \\
-S2 & 100.00\% & 0.00\% & 0.00\% \\
-S3 & 0.00\% & 100.00\% & 0.00\% \\
-S4 & 58.82\% & 0.00\% & 41.18\% \\
-S5 & 0.00\% & 83.86\% & 16.14\% \\
-S6 & 0.00\% & 100.00\% & 0.00\% \\
-S7 & 0.00\% & 64.77\% & 35.23\% \\
-S8 & 0.00\% & 64.77\% & 35.23\% \\
-S9 & 100.00\% & 0.00\% & 0.00\% \\
-\end{tabular}\\
-Applying these percentages to normal demand, we have the following truckloads per 
-week. \\[0.8em]
-\begin{tabular}{l r r r }
-    Store & DC0 & DC1 & DC2 \\
-S0 & 0.00 & 0.00 & 18.00 \\
-S1 & 7.00 & 0.00 & 0.00 \\
-S2 & 21.00 & 0.00 & 0.00 \\
-S3 & 0.00 & 15.00 & 0.00 \\
-S4 & 10.00 & 0.00 & 7.00 \\
-S5 & 0.00 & 8.39 & 1.61 \\
-S6 & 0.00 & 6.00 & 0.00 \\
-S7 & 0.00 & 5.18 & 2.82 \\
-S8 & 0.00 & 4.53 & 2.47 \\
-S9 & 7.00 & 0.00 & 0.00 \\
+\section{Communication 7}
+Communication 7 builds on communication 6. Now, we can open up to 2 new DCs. 
+If we open 2 new DCs, 1 old DC must be closed.
+We consider if it would be cheaper
+to build 2 of the new DCs and close an existing one.\@  
+
+Note that in communication 6, DC0 is not used at all despite being available. 
+Thus, closing it would not affect the weekly cost. Moreover, 
+an additional new DC could be opened to further reduce the cost. This 
+communication's model recommends \textbf{closing DC0} and 
+\textbf{opening DC3 and DC5}. 
+
+This results in a weekly transport cost of \$140776, \$19710 cheaper  than communication 
+6, with the following assignments.\\[1em]
+\begin{tabular}{l  r  r  r  r r r r}
+    Store & DC0 & DC1 & DC2 & DC3 & DC4 & DC5 & DC6 \\
+    S0 &  &  &  & 100\% &  &  &  \\
+    S1 &  &  &  & 100\% &  &  &  \\
+    S2 &  &  &  & 100\% &  &  &  \\
+    S3 &  &  &  &  &  & 100\% &  \\
+    S4 &  &  &  & 100\% &  &  &  \\
+    S5 &  & 100\% &  &  &  &  &  \\
+    S6 &  & 100\% &  &  &  &  &  \\
+    S7 &  &  & 100\% &  &  &  &  \\
+    S8 &  &  & 100\% &  &  &  &  \\
+    S9 &  &  &  & 100\% &  &  &  \\
 \end{tabular}
+
+\newpage
+
+\section{Communication 8}
+Here, we also consider labour costs during regular demand.
+
+Optimising the model results in a cost of \$202276 per week, \$61500 more than 
+comm 7. This is done by \textbf{closing DC0} and 
+\textbf{opening DC3 and DC5} with the below store and labour assignments. 
+Note that the store and DC assignments are the same as 
+communication 7 so this does not affect those; the additional \$61500
+is exactly the cost of the full-time and part-time teams.
+\\[0.8em]
+\begin{tabular}{l  r  r  r  r r r r}
+    Store & DC0 & DC1 & DC2 & DC3 & DC4 & DC5 & DC6 \\
+    S0 &  &  &  & 100\% &  &  &  \\
+    S1 &  &  &  & 100\% &  &  &  \\
+    S2 &  &  &  & 100\% &  &  &  \\
+    S3 &  &  &  &  &  & 100\% &  \\
+    S4 &  &  &  & 100\% &  &  &  \\
+    S5 &  & 100\% &  &  &  &  &  \\
+    S6 &  & 100\% &  &  &  &  &  \\
+    S7 &  &  & 100\% &  &  &  &  \\
+    S8 &  &  & 100\% &  &  &  &  \\
+    S9 &  &  &  & 100\% &  &  &  \\
+\end{tabular} \\ [0.8em]
+\begin{tabular}{l  r  r }
+    DC & Part-time & Full-time \\
+    DC1 & 0 &2 \\ 
+    DC2  & 3 &0 \\ 
+    DC3 &  0& 8 \\
+    DC5 &  3&0 \\ 
+\end{tabular}
+
+\newpage
+\section{Communication 9}
+Finally, we also consider the transport and labour costs of 
+surge scenarios across the whole year. 
+
+Solving this model results in a cost of \$12576018.00 each year 
+(on average, \$241846.50 per week), an increase of \$39570.50 
+per week from communication 8.
+You should \textbf{close DC0} and 
+\textbf{open DC3 and DC5} 
+with the below store and labour assignments. 
+Again, the store and DC assignments are the same as communications 
+7 and 8 but the full/part-time teams have changed.\\[0.8em]
+\begin{tabular}{l  r  r  r  r r r r}
+    Store & DC0 & DC1 & DC2 & DC3 & DC4 & DC5 & DC6 \\
+    S0 &  &  &  & 100\% &  &  &  \\
+    S1 &  &  &  & 100\% &  &  &  \\
+    S2 &  &  &  & 100\% &  &  &  \\
+    S3 &  &  &  &  &  & 100\% &  \\
+    S4 &  &  &  & 100\% &  &  &  \\
+    S5 &  & 100\% &  &  &  &  &  \\
+    S6 &  & 100\% &  &  &  &  &  \\
+    S7 &  &  & 100\% &  &  &  &  \\
+    S8 &  &  & 100\% &  &  &  &  \\
+    S9 &  &  &  & 100\% &  &  &  \\
+\end{tabular} \\ [0.8em]
+\begin{tabular}{l  r  r }
+    DC & Part-time & Full-time \\
+    DC1 & 0 &2 \\ 
+    DC2  & 0 &2 \\ 
+    DC3 &  0& 8 \\
+    DC5 &  0&2 \\ 
+\end{tabular} \\ [0.8em]
+\begin{tabular}{l  l  r }
+    Surge & DC & Casual \\
+    Surge 0 &DC5& 11  \\ 
+    Surge 1&DC2 & 20 \\ 
+    Surge 3&DC2 & 20 \\
+    Surge 4&DC1 & 42 \\ 
+    Surge 4&DC3 & 2 \\ 
+\end{tabular} \\ (Surge 2 needs no additional casual staff at any DC)
 
 \part{Insights}
 \section{General Observations}
 While optimising the assignments with the data you provided us, we made 
 the following observations.
 \begin{itemize}
-    \item With the exception of surge scenario 4, the capacity at DC1 is never 
-fully used. Normal demand and scenarios 0 -- 3 use at most 54 truckloads per week 
-from DC1. However, reducing its throughput (by any amount) would make surge scenario 4
-impossible.
-    \item DC0's capacity of 72 is never fully utilised. At most, 45.6 truckloads are 
-    required from it per week (during scenario 4).
-    \item Surge scenario 4 is the limit of your current system. It requires 161 truckloads 
-    in total. Because DC0 and DC2 together can only supply 85 and DC1 can supply 76, this is 
-    exactly 161 truckloads per week. 
+    \item The optimal solution to communication 9 uses no part-time teams, despite 
+    them being used in communication 8. This is because the additional 
+    capacity from full-time staff will be used during surge
+     scenarios, reducing the need for expensive casual workers. Each casual worker only 
+     handles 1 truckload, but costs 65\% as much as a full-time team which handles 
+     9 truckloads. Note how 
+     surge 2 can be handled by the only full-time staff.
+    \item With communication 9, we have a fairly complete picture of WonderMarket's
+    logistics needs and costs. Some DC capacities are never fully utilised, 
+    but the model accounts for this and only assigns enough staff to handle 
+    the required demand. This means if demand increases, you can simply employ more 
+    staff (as long as DC capacity is sufficient). However, we would recommend
+    re-evaluating the model to optimise for the new situation.
+    \item With the construction of DC3 and DC5, your total capacity has increased 
+    notably. Even the most demanding surge scenario, surge 4 with 164 truckloads,
+    has 55 truckloads of spare capacity across DC1, DC2 and DC5.
+    \item With that in mind, DC3 is nearing its capacity. There are at most  
+    4 unused truckloads per week. In surge scenario 4, all of its 
+    capacity is used. 
 \end{itemize}
 
 \section{Marginal Costs}
@@ -134,13 +207,16 @@ These are the effects of slight adjustments to the capacity of DCs
  you have provided us. These may be useful to improve your management of 
  distribution centres. 
 \begin{itemize}
-    \item Increasing DC0 or DC1's capacity 
-    (by any amount) will not reduce the cost, as they are not bottlenecks of your supply chain.
-    \item Increasing DC2's capacity by 1 truckload would 
-    reduce the regular demand cost by \$496, to \$199165.44.
-    \item Increasing the northside capacity by 1 truckload per week would reduce your
-    normal demand cost by \$387.02, to \$199274.43. The northside is a limiting 
-    constraint in 3 of the 5 surge scenarios.
+    \item With the notes on DC capacity above, increasing the DC1, DC2, DC3 or DC5's
+    capacity by 1 does not affect the cost as the DC capacity is no longer a 
+    limiting factor.
+    \item If you can close one more DC to open a new site, you should close 
+    DC1 and open DC6. This would reduce your yearly cost by \$853344 (\$16410.46 per week),
+    to \$11722674 (\$225436.04 per week).
+    \item The solution assigns 5 of the 10 stores to DC3. If DC3 could not be built, 
+    your cost would be increased by \$1225564 yearly (\$23568.54 weekly) 
+    to \$13801582 yearly (\$265415.04 weekly). Using DC0, DC1, DC2 and DC6 would 
+    then be optimal.
 \end{itemize}
 
 \end{document}
