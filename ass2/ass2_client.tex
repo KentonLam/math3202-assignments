@@ -1,0 +1,146 @@
+\documentclass[11pt,a4paper]{article}
+\input{../../../header.tex}
+\input{../../../normal.tex}
+
+\usepackage{lmodern}
+\renewcommand*\familydefault{\sfdefault} %% Only if the base font of the document is to be sans serif
+\usepackage[T1]{fontenc}
+
+\author{Kenton Lam}
+\date{{MATH3202 Assignment 2 \\ Due 03/05/2019 1:00 pm}}
+\title{WonderMarket \\ 
+Section B -- Client Report}
+
+
+\begin{document}
+\maketitle
+\begin{abstract}
+    In this report, we propose a solution to optimise your supply chain logistics, 
+    to minimise costs while ensuring all demands are met.
+\end{abstract}
+
+\part{Solution}
+We have considered your requirements of weekly demand, DC capacity, surge demands, 
+proposed new DCs and labour costs.
+We propose the following  for each communication.
+
+\section{Communication 1}
+Only considering each store's demand without any capacity constraints 
+resulted in a cost of \$150212. The solution is described below (in truckloads per week). \\[0.8em]
+\begin{tabular}{l  r  r  r }
+    Store & DC0 & DC1 & DC2 \\
+    S0 & 0.00 & 0.00 & 18.00 \\
+    S1 & 7.00 & 0.00 & 0.00 \\
+    S2 & 0.00 & 0.00 & 21.00 \\
+    S3 & 0.00 & 0.00 & 15.00 \\
+    S4 & 0.00 & 0.00 & 17.00 \\
+    S5 & 0.00 & 0.00 & 10.00 \\
+    S6 & 0.00 & 6.00 & 0.00 \\
+    S7 & 0.00 & 0.00 & 8.00 \\
+    S8 & 0.00 & 0.00 & 7.00 \\
+    S9 & 7.00 & 0.00 & 0.00 \\    
+\end{tabular}
+\pagebreak
+
+\section{Communication 2}
+With DC capacity considered, the cost was  \$174952 with 
+the following assignments (truckloads per week). \\[0.8em]
+\begin{tabular}{l  r  r  r }
+    Store & DC0 & DC1 & DC2 \\
+S0 & 3.00 & 0.00 & 15.00 \\
+S1 & 7.00 & 0.00 & 0.00 \\
+S2 & 21.00 & 0.00 & 0.00 \\
+S3 & 0.00 & 15.00 & 0.00 \\
+S4 & 17.00 & 0.00 & 0.00 \\
+S5 & 0.00 & 0.00 & 10.00 \\
+S6 & 0.00 & 6.00 & 0.00 \\
+S7 & 0.00 & 0.00 & 8.00 \\
+S8 & 0.00 & 0.00 & 7.00 \\
+S9 & 7.00 & 0.00 & 0.00 \\
+\end{tabular}
+
+\section{Communication 3}
+With the northside capacity limit as well, the cost was \$179882 with the following 
+assignments (truckloads per week).\\[0.8em]
+\begin{tabular}{l r r r}
+    Store & DC0 & DC1 & DC2 \\
+S0 & 0.00 & 0.00 & 18.00 \\
+S1 & 7.00 & 0.00 & 0.00 \\
+S2 & 21.00 & 0.00 & 0.00 \\
+S3 & 0.00 & 15.00 & 0.00 \\
+S4 & 17.00 & 0.00 & 0.00 \\
+S5 & 0.00 & 3.00 & 7.00 \\
+S6 & 0.00 & 6.00 & 0.00 \\
+S7 & 0.00 & 0.00 & 8.00 \\
+S8 & 0.00 & 0.00 & 7.00 \\
+S9 & 0.00 & 7.00 & 0.00 \\
+\end{tabular}
+\pagebreak
+
+\section{Communication 4}
+Considering the surge scenarios, we developed the following assignment, with a 
+regular (non-surge) cost of \$199661.44 per week.
+We have verified that these assignments can scale up to the surge scenarios provided
+without exceeding any of your capacity limits.
+The following are the percentages of demand each store should receive 
+from each distribution centre. \\[0.8em]
+\begin{tabular}{l r r r}
+    Store & DC0 & DC1 & DC2 \\
+S0 & 0.00\% & 0.00\% & 100.00\% \\
+S1 & 100.00\% & 0.00\% & 0.00\% \\
+S2 & 100.00\% & 0.00\% & 0.00\% \\
+S3 & 0.00\% & 100.00\% & 0.00\% \\
+S4 & 58.82\% & 0.00\% & 41.18\% \\
+S5 & 0.00\% & 83.86\% & 16.14\% \\
+S6 & 0.00\% & 100.00\% & 0.00\% \\
+S7 & 0.00\% & 64.77\% & 35.23\% \\
+S8 & 0.00\% & 64.77\% & 35.23\% \\
+S9 & 100.00\% & 0.00\% & 0.00\% \\
+\end{tabular}\\
+Applying these percentages to normal demand, we have the following truckloads per 
+week. \\[0.8em]
+\begin{tabular}{l r r r }
+    Store & DC0 & DC1 & DC2 \\
+S0 & 0.00 & 0.00 & 18.00 \\
+S1 & 7.00 & 0.00 & 0.00 \\
+S2 & 21.00 & 0.00 & 0.00 \\
+S3 & 0.00 & 15.00 & 0.00 \\
+S4 & 10.00 & 0.00 & 7.00 \\
+S5 & 0.00 & 8.39 & 1.61 \\
+S6 & 0.00 & 6.00 & 0.00 \\
+S7 & 0.00 & 5.18 & 2.82 \\
+S8 & 0.00 & 4.53 & 2.47 \\
+S9 & 7.00 & 0.00 & 0.00 \\
+\end{tabular}
+
+\part{Insights}
+\section{General Observations}
+While optimising the assignments with the data you provided us, we made 
+the following observations.
+\begin{itemize}
+    \item With the exception of surge scenario 4, the capacity at DC1 is never 
+fully used. Normal demand and scenarios 0 -- 3 use at most 54 truckloads per week 
+from DC1. However, reducing its throughput (by any amount) would make surge scenario 4
+impossible.
+    \item DC0's capacity of 72 is never fully utilised. At most, 45.6 truckloads are 
+    required from it per week (during scenario 4).
+    \item Surge scenario 4 is the limit of your current system. It requires 161 truckloads 
+    in total. Because DC0 and DC2 together can only supply 85 and DC1 can supply 76, this is 
+    exactly 161 truckloads per week. 
+\end{itemize}
+
+\section{Marginal Costs}
+These are the effects of slight adjustments to the capacity of DCs 
+ you have provided us. These may be useful to improve your management of 
+ distribution centres. 
+\begin{itemize}
+    \item Increasing DC0 or DC1's capacity 
+    (by any amount) will not reduce the cost, as they are not bottlenecks of your supply chain.
+    \item Increasing DC2's capacity by 1 truckload would 
+    reduce the regular demand cost by \$496, to \$199165.44.
+    \item Increasing the northside capacity by 1 truckload per week would reduce your
+    normal demand cost by \$387.02, to \$199274.43. The northside is a limiting 
+    constraint in 3 of the 5 surge scenarios.
+\end{itemize}
+
+\end{document}
