@@ -391,10 +391,10 @@ def run_assignment_model(comm: int):
     for s in Stores:
         # proportions
         p = [float(X[d,s].x/Demands[s]) for d in DCs]
-        p = [str(round(a*100, 2))+'\\%' if a else '' for a in p]
+        p = [str(round(a*100, 2)).rstrip('0').rstrip('.')+'\\%' if a else '' for a in p]
         print(' & '.join([s] + p), r'\\')
     print_ticks()
-    
+
     print()
     print('This was communication', comm, 'with value', model.objVal)
     
@@ -434,20 +434,20 @@ def main():
 
 TableSpec = namedtuple('TableSpec', 'title header format generator empty')
 
-r = lambda i: round(i, 4)
+r = lambda i: round(i, 4) if i else '0'
 row_generator = {
     'constraints': TableSpec(
         'Constraint Analysis', 
         ('constr', '', 'rhs', 'slack', 'pi', 'rhs low', 'rhs high'),
         '  {:>1} {:>5} | {:>6} {:>6} | {:>7} {:>7}', 
-        lambda n, c: (n, c.sense, r(c.rhs), r(c.slack), 0, 0, 0),
+        lambda n, c: (n, c.sense, r(c.rhs), r(c.slack), '-', '-', '-'),
         lambda t: t[2] == 0
     ),
     'variables': TableSpec(
         'Variable Analysis', 
         ('variable', 'x', 'coeff', 'rc', 'obj low', 'obj high'),
         '  = {:>5} * {:>6} | {:>6} | {:>7} {:>7}', 
-        lambda n, c: (c.varName, r(c.x), r(c.obj), 0, 0, 0),
+        lambda n, c: (c.varName, r(c.x), r(c.obj), '-', '-', '-'),
         lambda t: t[1] == 0
     )
 }
