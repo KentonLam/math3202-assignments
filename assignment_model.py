@@ -7,6 +7,7 @@ Due 29/03/2019 12:00pm
 
 from gurobipy import *
 from collections import defaultdict, namedtuple
+from collections.abc import Mapping
 
 from itertools import product
 
@@ -167,7 +168,7 @@ def run_assignment_model(comm: int):
         # total capacity handled by full-time and part-time teams at each DC.
         FTPTSum = tupledict({ d: FTCapacity*F[d]+PTCapacity*P[d] for d in DCs })
         # this doesn't need to be a variable because it is directly derived 
-        # from other variables
+        # from other variables and is not used in the objective function.
 
     # comm 9: we need to consider labour during surge scenarios using casual 
     # workers.
