@@ -42,7 +42,7 @@ Cutting planes:
   MIR: 9
   StrongCG: 4
 
-Explored 1 nodes (108 simplex iterations) in 0.04 seconds
+Explored 1 nodes (108 simplex iterations) in 0.05 seconds
 Thread count was 4 (of 4 available processors)
 
 Solution count 7: 1.2576e+07 1.26133e+07 1.26878e+07 ... 1.48564e+07
