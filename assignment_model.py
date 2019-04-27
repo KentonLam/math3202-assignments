@@ -441,14 +441,14 @@ row_generator = {
         ('constr', '', 'rhs', 'slack', 'pi', 'rhs low', 'rhs high'),
         '  {:>1} {:>5} | {:>6} {:>6} | {:>7} {:>7}', 
         lambda n, c: (n, c.sense, r(c.rhs), r(c.slack), '-', '-', '-'),
-        lambda t: t[2] == 0
+        lambda t: t[2] in (0, '0')
     ),
     'variables': TableSpec(
         'Variable Analysis', 
         ('variable', 'x', 'coeff', 'rc', 'obj low', 'obj high'),
         '  = {:>5} * {:>6} | {:>6} | {:>7} {:>7}', 
         lambda n, c: (c.varName, r(c.x), r(c.obj), '-', '-', '-'),
-        lambda t: t[1] == 0
+        lambda t: t[1] in (0, '0')
     )
 }
 
