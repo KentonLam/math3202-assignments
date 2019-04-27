@@ -1,0 +1,176 @@
+\documentclass[11pt,a4paper]{article}
+\input{../../../../header.tex}
+\input{../../../../normal.tex}
+
+\usepackage{booktabs}
+
+\usepackage{lmodern}
+\renewcommand*\familydefault{\sfdefault} %% Only if the base font of the document is to be sans serif
+\usepackage[T1]{fontenc}
+
+\author{Kenton Lam}
+\date{{MATH3202 Assignment 2 \\ Due 03/05/2019 1:00 pm}}
+\title{WonderMarket \\ Section A -- Internal Report}
+
+
+\begin{document}
+\maketitle
+\begin{abstract}
+    We have been approached by WonderMarket to optimise their supply chain logistics.
+    Given information about their costs and needs, we created and optimmised a model using Gurobi.
+    This report describes the model and its solution.
+\end{abstract}
+
+\part{Model Definition}
+WonderMarket operates a number of stores and distribution centres (DCs).
+Each week, each store requires some amount of goods (measured in truckloads)
+to be delivered from one or more of their distribution centres (DC).
+
+After communication 9, we developed a detailed model to mathematically represent
+their objectives. This includes handling surge scenarios and predicting the 
+total yearly cost of their operations.
+
+\section{Sets}
+\begin{tabular}{l l}
+    $S$ & set of stores. \\ 
+    $D$ & set of distribution centres (this includes proposed new DCs). \\ 
+    $U$ & set of surge scenarios.   
+\end{tabular}
+
+\section{Data}
+\begin{tabular}{l l}
+    $\mathrm{Cost}_{d,s}$ & cost of moving one truckload of goods from DC $d$ to store $s$ (comm 1). \\
+    &(this includes cost of transport from new DCs after communication 6).\\ 
+    $\mathrm{Demand}_s$ & number of truckloads required at store $s$ per week normally (comm 1). \\
+    $\mathrm{Capacity}_d$ & maximum capacity (truckloads) which can be sent from $d$ per week (comm 2).  \\
+    & (this includes capacities of new DCs after communication 6).\\ 
+    $\mathrm{Northside}$ & set of distribution centres on the north side (comm 3). \\ 
+    $\mathrm{NorthsideMax}$ & maximum combined capacity of northside DCs (comm 3). \\ 
+    $\mathrm{SurgeDemand}_{u,s}$ & surge demand during scenario $u$ at store $s$ (comm 4). \\ 
+    $\mathrm{NewDCs}$ & set of DCs which are not currently built (comm 6).\\ 
+    $\mathrm{SurgeWeeks}_u$ & number of weeks surge scenario $u$ occurs per year (comm 9). 
+\end{tabular}
+
+\subsection{Derived Data}
+To simplify later calculations, we derived some data from the data given above.\\[0.8em]    
+\begin{tabular}{l l}
+    $\mathrm{SurgeMultiplier}_{u,s}$ & surge demand at store $s$ during surge $u$,  divided by regular \\ 
+    &  demand at store $s$. \\ 
+    &$\mathrm{SurgeMultiplier}_{u,s} = \mathrm{SurgeDemand}_{u,s} / \mathrm{Demand}_s $ \\
+    $\mathrm{NormalWeeks}$ & number of weeks in the year which have no surge scenario. \\ 
+    & $\mathrm{NormalWeeks} = 52-\sum_{u \in U} \mathrm{SurgeWeeks}_u $
+\end{tabular}
+
+\section{Variables}
+The following variables were used in the Gurobi model.\\[0.8em]
+\begin{tabular}{l l}
+    $B_{d}$ & binary variables for whether DC $d$ is active. \\ 
+    & (1 means if $d$ is new then $d$ is built; if $d$ 
+    already exists then $d$ is not closed). \\
+    $P_d$ & integer number of part-time teams employed at DC $d$ year-round. \\ 
+    $F_d$ & integer number of full-time teams employed at DC $d$ year-round. \\ 
+    $C_{u,d}$ & integer number of casual employeed employed at DC $d$  during surge $u$. \\
+    & (each casual employee is only employed for the duration of the surge). \\ 
+    $A_{d,s}$ & binary variable for whether DC $d$ delivers to store $s$. \\  
+    $X_{d,s}$ & truckloads to be sent from DC $d$ to store $s$ during normal demand. \\
+    $Y_{d,s,u}$ & truckloads to be sent from DC $d$ to store $s$ during 
+    surge scenario $u$. 
+\end{tabular}
+\\[0.8em]
+
+\section{Objective}
+This calculates the total yearly cost, considering transport and labour costs.
+The objective is to \textit{minimise} the following function.
+\begin{align*}
+    \text{(normal transport cost)} \qquad&\quad \sum_{s \in S} \sum_{d \in D} \mathrm{NormalWeeks} \cdot \mathrm{Cost}_{d, s}  X_{d,s} \\ 
+    \text{(surge transport costs)} \qquad &+ \sum_{u \in U} \sum_{s \in S} \sum_{d \in D} \mathrm{SurgeWeeks}_u \mathrm{Cost}_{d, s} Y_{d,s,u} \\ 
+    \text{(full/part-time labour costs)} \qquad &+ 52 \sum_{d \in D} 2750\, P_d + 52 \sum_{d \in D}4500 \,F_d \\
+    \text{(casual labour costs)} \qquad &+\sum_{u \in U} \sum_{d \in D} 2951\,\mathrm{SurgeWeeks}_u C_{u,d}
+\end{align*}
+
+\section{Constraints}
+First, we have the constraint that all variables are non-negative and certain variables 
+are integers or binary. For all $d \in D,~s \in S, ~u \in U$, we have
+\begin{align*}
+    B_d, P_d, F_d, C_{u,d}, A_{d,s}, X_{d,s}, Y_{d,s,u}  &\ge 0  \\ 
+    B_d, A_{d,s} &\in  \left\{ 0, 1\right\} \\ 
+    P_d, F_d, C_{u,d} &\in \mathbb Z
+\end{align*}
+We link $X$ and $Y$ variables via $A$ and the known demand at each store. This ensures 
+each store receives all its supplies from one DC.
+\begin{align*}
+    X_{d,s} &= \mathrm{Demand}_s A_{d,s} && \forall~d \in D, ~s \in S
+\end{align*}
+We link $X$ and $Y$ via the surge multipliers data. This ensures for each store, 
+it receives deliveries from the same DCs in each scenario as during normal demand. 
+\begin{align*}
+    Y_{d,s,u} &= \mathrm{SurgeMultiplier}_{u,s} X_{d,s} && \forall~d \in D,~s \in S,~u \in U
+\end{align*}
+We ensure the solution is valid for normal demand considering 
+truckloads and capacities. Note that the northside capacity limit has been removed.
+\begin{align*}
+    \sum_{d \in D} X_{d,s} &\ge \mathrm{Demand}_{s} &&\forall~s \in S \\ 
+    \sum_{s \in S} X_{d,s} &\le \mathrm{Capacity}_d &&\forall~d \in D 
+\end{align*}
+Ensuring at most 2 new DCs are built and there are 4 DCs in total (3 or 2 old).
+\begin{align*}
+    \sum_{d \in \mathrm{NewDCs}} B_d &\le 2 \\ 
+    \sum_{d \in D} B_d &= 4 
+\end{align*}
+Ensuring enough teams are employed to meet normal demand at each DC.
+\begin{align*}
+    \sum_{s \in S} X_{d,s} &\le 9\,F_d + 5\,P_d && \forall~d \in D
+\end{align*}
+We ensure our assignments can scale up to each surge scenario while remaining 
+feasible with the given constraints. 
+For each $u \in U$,
+\begin{align*}
+    \sum_{d \in D} Y_{d,s,u} &\ge \mathrm{SurgeDemand}_{u,s} &&\forall~s \in S \\ 
+    \sum_{s \in S} Y_{d,s,u} &\le \mathrm{Capacity}_d &&\forall~d \in D \\ 
+    \sum_{s \in S} Y_{d,s,u} &\le 9\,F_d + 5\,P_d + C_{u,d} && \forall~d \in D
+\end{align*}
+
+\pagebreak
+\part{Solution}
+Solving this MILP model in Gurobi returns the following solution.
+This would cost WonderMarket \$12576018.00 each year (\$241846.50 per week).
+
+\section{Store Assignments}
+\begin{tabular}{l  r  r  r r r r r}
+    Store & DC0 & DC1 & DC2 & DC3 & DC4 & DC5 & DC6 \\
+    S0 &  &  &  & 100.0\% &  &  &  \\
+    S1 &  &  &  & 100.0\% &  &  &  \\
+    S2 &  &  &  & 100.0\% &  &  &  \\
+    S3 &  &  &  &  &  & 100.0\% &  \\
+    S4 &  &  &  & 100.0\% &  &  &  \\
+    S5 &  & 100.0\% &  &  &  &  &  \\
+    S6 &  & 100.0\% &  &  &  &  &  \\
+    S7 &  &  & 100.0\% &  &  &  &  \\
+    S8 &  &  & 100.0\% &  &  &  &  \\
+    S9 &  &  &  & 100.0\% &  &  &  \\
+\end{tabular} 
+
+\section{Distribution Centres}
+WonderMarket should close DC0 and build DC3 and DC5. DC1 and DC2 
+should remain open.
+
+\section{Labour}
+WonderMarket should hire the following teams for the whole year. \\[1em]
+\begin{tabular}{l  r  r }
+    DC & Part-time & Full-time \\
+    DC1 & 0 &2 \\ 
+    DC2  & 0 &2 \\ 
+    DC3 &  0& 8 \\
+    DC5 &  0&2 \\ 
+\end{tabular} \\[1em]
+Additionally, they should hire the following casual staff for certain 
+surges.\\[1em]
+\begin{tabular}{l  l  r }
+    Surge & DC & Casual \\
+    Surge 0 &DC5& 11  \\ 
+    Surge 1&DC2 & 20 \\ 
+    Surge 3&DC2 & 20 \\
+    Surge 4&DC1 & 42 \\ 
+    Surge 4&DC3 & 2 \\ 
+\end{tabular} 
+\end{document}
