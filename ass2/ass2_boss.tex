@@ -48,7 +48,12 @@ total yearly cost of their operations.
     $\mathrm{NorthsideMax}$ & maximum combined capacity of northside DCs (comm 3). \\ 
     $\mathrm{SurgeDemand}_{u,s}$ & surge demand during scenario $u$ at store $s$ (comm 4). \\ 
     $\mathrm{NewDCs}$ & set of DCs which are not currently built (comm 6).\\ 
-    $\mathrm{SurgeWeeks}_u$ & number of weeks surge scenario $u$ occurs per year (comm 9). 
+    $\mathrm{FTCost}$& cost per week of hiring one full-time team (comm 8). \\
+    $\mathrm{PTCost}$& cost per week of hiring one part-time team (comm 8). \\
+    $\mathrm{FTCapacity}$& capacity per week handled by one full-time team (comm 8). \\
+    $\mathrm{PTCapacity}$& capacity per week handled by one part-time team (comm 8). \\
+    $\mathrm{CasualCost}$& cost per week of hiring one casual employee (comm 9). \\
+    $\mathrm{SurgeWeeks}_u$ & number of weeks surge scenario $u$ occurs per year (comm 9).  
 \end{tabular}
 
 \subsection{Derived Data}
@@ -84,8 +89,8 @@ The objective is to \textit{minimise} the following function.
 \begin{align*}
     \text{(normal transport cost)} \qquad&\quad \sum_{s \in S} \sum_{d \in D} \mathrm{NormalWeeks} \cdot \mathrm{Cost}_{d, s}  X_{d,s} \\ 
     \text{(surge transport costs)} \qquad &+ \sum_{u \in U} \sum_{s \in S} \sum_{d \in D} \mathrm{SurgeWeeks}_u \mathrm{Cost}_{d, s} Y_{d,s,u} \\ 
-    \text{(full/part-time labour costs)} \qquad &+ 52 \sum_{d \in D} 2750\, P_d + 52 \sum_{d \in D}4500 \,F_d \\
-    \text{(casual labour costs)} \qquad &+\sum_{u \in U} \sum_{d \in D} 2951\,\mathrm{SurgeWeeks}_u C_{u,d}
+    \text{(full/part-time labour costs)} \qquad &+ 52 \sum_{d \in D} \mathrm{PTCost}\, P_d + 52 \sum_{d \in D}\mathrm{FTCost} \,F_d \\
+    \text{(casual labour costs)} \qquad &+\sum_{u \in U} \sum_{d \in D} \mathrm{CasualCost}\,\mathrm{SurgeWeeks}_u C_{u,d}
 \end{align*}
 
 \section{Constraints}
@@ -119,7 +124,7 @@ Ensuring at most 2 new DCs are built and there are 4 DCs in total (3 or 2 old).
 \end{align*}
 Ensuring enough teams are employed to meet normal demand at each DC.
 \begin{align*}
-    \sum_{s \in S} X_{d,s} &\le 9\,F_d + 5\,P_d && \forall~d \in D
+    \sum_{s \in S} X_{d,s} &\le \mathrm{FTCapacity}\,F_d + \mathrm{PTCapacity}\,P_d && \forall~d \in D
 \end{align*}
 We ensure our assignments can scale up to each surge scenario while remaining 
 feasible with the given constraints. 
@@ -127,7 +132,7 @@ For each $u \in U$,
 \begin{align*}
     \sum_{d \in D} Y_{d,s,u} &\ge \mathrm{SurgeDemand}_{u,s} &&\forall~s \in S \\ 
     \sum_{s \in S} Y_{d,s,u} &\le \mathrm{Capacity}_d &&\forall~d \in D \\ 
-    \sum_{s \in S} Y_{d,s,u} &\le 9\,F_d + 5\,P_d + C_{u,d} && \forall~d \in D
+    \sum_{s \in S} Y_{d,s,u} &\le \mathrm{FTCapacity}\,F_d + \mathrm{PTCapacity}\,P_d + C_{u,d} && \forall~d \in D
 \end{align*}
 
 \pagebreak
