@@ -11,7 +11,7 @@ Coefficient statistics:
   Bounds range     [1e+00, 1e+00]
   RHS range        [6e+00, 8e+01]
 Presolve removed 189 rows and 182 columns
-Presolve time: 0.01s
+Presolve time: 0.00s
 Presolved: 25 rows, 28 columns, 182 nonzeros
 Variable types: 0 continuous, 28 integer (28 binary)
 Found heuristic solution: objective 236309.00000
@@ -43,7 +43,7 @@ Cutting planes:
   MIR: 1
   StrongCG: 1
 
-Explored 1 nodes (31 simplex iterations) in 0.05 seconds
+Explored 1 nodes (31 simplex iterations) in 0.03 seconds
 Thread count was 4 (of 4 available processors)
 
 Solution count 8: 205688 206641 209182 ... 236309
@@ -68,72 +68,72 @@ Objective value: 205688.0
 ```
 Variable Analysis
  variable  =     x *  coeff |     rc | obj low obj high
-A[DC0,S0]  =     0 *      0 |      0 |       0       0
-A[DC0,S1]  =   1.0 *      0 |      0 |       0       0
-A[DC0,S2]  =     0 *      0 |      0 |       0       0
-A[DC0,S3]  =     0 *      0 |      0 |       0       0
-A[DC0,S4]  =   1.0 *      0 |      0 |       0       0
-A[DC0,S5]  =     0 *      0 |      0 |       0       0
-A[DC0,S6]  =     0 *      0 |      0 |       0       0
-A[DC0,S7]  =   1.0 *      0 |      0 |       0       0
-A[DC0,S8]  =   1.0 *      0 |      0 |       0       0
-A[DC0,S9]  =   1.0 *      0 |      0 |       0       0
-A[DC1,S0]  =     0 *      0 |      0 |       0       0
-A[DC1,S1]  =     0 *      0 |      0 |       0       0
-A[DC1,S2]  =     0 *      0 |      0 |       0       0
-A[DC1,S3]  =   1.0 *      0 |      0 |       0       0
-A[DC1,S4]  =     0 *      0 |      0 |       0       0
-A[DC1,S5]  =   1.0 *      0 |      0 |       0       0
-A[DC1,S6]  =   1.0 *      0 |      0 |       0       0
-A[DC1,S7]  =     0 *      0 |      0 |       0       0
-A[DC1,S8]  =     0 *      0 |      0 |       0       0
-A[DC1,S9]  =     0 *      0 |      0 |       0       0
-A[DC2,S0]  =   1.0 *      0 |      0 |       0       0
-A[DC2,S1]  =     0 *      0 |      0 |       0       0
-A[DC2,S2]  =   1.0 *      0 |      0 |       0       0
-A[DC2,S3]  =     0 *      0 |      0 |       0       0
-A[DC2,S4]  =     0 *      0 |      0 |       0       0
-A[DC2,S5]  =     0 *      0 |      0 |       0       0
-A[DC2,S6]  =     0 *      0 |      0 |       0       0
-A[DC2,S7]  =     0 *      0 |      0 |       0       0
-A[DC2,S8]  =     0 *      0 |      0 |       0       0
-A[DC2,S9]  =     0 *      0 |      0 |       0       0
+A[DC0,S0]  =     0 *      0 |      - |       -       -
+A[DC0,S1]  =   1.0 *      0 |      - |       -       -
+A[DC0,S2]  =     0 *      0 |      - |       -       -
+A[DC0,S3]  =     0 *      0 |      - |       -       -
+A[DC0,S4]  =   1.0 *      0 |      - |       -       -
+A[DC0,S5]  =     0 *      0 |      - |       -       -
+A[DC0,S6]  =     0 *      0 |      - |       -       -
+A[DC0,S7]  =   1.0 *      0 |      - |       -       -
+A[DC0,S8]  =   1.0 *      0 |      - |       -       -
+A[DC0,S9]  =   1.0 *      0 |      - |       -       -
+A[DC1,S0]  =     0 *      0 |      - |       -       -
+A[DC1,S1]  =     0 *      0 |      - |       -       -
+A[DC1,S2]  =     0 *      0 |      - |       -       -
+A[DC1,S3]  =   1.0 *      0 |      - |       -       -
+A[DC1,S4]  =     0 *      0 |      - |       -       -
+A[DC1,S5]  =   1.0 *      0 |      - |       -       -
+A[DC1,S6]  =   1.0 *      0 |      - |       -       -
+A[DC1,S7]  =     0 *      0 |      - |       -       -
+A[DC1,S8]  =     0 *      0 |      - |       -       -
+A[DC1,S9]  =     0 *      0 |      - |       -       -
+A[DC2,S0]  =   1.0 *      0 |      - |       -       -
+A[DC2,S1]  =     0 *      0 |      - |       -       -
+A[DC2,S2]  =   1.0 *      0 |      - |       -       -
+A[DC2,S3]  =     0 *      0 |      - |       -       -
+A[DC2,S4]  =     0 *      0 |      - |       -       -
+A[DC2,S5]  =     0 *      0 |      - |       -       -
+A[DC2,S6]  =     0 *      0 |      - |       -       -
+A[DC2,S7]  =     0 *      0 |      - |       -       -
+A[DC2,S8]  =     0 *      0 |      - |       -       -
+A[DC2,S9]  =     0 *      0 |      - |       -       -
 ```
 
 
 ```
 Variable Analysis
  variable  =     x *  coeff |     rc | obj low obj high
-X[DC0,S0]  =     0 * 1828.0 |      0 |       0       0
-X[DC1,S0]  =     0 * 2271.0 |      0 |       0       0
-X[DC2,S0]  =  18.0 *  807.0 |      0 |       0       0
-X[DC0,S1]  =   7.0 * 1058.0 |      0 |       0       0
-X[DC1,S1]  =     0 * 1746.0 |      0 |       0       0
-X[DC2,S1]  =     0 * 1679.0 |      0 |       0       0
-X[DC0,S2]  =     0 * 2014.0 |      0 |       0       0
-X[DC1,S2]  =     0 * 2919.0 |      0 |       0       0
-X[DC2,S2]  =  21.0 * 1779.0 |      0 |       0       0
-X[DC0,S3]  =     0 * 2134.0 |      0 |       0       0
-X[DC1,S3]  =  15.0 * 1982.0 |      0 |       0       0
-X[DC2,S3]  =     0 * 1428.0 |      0 |       0       0
-X[DC0,S4]  =  17.0 * 1952.0 |      0 |       0       0
-X[DC1,S4]  =     0 * 2704.0 |      0 |       0       0
-X[DC2,S4]  =     0 * 1456.0 |      0 |       0       0
-X[DC0,S5]  =     0 * 2677.0 |      0 |       0       0
-X[DC1,S5]  =  10.0 * 2577.0 |      0 |       0       0
-X[DC2,S5]  =     0 * 1273.0 |      0 |       0       0
-X[DC0,S6]  =     0 * 2548.0 |      0 |       0       0
-X[DC1,S6]  =   6.0 * 2063.0 |      0 |       0       0
-X[DC2,S6]  =     0 * 2160.0 |      0 |       0       0
-X[DC0,S7]  =   8.0 * 2292.0 |      0 |       0       0
-X[DC1,S7]  =     0 * 2807.0 |      0 |       0       0
-X[DC2,S7]  =     0 *  559.0 |      0 |       0       0
-X[DC0,S8]  =   7.0 * 2704.0 |      0 |       0       0
-X[DC1,S8]  =     0 * 2924.0 |      0 |       0       0
-X[DC2,S8]  =     0 * 1014.0 |      0 |       0       0
-X[DC0,S9]  =   7.0 * 1153.0 |      0 |       0       0
-X[DC1,S9]  =     0 * 1736.0 |      0 |       0       0
-X[DC2,S9]  =     0 * 1514.0 |      0 |       0       0
+X[DC0,S0]  =     0 * 1828.0 |      - |       -       -
+X[DC1,S0]  =     0 * 2271.0 |      - |       -       -
+X[DC2,S0]  =  18.0 *  807.0 |      - |       -       -
+X[DC0,S1]  =   7.0 * 1058.0 |      - |       -       -
+X[DC1,S1]  =     0 * 1746.0 |      - |       -       -
+X[DC2,S1]  =     0 * 1679.0 |      - |       -       -
+X[DC0,S2]  =     0 * 2014.0 |      - |       -       -
+X[DC1,S2]  =     0 * 2919.0 |      - |       -       -
+X[DC2,S2]  =  21.0 * 1779.0 |      - |       -       -
+X[DC0,S3]  =     0 * 2134.0 |      - |       -       -
+X[DC1,S3]  =  15.0 * 1982.0 |      - |       -       -
+X[DC2,S3]  =     0 * 1428.0 |      - |       -       -
+X[DC0,S4]  =  17.0 * 1952.0 |      - |       -       -
+X[DC1,S4]  =     0 * 2704.0 |      - |       -       -
+X[DC2,S4]  =     0 * 1456.0 |      - |       -       -
+X[DC0,S5]  =     0 * 2677.0 |      - |       -       -
+X[DC1,S5]  =  10.0 * 2577.0 |      - |       -       -
+X[DC2,S5]  =     0 * 1273.0 |      - |       -       -
+X[DC0,S6]  =     0 * 2548.0 |      - |       -       -
+X[DC1,S6]  =   6.0 * 2063.0 |      - |       -       -
+X[DC2,S6]  =     0 * 2160.0 |      - |       -       -
+X[DC0,S7]  =   8.0 * 2292.0 |      - |       -       -
+X[DC1,S7]  =     0 * 2807.0 |      - |       -       -
+X[DC2,S7]  =     0 *  559.0 |      - |       -       -
+X[DC0,S8]  =   7.0 * 2704.0 |      - |       -       -
+X[DC1,S8]  =     0 * 2924.0 |      - |       -       -
+X[DC2,S8]  =     0 * 1014.0 |      - |       -       -
+X[DC0,S9]  =   7.0 * 1153.0 |      - |       -       -
+X[DC1,S9]  =     0 * 1736.0 |      - |       -       -
+X[DC2,S9]  =     0 * 1514.0 |      - |       -       -
 ```
 
 
@@ -143,40 +143,40 @@ X[DC2,S9]  =     0 * 1514.0 |      0 |       0       0
 ```
 Constraint Analysis
            constr      rhs |  slack     pi | rhs low rhs high
-      n_demand S0  >  18.0 |      0      0 |       0       0
-      n_demand S1  >   7.0 |      0      0 |       0       0
-      n_demand S2  >  21.0 |      0      0 |       0       0
-      n_demand S3  >  15.0 |      0      0 |       0       0
-      n_demand S4  >  17.0 |      0      0 |       0       0
-      n_demand S5  >  10.0 |      0      0 |       0       0
-      n_demand S6  >   6.0 |      0      0 |       0       0
-      n_demand S7  >   8.0 |      0      0 |       0       0
-      n_demand S8  >   7.0 |      0      0 |       0       0
-      n_demand S9  >   7.0 |      0      0 |       0       0
-   n_capacity DC0  <  72.0 |   26.0      0 |       0       0
-   n_capacity DC1  <  76.0 |   45.0      0 |       0       0
-   n_capacity DC2  <  40.0 |    1.0      0 |       0       0
-   U0 s_demand S3  >  29.0 |      0      0 |       0       0
-U0 s_capacity DC0  <  72.0 |   26.0      0 |       0       0
-U0 s_capacity DC1  <  76.0 |   31.0      0 |       0       0
-U0 s_capacity DC2  <  40.0 |    1.0      0 |       0       0
-   U1 s_demand S7  >  31.0 |      0      0 |       0       0
-U1 s_capacity DC0  <  72.0 |    3.0      0 |       0       0
-U1 s_capacity DC1  <  76.0 |   45.0      0 |       0       0
-U1 s_capacity DC2  <  40.0 |    1.0      0 |       0       0
-   U2 s_demand S0  >  19.0 |      0      0 |       0       0
-U2 s_capacity DC0  <  72.0 |   26.0      0 |       0       0
-U2 s_capacity DC1  <  76.0 |   45.0      0 |       0       0
-U2 s_capacity DC2  <  40.0 |      0      0 |       0       0
-   U3 s_demand S8  >  30.0 |      0      0 |       0       0
-U3 s_capacity DC0  <  72.0 |    3.0      0 |       0       0
-U3 s_capacity DC1  <  76.0 |   45.0      0 |       0       0
-U3 s_capacity DC2  <  40.0 |    1.0      0 |       0       0
-   U4 s_demand S4  >  21.0 |      0      0 |       0       0
-   U4 s_demand S5  >  54.0 |      0      0 |       0       0
-U4 s_capacity DC0  <  72.0 |   22.0      0 |       0       0
-U4 s_capacity DC1  <  76.0 |    1.0      0 |       0       0
-U4 s_capacity DC2  <  40.0 |    1.0      0 |       0       0
+      n_demand S0  >  18.0 |      0      - |       -       -
+      n_demand S1  >   7.0 |      0      - |       -       -
+      n_demand S2  >  21.0 |      0      - |       -       -
+      n_demand S3  >  15.0 |      0      - |       -       -
+      n_demand S4  >  17.0 |      0      - |       -       -
+      n_demand S5  >  10.0 |      0      - |       -       -
+      n_demand S6  >   6.0 |      0      - |       -       -
+      n_demand S7  >   8.0 |      0      - |       -       -
+      n_demand S8  >   7.0 |      0      - |       -       -
+      n_demand S9  >   7.0 |      0      - |       -       -
+   n_capacity DC0  <  72.0 |   26.0      - |       -       -
+   n_capacity DC1  <  76.0 |   45.0      - |       -       -
+   n_capacity DC2  <  40.0 |    1.0      - |       -       -
+   U0 s_demand S3  >  29.0 |      0      - |       -       -
+U0 s_capacity DC0  <  72.0 |   26.0      - |       -       -
+U0 s_capacity DC1  <  76.0 |   31.0      - |       -       -
+U0 s_capacity DC2  <  40.0 |    1.0      - |       -       -
+   U1 s_demand S7  >  31.0 |      0      - |       -       -
+U1 s_capacity DC0  <  72.0 |    3.0      - |       -       -
+U1 s_capacity DC1  <  76.0 |   45.0      - |       -       -
+U1 s_capacity DC2  <  40.0 |    1.0      - |       -       -
+   U2 s_demand S0  >  19.0 |      0      - |       -       -
+U2 s_capacity DC0  <  72.0 |   26.0      - |       -       -
+U2 s_capacity DC1  <  76.0 |   45.0      - |       -       -
+U2 s_capacity DC2  <  40.0 |      0      - |       -       -
+   U3 s_demand S8  >  30.0 |      0      - |       -       -
+U3 s_capacity DC0  <  72.0 |    3.0      - |       -       -
+U3 s_capacity DC1  <  76.0 |   45.0      - |       -       -
+U3 s_capacity DC2  <  40.0 |    1.0      - |       -       -
+   U4 s_demand S4  >  21.0 |      0      - |       -       -
+   U4 s_demand S5  >  54.0 |      0      - |       -       -
+U4 s_capacity DC0  <  72.0 |   22.0      - |       -       -
+U4 s_capacity DC1  <  76.0 |    1.0      - |       -       -
+U4 s_capacity DC2  <  40.0 |    1.0      - |       -       -
 ```
 
 
