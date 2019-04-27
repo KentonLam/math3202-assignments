@@ -105,10 +105,17 @@ NewCosts = make_tupledict([
 ], NewDCs, Stores)
 NewCapacities = make_tupledict([74, 21, 29, 68], NewDCs)
 
+# == comm 8 ==
+FTCost = 4500 
+PTCost = 2750
+FTCapacity = 9 
+PTCapacity = 5
+
 # == comm 9 == 
 SurgeWeeks = make_tupledict([5, 5, 6, 2, 5], Surges)
 NormalWeeks = 52 - SurgeWeeks.sum('*').getValue()
 assert NormalWeeks == 29
+CasualCost = 2951
 
 
 def run_assignment_model(comm: int):
@@ -148,17 +155,19 @@ def run_assignment_model(comm: int):
 
     # comm 8: each DC now has labour costs.
     if comm >= 8: 
-        PTCost = 2750 
-        FTCost = 4500
+        PTScaledCost = PTCost
+        FTScaledCost = FTCost
         # in comm 9, these are employed year-round.
         if comm >= 9:
-            PTCost *= 52 
-            FTCost *= 52
-        P = model.addVars(DCs, name='PT', obj=PTCost, vtype=GRB.INTEGER)
-        F = model.addVars(DCs, name='FT', obj=FTCost, vtype=GRB.INTEGER)
+            PTScaledCost *= 52 
+            FTScaledCost *= 52
+        P = model.addVars(DCs, name='PT', obj=PTScaledCost, vtype=GRB.INTEGER)
+        F = model.addVars(DCs, name='FT', obj=FTScaledCost, vtype=GRB.INTEGER)
         
         # total capacity handled by full-time and part-time teams at each DC.
-        FTPTSum = tupledict({ d: 9*F[d]+5*P[d] for d in DCs })
+        FTPTSum = tupledict({ d: FTCapacity*F[d]+PTCapacity*P[d] for d in DCs })
+        # this doesn't need to be a variable because it is directly derived 
+        # from other variables
 
     # comm 9: we need to consider labour during surge scenarios using casual 
     # workers.
@@ -168,7 +177,7 @@ def run_assignment_model(comm: int):
             for dc in DCs:
             # how much it will cost to employ 1 casual worker for the 
             # duration of a particular surge, at each DC.
-                CasualCosts[surge, dc] = SurgeWeeks[surge]*2951
+                CasualCosts[surge, dc] = SurgeWeeks[surge]*CasualCost
         C = model.addVars(Surges, DCs, name='CA', obj=CasualCosts, vtype=GRB.INTEGER)
 
     # A[d,s] is a binary variable of whether store s receives deliveries 
@@ -343,6 +352,14 @@ def run_assignment_model(comm: int):
     print('DC sums:', {d: X.sum(d, '*').getValue() for d in DCs})
     if comm >= 8:
         print('FTPT sums:', {k: v.getValue() for k, v in FTPTSum.items() })
+    if comm >= 9:
+        t_cost = quicksum(X[d,s]*NormalTCosts[d,s] 
+            for d,s in X)
+        l_cost = quicksum( (F[d]*FTScaledCost + P[d]*PTScaledCost)
+            for d in DCs) 
+        print('Cost (yearly, with labour):', (t_cost+l_cost).getValue())
+        print('  Transport:', t_cost.getValue())
+        print('  FT/PT labour:', l_cost.getValue())
     print_ticks()
 
     print()

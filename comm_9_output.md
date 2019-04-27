@@ -11,7 +11,7 @@ Coefficient statistics:
   Bounds range     [1e+00, 1e+00]
   RHS range        [2e+00, 5e+01]
 Presolve removed 446 rows and 433 columns
-Presolve time: 0.00s
+Presolve time: 0.01s
 Presolved: 76 rows, 113 columns, 802 nonzeros
 Variable types: 0 continuous, 113 integer (69 binary)
 Found heuristic solution: objective 1.485643e+07
@@ -42,7 +42,7 @@ Cutting planes:
   MIR: 9
   StrongCG: 4
 
-Explored 1 nodes (108 simplex iterations) in 0.02 seconds
+Explored 1 nodes (108 simplex iterations) in 0.04 seconds
 Thread count was 4 (of 4 available processors)
 
 Solution count 7: 1.2576e+07 1.26133e+07 1.26878e+07 ... 1.48564e+07
@@ -311,6 +311,9 @@ X[DC3,S9] = 7.0
 Store sums: {'S0': 18.0, 'S1': 7.0, 'S2': 21.0, 'S3': 15.0, 'S4': 17.0, 'S5': 10.0, 'S6': 6.0, 'S7': 8.0, 'S8': 7.0, 'S9': 7.0}
 DC sums: {'DC0': 0.0, 'DC1': 16.0, 'DC2': 15.0, 'DC3': 70.0, 'DC4': 0.0, 'DC5': 15.0, 'DC6': 0.0}
 FTPT sums: {'DC0': 0.0, 'DC1': 18.0, 'DC2': 18.0, 'DC3': 72.0, 'DC4': 0.0, 'DC5': 18.0, 'DC6': 0.0}
+Cost (yearly, with labour): 7358504.0
+  Transport: 4082504.0
+  FT/PT labour: 3276000.0
 ```
 
 ## == SURGE ANALYSIS == ##
