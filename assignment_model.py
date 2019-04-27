@@ -121,10 +121,13 @@ def run_assignment_model(comm: int):
         SurgeDemands = None
         SurgeMultipliers = None
 
+    print_ticks = lambda: print('```')
+
     print('Communication', comm)
     print('='*78)
     print()
 
+    print_ticks()
     # the gurobi model.
     model = Model('WonderMarket Model')
 
@@ -225,7 +228,7 @@ def run_assignment_model(comm: int):
     
     if comm >= 7: # comm 7: total number of DCs is at most 4 (1 or 2 new)
         constrs['new_dc'] = model.addConstr(B.sum(NewDCs) <= 2)
-        constrs['all_dcs'] = model.addConstr(B.sum('*') <= 4)
+        constrs['all_dcs'] = model.addConstr(B.sum('*') == 4)
 
     if comm >= 8: # comm 8: enough labour for truckloads needed.
         # remember that X is normal demand.
@@ -260,10 +263,11 @@ def run_assignment_model(comm: int):
     # minimise total cost of transport. objective function set using obj= above.
     model.modelSense = GRB.MINIMIZE
     model.optimize()
-
+    print_ticks()
     print()
     print('## -- GUROBI OUTPUT -- ##')
     print('###', model.objVal)
+    print_ticks()
     print(f'Optimised for communication {comm}.')
     if model.status == GRB.OPTIMAL:
         print('Objective value:', model.objVal)
@@ -273,33 +277,12 @@ def run_assignment_model(comm: int):
         print('INFEASIBLE MODEL.')
     else:
         print(f'Optimisation failed (status {model.status}).')
+    print_ticks()
     print()
     print()
     # group by surge, then store, then DC.
     x_ = {(d, s): X[d,s] for s in Stores for d in DCs}
     y_ = {(d,s,u): Y[d,s,u] for u in Surges for s in Stores for d in DCs}
-    
-    '''
-    print('== FULL ANALYSIS ==')
-    # print_variable_analysis(x_)
-    print()
-    if comm >= 5:
-        print_variable_analysis(A)
-        print()
-    if comm >= 6:
-        print_variable_analysis(B)
-        print()
-    if comm >= 8:
-        print_variable_analysis(P)
-        print_variable_analysis(F)
-        print()
-    print_variable_analysis(x_)
-    print()
-    if comm >= 9:
-        print('Y variables omitted.')
-        # print_variable_analysis(y_)
-    print()
-    '''
 
     print()
     print()
@@ -308,52 +291,72 @@ def run_assignment_model(comm: int):
     # print_variable_analysis(x_, True)
     print()
     if comm >= 5:
+        print_ticks()
         print_variable_analysis(A, 1)
+        print_ticks()
         print()
     if comm >= 6:
+        print_ticks()
         print_variable_analysis(B, 1)
+        print_ticks()
         print()
     if comm >= 8:
+        print_ticks()
         print_variable_analysis(P, 1)
+        print_ticks()
         print()
+        print_ticks()
         print_variable_analysis(F, 1)
+        print_ticks()
         print()
     if comm >= 9:
+        print_ticks()
         print_variable_analysis(C, 1)
+        print_ticks()
         print()
     print()
+    print_ticks()
     print_variable_analysis(x_, True)
+    print_ticks()
     print()
     if comm >= 9:
+        print_ticks()
         print_variable_analysis(y_, 1)
+        print_ticks()
     print()
     # print_variable_analysis(Z, True)
     print()
     
     print('## == CONSTRAINTS == ##')
     print()
+    print_ticks()
     print_constr_analysis(constrs)
+    print_ticks()
     
     print()
     print()
     print('## == NORMAL DEMAND ANALYSIS == ##')
     print() 
+    print_ticks()
     print('\n'.join([f'X[{d},{s}] = {X[d,s].x}' for s in Stores for d in DCs if X[d,s].x]))
     print('Store sums:', {s: X.sum('*', s).getValue() for s in Stores})
     print('DC sums:', {d: X.sum(d, '*').getValue() for d in DCs})
     if comm >= 8:
         print('FTPT sums:', {k: v.getValue() for k, v in FTPTSum.items() })
+    print_ticks()
 
     print()
     print('## == SURGE ANALYSIS == ##')
     print()
     print('Surge multipliers')
-    
+    print_ticks()
     print(SurgeMultipliers)
+    print_ticks()
     # prints truckloads for each store during each surge.
     for u in Surges:
         print()
         print('### Surge', u)
+        print_ticks()
         print('\n'.join([f'Y[{d},{s},{u}] = {Y[d,s,u].x}' for s in Stores for d in DCs if Y[d,s,u].x]))
         print('Store sums:', {s: Y.sum('*', s, u).getValue() for s in Stores})
         print('DC sums:', {d: Y.sum(d, '*', u).getValue() for d in DCs})
@@ -374,18 +377,23 @@ def run_assignment_model(comm: int):
             print('  Casual labour:', l_cost.getValue())
             print('Weekly:', ((t_cost+l_cost)/SurgeWeeks[u]).getValue())
             print('Surge duration:', SurgeWeeks[u])
+        print_ticks()
 
     print()
     print('## == STORE ASSIGNMENTS == ##')
+    print_ticks()
     print_assignments(X)
+    print_ticks()
 
     print()
+    print_ticks()
     print('Store &', ' & '.join(DCs), r'\\')
     for s in Stores:
         # proportions
         p = [float(X[d,s].x/Demands[s]) for d in DCs]
-        p = [str(round(a*100, 2))+'%' if a else '' for a in p]
+        p = [str(round(a*100, 2))+'\\%' if a else '' for a in p]
         print(' & '.join([s] + p), r'\\')
+    print_ticks()
     
     print()
     print('This was communication', comm, 'with value', model.objVal)
