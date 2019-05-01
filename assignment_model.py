@@ -44,57 +44,42 @@ def make_tupledict(matrix, *names):
 
 ## RAW DATA ##
 
-WeeksPerYear = 52
-FTStaffCost = 4500
-PTStaffCost = 2750
-CStaffCost = 2706
-FTStaffTruckloads = 9
-PTStaffTruckloads = 5
-CStaffTruckloads = 1
-
-Costs = [
-    [2362, 964, 1303, 1800, 1107, 761, 2089, 2762, 2139, 3070],
-    [1350, 1930, 1517, 2178, 2260, 2123, 2493, 2163, 1226, 1845],
-    [1270, 1970, 1931, 775, 1457, 1846, 735, 1348, 1343, 1810],
-    [2012, 1349, 1556, 1250, 654, 1069, 1519, 2321, 1872, 2738],
-    [1660, 919, 862, 1549, 937, 871, 1884, 2376, 1452, 2409],
-    [861, 1743, 1728, 1075, 1495, 1820, 1278, 1219, 912, 1505],
-    [1041, 2321, 1927, 2058, 2316, 2481, 2163, 1539, 1079, 1130]
+_Costs = [
+    [1828, 1058, 2014, 2134, 1952, 2677, 2548, 2292, 2704, 1153, ],
+    [2271, 1746, 2919, 1982, 2704, 2577, 2063, 2807, 2924, 1736, ],
+    [807, 1679, 1779, 1428, 1456, 1273, 2160, 559, 1014, 1514, ],
 ]
-
-Demands = [
-    [12, 8, 15, 16, 21, 17, 17, 18, 13, 8],
-    [12, 8, 26, 16, 21, 17, 17, 18, 13, 8],
-    [12, 8, 15, 19, 27, 20, 17, 18, 13, 8],
-    [12, 8, 15, 23, 21, 17, 17, 18, 13, 8],
-    [12, 10, 15, 16, 21, 17, 17, 18, 15, 8],
-    [12, 8, 15, 20, 21, 17, 17, 18, 20, 8]
-]
-
-DCCapacities = [85, 69, 33, 85, 45, 45, 77]
-SurgesPerYear = [36, 3, 2, 4, 1, 6]
-
-_Costs = Costs[:3]
-_Demands = Demands[0]
-_Capacities = DCCapacities[:3]
+_Demands = [18, 7, 21, 15, 17, 10, 6, 8, 7, 7]
+_Capacities = [72, 76, 40]
 
 _Northside = ['DC0', 'DC2']
 _NorthsideMax = 88
 
-_SurgeDemands = Demands[1:]
+_SurgeDemands = [
+    [18,7,21,29,17,10,6,8,7,7],
+    [18,7,21,15,17,10,6,31,7,7],
+    [19,7,21,15,17,10,6,8,7,7],
+    [18,7,21,15,17,10,6,8,30,7],
+    [18,7,21,15,21,54,6,8,7,7]
+]
 
-_NewCosts = Costs[3:]
+_NewCosts = [
+    [1312,722,1251,1929,1125,2264,2565,1718,2161,996],
+    [1748,1663,670,2603,814,2606,3299,1890,2316,1862],
+    [1273,1776,2489,668,2062,841,1353,1370,1275,1532],
+    [2475,2663,3584,1653,3260,1899,936,2648,2434,2441],
+]
 
-_NewCapacities = DCCapacities[3:]
+_NewCapacities = [74, 21, 29, 68]
 
-_SurgeWeeks = SurgesPerYear[1:]
+_SurgeWeeks = [5, 5, 6, 2, 5]
 
-_FTCost = FTStaffCost 
-_PTCost = PTStaffCost
-_FTCapacity = 9
+_FTCost = 4500 
+_PTCost = 2750
+_FTCapacity = 9 
 _PTCapacity = 5
 
-_CasualCost = CStaffCost
+_CasualCost = 2951 
 
 ### SETS ###
 
@@ -153,7 +138,7 @@ PTCapacity = _PTCapacity
 # == comm 9 == 
 SurgeWeeks = make_tupledict(_SurgeWeeks, Surges)
 NormalWeeks = 52 - SurgeWeeks.sum('*').getValue()
-assert NormalWeeks == 36
+assert NormalWeeks == 29
 CasualCost = _CasualCost
 
 
@@ -231,7 +216,7 @@ def run_assignment_model(comm: int):
     if comm >= 9: # comm 9: consider yearly cost.
         # per truckload cost multiplied by number of normal weeks.
         NormalTCosts = { k: NormalWeeks*v for k, v in Costs.items() }
-    X = model.addVars(DCs, Stores, obj=NormalTCosts, name='X', vtype=GRB.INTEGER)
+    X = model.addVars(DCs, Stores, obj=NormalTCosts, name='X')
     # comm 5: binary variables dicate store assignments.
     if comm >= 5:
         model.addConstrs(X[d,s] == A[d,s]*Demands[s] for s in Stores for d in DCs)
@@ -246,10 +231,10 @@ def run_assignment_model(comm: int):
         # the cost of each surge which is affected by how long it runs for.
         SurgeTCosts = { (d,s,u): Costs[d,s]*SurgeWeeks[u] 
             for d, s, u in product(DCs, Stores, Surges) }
-    Y = model.addVars(DCs, Stores, Surges, name='Y', obj=SurgeTCosts, vtype=GRB.INTEGER)
-    
+    Y = model.addVars(DCs, Stores, Surges, name='Y', obj=SurgeTCosts)
+
     # links X and Y variables. this ensures proportions are kept.
-    model.addConstrs(Y[d,s,u] == A[d, s] * SurgeDemands[u, s] 
+    model.addConstrs(Y[d,s,u] == X[d, s] * SurgeMultipliers[u, s] 
         for s in Stores for d in DCs for u in Surges)
 
     # dictionary to store our constraints.
