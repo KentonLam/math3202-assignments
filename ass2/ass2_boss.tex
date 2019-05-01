@@ -77,9 +77,10 @@ The following variables were used in the Gurobi model.\\[0.8em]
     $C_{u,d}$ & integer number of casual employeed employed at DC $d$  during surge $u$. \\
     & (each casual employee is only employed for the duration of the surge). \\ 
     $A_{d,s}$ & binary variable for whether DC $d$ delivers to store $s$. \\  
-    $X_{d,s}$ & truckloads to be sent from DC $d$ to store $s$ during normal demand. \\
-    $Y_{d,s,u}$ & truckloads to be sent from DC $d$ to store $s$ during 
-    surge scenario $u$. 
+    $X_{d,s}$ & integer truckloads to be sent from DC $d$ to store $s$ during normal demand. \\
+    $Y_{d,s,u}$ & integer truckloads to be sent from DC $d$ to store $s$ during 
+    surge scenario $u$.  \\ 
+    & ($X$ and $Y$ will be 0 or exactly match demand, so will be integers.)
 \end{tabular}
 \\[0.8em]
 

@@ -161,6 +161,7 @@ def run_assignment_model(comm: int):
     print_ticks()
     # the gurobi model.
     model = Model('WonderMarket Model')
+    # model.setParam('heuristics', 0)
 
     # comm 6: we have 4 candidate DC sites. add their data to the existing DCs.
     if comm >= 6:
@@ -216,7 +217,8 @@ def run_assignment_model(comm: int):
     if comm >= 9: # comm 9: consider yearly cost.
         # per truckload cost multiplied by number of normal weeks.
         NormalTCosts = { k: NormalWeeks*v for k, v in Costs.items() }
-    X = model.addVars(DCs, Stores, obj=NormalTCosts, name='X')
+    X = model.addVars(DCs, Stores, obj=NormalTCosts, name='X',
+        vtype=GRB.INTEGER if comm >= 5 else GRB.CONTINUOUS)
     # comm 5: binary variables dicate store assignments.
     if comm >= 5:
         model.addConstrs(X[d,s] == A[d,s]*Demands[s] for s in Stores for d in DCs)
@@ -231,7 +233,8 @@ def run_assignment_model(comm: int):
         # the cost of each surge which is affected by how long it runs for.
         SurgeTCosts = { (d,s,u): Costs[d,s]*SurgeWeeks[u] 
             for d, s, u in product(DCs, Stores, Surges) }
-    Y = model.addVars(DCs, Stores, Surges, name='Y', obj=SurgeTCosts)
+    Y = model.addVars(DCs, Stores, Surges, name='Y', obj=SurgeTCosts,
+        vtype=GRB.INTEGER if comm >= 5 else GRB.CONTINUOUS)
 
     # links X and Y variables. this ensures proportions are kept.
     model.addConstrs(Y[d,s,u] == X[d, s] * SurgeMultipliers[u, s] 
