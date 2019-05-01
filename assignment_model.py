@@ -42,6 +42,41 @@ def make_tupledict(matrix, *names):
         d[key] = get_elem(matrix, r)
     return d
 
+## RAW DATA ##
+_Costs = [
+    [1828, 1058, 2014, 2134, 1952, 2677, 2548, 2292, 2704, 1153, ],
+    [2271, 1746, 2919, 1982, 2704, 2577, 2063, 2807, 2924, 1736, ],
+    [807, 1679, 1779, 1428, 1456, 1273, 2160, 559, 1014, 1514, ],
+]
+_Demands = [18, 7, 21, 15, 17, 10, 6, 8, 7, 7]
+_Capacities = [72, 76, 40]
+
+_SurgeDemands = [
+    [18,7,21,29,17,10,6,8,7,7],
+    [18,7,21,15,17,10,6,31,7,7],
+    [19,7,21,15,17,10,6,8,7,7],
+    [18,7,21,15,17,10,6,8,30,7],
+    [18,7,21,15,21,54,6,8,7,7]
+]
+
+_NewCosts = [
+    [1312,722,1251,1929,1125,2264,2565,1718,2161,996],
+    [1748,1663,670,2603,814,2606,3299,1890,2316,1862],
+    [1273,1776,2489,668,2062,841,1353,1370,1275,1532],
+    [2475,2663,3584,1653,3260,1899,936,2648,2434,2441],
+]
+
+_NewCapacities = [74, 21, 29, 68]
+
+_SurgeWeeks = [5, 5, 6, 2, 5]
+
+_FTCost = 4500 
+_PTCost = 2750
+_FTCapacity = 9 
+_PTCapacity = 5
+
+_CasualCost = 2951 
+
 ### SETS ###
 
 # set of stores
@@ -57,17 +92,13 @@ Surges = [f'U{i}' for i in range(5)]
 # == comm 1 ==
 # matrix of cost per truckload of transporting from d to s.
 # indexed as C[d,s]
-Costs = make_tupledict([
-    [1828, 1058, 2014, 2134, 1952, 2677, 2548, 2292, 2704, 1153, ],
-    [2271, 1746, 2919, 1982, 2704, 2577, 2063, 2807, 2924, 1736, ],
-    [807, 1679, 1779, 1428, 1456, 1273, 2160, 559, 1014, 1514, ],
-], DCs, Stores)
+Costs = make_tupledict(_Costs, DCs, Stores)
 # required truckloads at each store.
-Demands = dict(zip(Stores, [18, 7, 21, 15, 17, 10, 6, 8, 7, 7]))
+Demands = dict(zip(Stores, _Demands))
 
 # == comm 2 ==
 # maximum capacity at each distribution centre.
-Capacities = dict(zip(DCs, [72, 76, 40]))
+Capacities = dict(zip(DCs, _Capacities))
 
 # == comm 3 ==
 # set of distribution centres on the north-side.
@@ -77,14 +108,7 @@ NorthsideMax = 88
 
 # == comm 4 ==
 # surge demand scenarios for each store.
-SurgeDemands = make_tupledict([
-    # ['S0', 'S1', 'S2', 'S3', 'S4', 'S5', 'S6', 'S7', 'S8', 'S9'],
-    [18,7,21,29,17,10,6,8,7,7],
-    [18,7,21,15,17,10,6,31,7,7],
-    [19,7,21,15,17,10,6,8,7,7],
-    [18,7,21,15,17,10,6,8,30,7],
-    [18,7,21,15,21,54,6,8,7,7]
-], Surges, Stores)
+SurgeDemands = make_tupledict(_SurgeDemands, Surges, Stores)
 # for each surge and store, this is the ratio of surge demand over normal 
 # demand. for example: normal demand = 2, surge demand = 3 results in 
 # SurgeMultipliers[u, s] = 3/2 = 1.5.
@@ -98,25 +122,20 @@ SurgeMultipliers = {
 
 # == comm 6, 7 == 
 NewDCs = [f'DC{i+3}' for i in range(4)]
-NewCosts = make_tupledict([
-    [1312,722,1251,1929,1125,2264,2565,1718,2161,996],
-    [1748,1663,670,2603,814,2606,3299,1890,2316,1862],
-    [1273,1776,2489,668,2062,841,1353,1370,1275,1532],
-    [2475,2663,3584,1653,3260,1899,936,2648,2434,2441],
-], NewDCs, Stores)
-NewCapacities = make_tupledict([74, 21, 29, 68], NewDCs)
+NewCosts = make_tupledict(_NewCosts, NewDCs, Stores)
+NewCapacities = make_tupledict(_NewCapacities, NewDCs)
 
 # == comm 8 ==
-FTCost = 4500 
-PTCost = 2750
-FTCapacity = 9 
-PTCapacity = 5
+FTCost = _FTCost 
+PTCost = _PTCost
+FTCapacity = _FTCapacity
+PTCapacity = _PTCapacity
 
 # == comm 9 == 
-SurgeWeeks = make_tupledict([5, 5, 6, 2, 5], Surges)
+SurgeWeeks = make_tupledict(_SurgeWeeks, Surges)
 NormalWeeks = 52 - SurgeWeeks.sum('*').getValue()
 assert NormalWeeks == 29
-CasualCost = 2951
+CasualCost = _CasualCost
 
 
 def run_assignment_model(comm: int):
