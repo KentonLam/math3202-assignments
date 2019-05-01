@@ -43,6 +43,7 @@ def make_tupledict(matrix, *names):
     return d
 
 ## RAW DATA ##
+
 _Costs = [
     [1828, 1058, 2014, 2134, 1952, 2677, 2548, 2292, 2704, 1153, ],
     [2271, 1746, 2919, 1982, 2704, 2577, 2063, 2807, 2924, 1736, ],
@@ -50,6 +51,9 @@ _Costs = [
 ]
 _Demands = [18, 7, 21, 15, 17, 10, 6, 8, 7, 7]
 _Capacities = [72, 76, 40]
+
+_Northside = ['DC0', 'DC2']
+_NorthsideMax = 88
 
 _SurgeDemands = [
     [18,7,21,29,17,10,6,8,7,7],
@@ -102,9 +106,9 @@ Capacities = dict(zip(DCs, _Capacities))
 
 # == comm 3 ==
 # set of distribution centres on the north-side.
-Northside = ['DC0', 'DC2']
+Northside = _Northside
 # maximum capacity of northside DCs.
-NorthsideMax = 88
+NorthsideMax = _NorthsideMax
 
 # == comm 4 ==
 # surge demand scenarios for each store.
