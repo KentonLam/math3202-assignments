@@ -6,12 +6,6 @@ from math import ceil
 
 from datetime import datetime
 
-import numpy as np
-
-import stackprinter
-stackprinter.set_excepthook()
-
-
 Fridges = ['Alaska', 'Elsa', 'Lumi']
 F = tuple(range(len(Fridges)))
 
@@ -97,7 +91,6 @@ MaxTrucks = 2
 MaxStorePerType = 8
 
 
-
 @lru_cache(maxsize=None)
 def get_actions(s):
     t = []
@@ -112,57 +105,65 @@ def get_all_actions(max_sum):
         t.extend(get_actions(s))
     return t
 
-ActionPerms = get_all_actions(MaxTrucks*FridgesPerTruck)
+ActionPerms = tuple(
+    (i, j, k) 
+    for i, j, k in product(range(15), repeat=3)
+    if i+j+k <= MaxTrucks*FridgesPerTruck
+)
 
-# all possible permutations of demands. each fridge can be bought 1-6 times.
-DemandPerms = list(product(range(1, 7), range(1, 7), range(1, 7)))
-
-ProbPerms = [] 
-for demand in DemandPerms:
-    p = 1 
-    for i, n in enumerate(demand):
-        p *= Demands[i][n-1]
-    ProbPerms.append(p)
-
+# all possible permutations of demands and the probability of each. 
+# each fridge can be bought 1-7 times.
 DemandProbPerms = tuple(
-    (DemandPerms[i], ProbPerms[i]) 
-    for i in range(len(ProbPerms)) 
-    if ProbPerms[i])
+    ( (d0+1, d1+1, d2+1), Demands[0][d0]*Demands[1][d1]*Demands[2][d2] )
+    for d0, d1, d2 in product(range(6), repeat=3)
+    if Demands[0][d0] and Demands[1][d1] and Demands[2][d2]
+    # don't add permutations with probability 0 to the list.
+)
 
 @lru_cache(maxsize=None)
-def capped_demand_probs(c1, c2, c3):
-    out = []
+def capped_demand_probs(c0, c1, c2):
+    out = {}
     for (d1, d2, d3), p in DemandProbPerms:
-        out.append((min(d1, c1), min(d2, c2), min(d3, c3), p))
-    return out
+        key = (min(d1, c0), min(d2, c1), min(d3, c2))
+        if key not in out:
+            out[key] = p 
+        else:
+            out[key] += p
+    return list(out.items())
 
 @lru_cache(maxsize=None)
-def V3(t, s1, s2, s3):
+def V3(t, s0, s1, s2):
     if t == 4:
         return (0, 'done')
     return max(
         # profit
-        (-(s1+s2+s3+a1+a2+a3)*StoreCost - 150*ceil((a1+a2+a3)/FridgesPerTruck)
+        ((-(s0+s1+s2+a0+a1+a2)*StoreCost - 150*ceil((a0+a1+a2)/FridgesPerTruck)
         + sum(
-            p * (Profits[0]*d1 + Profits[1]*d2 + Profits[2]*d3
-                + V3(t+1, s1-d1, s2-d2, s3-d3)[0])
-            for d1, d2, d3, p in capped_demand_probs(s1+a1, s2+a2, s3+a3)
-        ), a1, a2, a3)
-        for a1, a2, a3 in ActionPerms
-        if s1+a1 <= 8 and s2+a2 <= 8 and s3+a3 <= 8
+            p * (Profits[0]*d0 + Profits[1]*d1 + Profits[2]*d2
+                + V3(t+1, s0+a0-d0, s1+a1-d1, s2+a2-d2)[0])
+            for (d0, d1, d2), p in capped_demand_probs(s0+a0, s1+a1, s2+a2)
+        ), a0, a1, a2)
+        for a0, a1, a2 in ActionPerms
+        if s0+a0 <= 8 and s1+a1 <= 8 and s2+a2 <= 8),
     )
 
 
 def comm_3():
+    PARAMETERS = (0, 0, 0, 0)
+
+    print('Model details:')
+    print('  Action space:', len(ActionPerms))
+    print('  Stochastic probability sum:', sum(x[1] for x in DemandProbPerms))
+    print('  Stochastic event space:', len(DemandProbPerms))
     start = datetime.now()
-    print('Start:', start)
     print()
-    print(V3(3, 0, 0, 0))
+    print('Algorithm start:', start)
+    print('  initial parameters:', PARAMETERS)
+    print('  solution:', V3(*PARAMETERS))
     end = datetime.now()
-    print(V3.cache_info())
-    print(capped_demand_probs.cache_info())
-    print()
-    print('End:', end)
+    print('  V3 cache:', V3.cache_info())
+    print('  capped_demand_probs cache:', capped_demand_probs.cache_info())
+    print('Algorithm finish:', end)
     print('Time taken:', end-start)
 
 def main():
