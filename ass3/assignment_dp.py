@@ -140,9 +140,7 @@ def V3(t, s):
             continue
         # cost of storing held fridges and truck costs
         e_profit = -sum(current)*StoreCost - 150*ceil(sum(action)/FridgesPerTruck)
-        for i, (demand, p) in enumerate(DemandProbPerms): # for each possible demand
-            assert p != 0
-
+        for demand, p in DemandProbPerms: # for each possible demand
             sold = tuple(min(demand[f], current[f]) for f in F) # element-wise minimum
             e_profit += p * (sum(Profits[f]*sold[f] for f in F) + V3(t+1, tuple(current[f] - sold[f] for f in F))[0])
         if e_profit > r_max:
