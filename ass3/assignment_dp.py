@@ -8,6 +8,9 @@ from datetime import datetime
 
 import numpy as np
 
+import stackprinter
+stackprinter.set_excepthook()
+
 
 Fridges = ['Alaska', 'Elsa', 'Lumi']
 F = tuple(range(len(Fridges)))
@@ -109,7 +112,7 @@ def get_all_actions(max_sum):
         t.extend(get_actions(s))
     return t
 
-Permutations = get_all_actions(MaxTrucks*FridgesPerTruck)
+ActionPerms = get_all_actions(MaxTrucks*FridgesPerTruck)
 
 # all possible permutations of demands. each fridge can be bought 1-6 times.
 DemandPerms = list(product(range(1, 7), range(1, 7), range(1, 7)))
@@ -127,34 +130,37 @@ DemandProbPerms = tuple(
     if ProbPerms[i])
 
 @lru_cache(maxsize=None)
-def V3(t, s):
+def capped_demand_probs(c1, c2, c3):
+    out = []
+    for (d1, d2, d3), p in DemandProbPerms:
+        out.append((min(d1, c1), min(d2, c2), min(d3, c3), p))
+    return out
+
+@lru_cache(maxsize=None)
+def V3(t, s1, s2, s3):
     if t == 4:
         return (0, 'done')
+    return max(
+        # profit
+        (-(s1+s2+s3+a1+a2+a3)*StoreCost - 150*ceil((a1+a2+a3)/FridgesPerTruck)
+        + sum(
+            p * (Profits[0]*d1 + Profits[1]*d2 + Profits[2]*d3
+                + V3(t+1, s1-d1, s2-d2, s3-d3)[0])
+            for d1, d2, d3, p in capped_demand_probs(s1+a1, s2+a2, s3+a3)
+        ), a1, a2, a3)
+        for a1, a2, a3 in ActionPerms
+        if s1+a1 <= 8 and s2+a2 <= 8 and s3+a3 <= 8
+    )
 
-    # print(' '*t, t, s)
-    r_max = 0 
-    r_action = None
-    for action in Permutations: # a is a list of fridges to buy
-        current = tuple(s[f] + action[f] for f in F)
-        if max(current) > 8:
-            continue
-        # cost of storing held fridges and truck costs
-        e_profit = -sum(current)*StoreCost - 150*ceil(sum(action)/FridgesPerTruck)
-        for demand, p in DemandProbPerms: # for each possible demand
-            sold = tuple(min(demand[f], current[f]) for f in F) # element-wise minimum
-            e_profit += p * (sum(Profits[f]*sold[f] for f in F) + V3(t+1, tuple(current[f] - sold[f] for f in F))[0])
-        if e_profit > r_max:
-            r_max = e_profit 
-            r_action = action
-    return (r_max, r_action)
 
 def comm_3():
     start = datetime.now()
     print('Start:', start)
     print()
-    print(V3(2, (0, 0, 0)))
+    print(V3(3, 0, 0, 0))
     end = datetime.now()
     print(V3.cache_info())
+    print(capped_demand_probs.cache_info())
     print()
     print('End:', end)
     print('Time taken:', end-start)
