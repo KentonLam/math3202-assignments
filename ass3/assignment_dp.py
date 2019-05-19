@@ -95,7 +95,7 @@ MaxStorePerType = 8
 # and the sum of all fridges bought must not exceed 14.
 ActionPerms = tuple(
     (i, j, k) 
-    for i, j, k in product(range(15), repeat=3)
+    for i, j, k in product(range(MaxTrucks*FridgesPerTruck+1), repeat=3)
     if i+j+k <= MaxTrucks*FridgesPerTruck
 )
 
@@ -123,6 +123,10 @@ def capped_demand_probs(c0, c1, c2):
     return list(out.items())
 
 @lru_cache(maxsize=None)
+def compute_profits(d0, d1, d2):
+    return Profits[0]*d0 + Profits[1]*d1 + Profits[2]*d2
+
+@lru_cache(maxsize=None)
 def V3(t, s0, s1, s2):
     if t == 4:
         return (0, 'done')
@@ -136,7 +140,7 @@ def V3(t, s0, s1, s2):
         (-(s0+s1+s2+a0+a1+a2)*StoreCost - TruckCost*ceil((a0+a1+a2)/FridgesPerTruck)
         + sum(  # for each demand scenario, compute the profit of that 
                 # scenario, weighted by the probability of it occuring.
-            p * (Profits[0]*d0 + Profits[1]*d1 + Profits[2]*d2
+            p * (compute_profits(d0, d1, d2)
                 + V3(t+1, s0+a0-d0, s1+a1-d1, s2+a2-d2)[0])
             for (d0, d1, d2), p in capped_demand_probs(s0+a0, s1+a1, s2+a2)
             # capped_demand_probs() caps dN to the amount we currently have
@@ -148,7 +152,7 @@ def V3(t, s0, s1, s2):
 
 
 def comm_3():
-    PARAMETERS = (2, 0, 0, 0)
+    PARAMETERS = (0, 0, 0, 0)
 
     print('Model details:')
     print('  Action space:', len(ActionPerms))
@@ -158,12 +162,16 @@ def comm_3():
     print()
     print('Algorithm start:', start)
     print('  parameters:', PARAMETERS)
-    print('* SOLUTION:', V3(*PARAMETERS))
+    sol = V3(*PARAMETERS)
     end = datetime.now()
-    print('  V3 cache:', V3.cache_info())
-    print('  capped_demand_probs cache:', capped_demand_probs.cache_info())
+    print('  caches:')
+    print('    V3', V3.cache_info())
+    print('    demand_probs', capped_demand_probs.cache_info())
+    print('    profits', compute_profits.cache_info())
     print('Algorithm finish:', end)
     print('Time taken:', end-start)
+    print() 
+    print('SOLUTION:', sol)
     print()
     print('Enter space separated parameters to V(t, a, e, l).')
     print('t = week, a = Alaska, e = Elsa, l = Lumi.')
