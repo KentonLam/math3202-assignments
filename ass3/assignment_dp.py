@@ -44,6 +44,7 @@ def comm_1():
 
 
 # COMMUNICATION 2
+D = list(range(1, 7)) # 1, ..., 6
 Demands = [
     [0.13, 0.24, 0.29, 0.23, 0.11, 0],
     [0, 0.14, 0.22, 0.31, 0.24, 0.09],
@@ -63,9 +64,7 @@ def V2(f: int, t: int, s: int):
     for a in Actions:
         # cost of storing old Fridges + newly bought Fridges
         e_profit = -StoreCost*(s+a) 
-        for i, p in enumerate(Demands[f]): # for each possible demand
-            n = i+1 # n = max number of Fridges sold
-
+        for n, p in zip(D, Demands[f]): # for each possible demand
             sold = min(n, s+a) # Fridges sold is limited by how many we have
             v, _ = V2(f, t+1, s+a - sold)
             e_profit += p * (Profits[f]*sold + v)
@@ -88,8 +87,7 @@ def comm_2():
 FridgesPerTruck = 7 
 TruckCost = 150 
 MaxTrucks = 2
-MaxStorePerType = 8
-
+MaxStore = 8
 
 # all possible buying options. each fridge can be bought 0 to 14 times
 # and the sum of all fridges bought must not exceed 14.
@@ -99,19 +97,26 @@ ActionPerms = tuple(
     if i+j+k <= MaxTrucks*FridgesPerTruck
 )
 
+# combines actions with their cost. an action is how many fridges to buy and
+# the cost considers the cost of delivering and storing the newly bought fridges.
+ActionsWithCosts = tuple(
+    (action, -StoreCost*sum(action) - TruckCost*ceil(sum(action)/FridgesPerTruck))
+    for action in ActionPerms
+)
+
 # all possible permutations of demands and the probability of each. 
-# each fridge can be bought 1-7 times.
-DemandProbPerms = tuple(
-    ( (d0+1, d1+1, d2+1), Demands[0][d0]*Demands[1][d1]*Demands[2][d2] )
-    for d0, d1, d2 in product(range(6), repeat=3)
-    if Demands[0][d0] and Demands[1][d1] and Demands[2][d2]
+# each fridge can be bought 1-7 times (6 options).
+DemandsWithProbs = tuple(
+    ( (i, j, k), p0*p1*p2 )
+    for (i, p0), (j, p1), (k, p2) in product(*[zip(D, Demands[f]) for f in F])
+    if p0 and p1 and p2
     # don't add permutations with probability 0 to the list.
 )
 
 @lru_cache(maxsize=None)
 def capped_demand_probs(c0, c1, c2):
     out = {}
-    for (d1, d2, d3), p in DemandProbPerms:
+    for (d1, d2, d3), p in DemandsWithProbs:
         key = (min(d1, c0), min(d2, c1), min(d3, c2))
         # after computing the minimum, this permutation may overlap with 
         # a previous permutation. if that happens, collapse and sum their 
@@ -135,9 +140,8 @@ def V3(t, s0, s1, s2):
         # aN is the number of fridge N bought (part of action).
         # dN is the number of fridge N in demand.
 
-        # subtract storage cost of existing fridges + bought fridges
-        # then subtract truck cost
-        (-(s0+s1+s2+a0+a1+a2)*StoreCost - TruckCost*ceil((a0+a1+a2)/FridgesPerTruck)
+        # cost of storing existing fridges as well as newly bought fridges.
+        (-(s0+s1+s2)*StoreCost + action_cost
         + sum(  # for each demand scenario, compute the profit of that 
                 # scenario, weighted by the probability of it occuring.
             p * (compute_profits(d0, d1, d2)
@@ -145,7 +149,7 @@ def V3(t, s0, s1, s2):
             for (d0, d1, d2), p in capped_demand_probs(s0+a0, s1+a1, s2+a2)
             # capped_demand_probs() caps dN to the amount we currently have
         ), a0, a1, a2)
-        for a0, a1, a2 in ActionPerms
+        for (a0, a1, a2), action_cost in ActionsWithCosts
         # ensure currently held fridges never exceed 8
         if s0+a0 <= 8 and s1+a1 <= 8 and s2+a2 <= 8
     )
@@ -154,10 +158,15 @@ def V3(t, s0, s1, s2):
 def comm_3():
     PARAMETERS = (0, 0, 0, 0)
 
+    trim = lambda s: str(s)[:40] + (str(s)[40:] and '...')
+    print_trim = lambda label, obj: print(label, f'({len(obj)}):', trim(obj))
+
     print('Model details:')
-    print('  Action space:', len(ActionPerms))
-    print('  Stochastic probability sum:', sum(x[1] for x in DemandProbPerms))
-    print('  Stochastic event space:', len(DemandProbPerms))
+    print_trim('  Profits', Profits)
+    print_trim('  Demands', Demands)
+    print_trim('  Action space', ActionPerms)
+    print_trim('  Stochastic event space', DemandsWithProbs)
+    print('  Stochastic probability sum:', sum(x[1] for x in DemandsWithProbs))
     start = datetime.now()
     print()
     print('Algorithm start:', start)
@@ -171,7 +180,8 @@ def comm_3():
     print('Algorithm finish:', end)
     print('Time taken:', end-start)
     print() 
-    print('SOLUTION:', sol)
+    print('SOLUTION:')
+    print(f'V{PARAMETERS} = {sol}')
     print()
     print('Enter space separated parameters to V(t, a, e, l).')
     print('t = week, a = Alaska, e = Elsa, l = Lumi.')
