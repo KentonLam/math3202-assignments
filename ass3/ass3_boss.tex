@@ -1,0 +1,235 @@
+\documentclass[11pt,a4paper]{article}
+\input{../../../../header.tex}
+\input{../../../../normal.tex}
+
+\usepackage{booktabs}
+
+\usepackage{lmodern}
+\renewcommand*\familydefault{\sfdefault} %% Only if the base font of the document is to be sans serif
+\usepackage[T1]{fontenc}
+
+\author{Kenton Lam}
+\date{{MATH3202 Assignment 3 \\ Due 27/05/2019 1:00 pm}}
+\title{WonderMarket \\ Section A -- Internal Report}
+
+
+\begin{document}
+\maketitle
+\begin{abstract}
+    Our long-time client WonderMarket has approached regarding their foray into the 
+    refridgerator space. Competition in the area is fierce and they need us 
+    to optimise their fridge logistics.
+    Given information about their costs and requirements, we created and
+    optimmised a dynamic programming model using Python.
+    This report describes the model and its solution.
+\end{abstract}
+
+\part{Model Definition}
+WonderMarket wishes to start selling fridges. For the time being, they are focusing 
+on 3 bespoke fridge options---named ``Alaska'', ``Elsa'' and ``Lumi''.
+Over a 4 week trial period, they need to decide how many fridges of each type 
+to purchase each week.
+
+After communication 9, we developed a detailed model to mathematically represent
+their objectives. This included considering each possible demand scenario to maximise 
+expected profit.
+
+\section{Sets}
+Let the 3 types of fridges be numbered as $0$ is Alaska, $1$ is Elsa and $2$ is Lumi.
+Denote this set as $F$.
+
+\section{Data}
+The following data has been provided to us by WonderMarket. 
+
+\begin{tabular}{l l}
+    $\mathrm{Profit}_{f}$ & profit made by selling one of fridge $f$. \\
+    $\mathrm{Expected}_{f,n}$& expected number of fridge $f$ sold if $n$ are displayed (comm 1). \\
+        & ($ 0 \le n \le 4$). \\ 
+    $\mathrm{Demands}_{f, n}$ & probability that $n$ units of fridge $f$ will be sold (comm 2).\\
+        & ($ 1 \le n \le 6$). \\ 
+    $\mathrm{StoreCost}$ & cost of storing one fridge for one week (comm 2). \\
+    $\mathrm{FridgesPerTruck}$ & maximum fridges transported by one truck (comm 3). \\ 
+    $\mathrm{TruckCost}$ & cost of one truck (comm 3). \\ 
+    $\mathrm{MaxTrucks}$ & maximum number of trucks per week (comm 3). \\ 
+    $\mathrm{MaxStore}$ & maximum number of each fridge type handled per week (comm 3). \\
+\end{tabular}
+
+\section{Stages}
+Our stage will be the number of weeks elapsed since the trial began. That is, 
+\begin{align*}
+    t = 0, 1, 2, 3, 4.
+\end{align*}
+Because this is only a 4 week trial, we stop once 4 weeks have elapsed.
+
+\section{State}
+This is the state carried from one week to the next. Specifically, this is 
+number of each type of fridge they have in storage. Denote this as a 3-dimensional 
+vector $\vec s$, where each component is
+\begin{align*}
+    s_f &= \text{number of fridge $f$ stored.} 
+\end{align*}
+
+\section{Actions}
+At each time step, WonderMarket can order up to 14 fridges, distributed in any way 
+among the 3 types. These are the actions they can take. Thus, the action space is given by the set 
+\begin{align*}
+    \mathrm{Actions} &= \left\{ (i, j, k)  ~|~ i, j, k \in \mathbb Z_{\ge 0}, i+j+k \le \mathrm{FridgesPerTruck}\times \mathrm{MaxTrucks}\right\}.
+\end{align*}
+Let $\vec a \in \mathrm{Actions}$ denote one specific action.
+
+
+\section{More Notation}
+For a vector $\vec v$, let $v_i$ be the $i$-th component of the vector.
+We write the element-wise minimum of two $n$-dimensional vectors as 
+\begin{align*}
+     \mathrm{emin}( \vec v, \vec u ) &= \left( \min \left\{ v_1, u_1 \right\}, \min \left\{ v_2, u_2 \right\}, \ldots, \min \left\{ v_n, u_n \right\} \right)
+\end{align*}
+Note that $\mathrm{Profit}$ is a 3-dimensional vector. 
+
+In our value function, we need to consider all possible permutations of demands 
+of each fridge type. We write the set of demand permutations as  
+\begin{align*}
+    \mathrm{DemandPerms} &= \left\{ 1, 2, \ldots, 6\right\}^3
+\end{align*}
+and denote the probability of each permutation $\vec d \in \mathrm{DemandPerms}$ 
+as 
+\begin{align*}
+    \mathrm{Prob}_\vec d &= \prod_{f \in F} \mathrm{Demands}_{f, d_f}.
+\end{align*}
+
+\section{Value Function}
+The value function represents the maximum expected profit given a starting time 
+and state. It can be expressed as $V_4(\vec s) = 0$, then for $t < 4$,
+\begin{align*}
+    V_{t}(\vec s) = 
+    \max_{ \substack{\vec a \,\in\, \mathrm{Actions} \\ \max \,(\vec s + \vec a)\, \le\, \mathrm{MaxStore} } }\Bigg\{& 
+        -\mathrm{StoreCost}\times\sum_{f \in F} (s_f + a_f) \\ 
+        &-\mathrm{TruckCost}\times \ceil*{\frac{\sum_{f\in F} a_f}{\mathrm{FridgesPerTruck}}} \\ 
+        & + \sum_{\vec d \in \mathrm{DemandPerms}} \mathrm{Prob}_{\vec d} \times \Big( \mathrm{Profit} \cdot \mathrm{emin} ( \vec d, \vec s + \vec a)   \\ 
+        & \qquad + V_{t+1} (\vec s + \vec a - \mathrm{emin} (\vec d, \vec s + \vec a) )\Big) \,\,\Bigg\}
+\end{align*}
+
+\subsection{Derived Data}
+To simplify later calculations, we derived some data from the data given above.\\[0.8em]    
+\begin{tabular}{l l}
+    $\mathrm{SurgeMultiplier}_{u,s}$ & surge demand at store $s$ during surge $u$,  divided by regular \\ 
+    &  demand at store $s$. \\ 
+    &$\mathrm{SurgeMultiplier}_{u,s} = \mathrm{SurgeDemand}_{u,s} / \mathrm{Demand}_s $ \\
+    $\mathrm{NormalWeeks}$ & number of weeks in the year which have no surge scenario. \\ 
+    & $\mathrm{NormalWeeks} = 52-\sum_{u \in U} \mathrm{SurgeWeeks}_u $
+\end{tabular}
+
+\section{Variables}
+The following variables were used in the Gurobi model.\\[0.8em]
+\begin{tabular}{l l}
+    $B_{d}$ & binary variables for whether DC $d$ is active. \\ 
+    & (1 means if $d$ is new then $d$ is built; if $d$ 
+    already exists then $d$ is not closed). \\
+    $P_d$ & integer number of part-time teams employed at DC $d$ year-round. \\ 
+    $F_d$ & integer number of full-time teams employed at DC $d$ year-round. \\ 
+    $C_{u,d}$ & integer number of casual employeed employed at DC $d$  during surge $u$. \\
+    & (each casual employee is only employed for the duration of the surge). \\ 
+    $A_{d,s}$ & binary variable for whether DC $d$ delivers to store $s$. \\  
+    $X_{d,s}$ & integer truckloads to be sent from DC $d$ to store $s$ during normal demand. \\
+    $Y_{d,s,u}$ & integer truckloads to be sent from DC $d$ to store $s$ during 
+    surge scenario $u$.  \\ 
+    & ($X$ and $Y$ will be 0 or exactly match demand, so will be integers.)
+\end{tabular}
+\\[0.8em]
+
+\section{Objective}
+This calculates the total yearly cost, considering transport and labour costs.
+The objective is to \textit{minimise} the following function.
+\begin{align*}
+    \text{(normal transport cost)} \qquad&\quad \sum_{s \in S} \sum_{d \in D} \mathrm{NormalWeeks} \cdot \mathrm{Cost}_{d, s}  X_{d,s} \\ 
+    \text{(surge transport costs)} \qquad &+ \sum_{u \in U} \sum_{s \in S} \sum_{d \in D} \mathrm{SurgeWeeks}_u \mathrm{Cost}_{d, s} Y_{d,s,u} \\ 
+    \text{(full/part-time labour costs)} \qquad &+ 52 \sum_{d \in D} \mathrm{PTCost}\, P_d + 52 \sum_{d \in D}\mathrm{FTCost} \,F_d \\
+    \text{(casual labour costs)} \qquad &+\sum_{u \in U} \sum_{d \in D} \mathrm{CasualCost}\,\mathrm{SurgeWeeks}_u C_{u,d}
+\end{align*}
+
+\section{Constraints}
+First, we have the constraint that all variables are non-negative and certain variables 
+are integers or binary. For all $d \in D,~s \in S, ~u \in U$, we have
+\begin{align*}
+    B_d, P_d, F_d, C_{u,d}, A_{d,s}, X_{d,s}, Y_{d,s,u}  &\ge 0  \\ 
+    B_d, A_{d,s} &\in  \left\{ 0, 1\right\} \\ 
+    P_d, F_d, C_{u,d} &\in \mathbb Z
+\end{align*}
+We link $X$ and $Y$ variables via $A$ and the known demand at each store. This ensures 
+each store receives all its supplies from one DC.
+\begin{align*}
+    X_{d,s} &= \mathrm{Demand}_s A_{d,s} && \forall~d \in D, ~s \in S
+\end{align*}
+We link $X$ and $Y$ via the surge multipliers data. This ensures for each store, 
+it receives deliveries from the same DCs in each scenario as during normal demand. 
+\begin{align*}
+    Y_{d,s,u} &= \mathrm{SurgeMultiplier}_{u,s} X_{d,s} && \forall~d \in D,~s \in S,~u \in U
+\end{align*}
+We ensure the solution is valid for normal demand considering 
+truckloads and capacities. Note that the northside capacity limit has been removed.
+\begin{align*}
+    \sum_{d \in D} X_{d,s} &\ge \mathrm{Demand}_{s} &&\forall~s \in S \\ 
+    \sum_{s \in S} X_{d,s} &\le \mathrm{Capacity}_d &&\forall~d \in D 
+\end{align*}
+Ensuring at most 2 new DCs are built and there are 4 DCs in total (3 or 2 old).
+\begin{align*}
+    \sum_{d \in \mathrm{NewDCs}} B_d &\le 2 \\ 
+    \sum_{d \in D} B_d &= 4 
+\end{align*}
+Ensuring enough teams are employed to meet normal demand at each DC.
+\begin{align*}
+    \sum_{s \in S} X_{d,s} &\le \mathrm{FTCapacity}\,F_d + \mathrm{PTCapacity}\,P_d && \forall~d \in D
+\end{align*}
+We ensure our assignments can scale up to each surge scenario while remaining 
+feasible with the given constraints. 
+For each $u \in U$,
+\begin{align*}
+    \sum_{d \in D} Y_{d,s,u} &\ge \mathrm{SurgeDemand}_{u,s} &&\forall~s \in S \\ 
+    \sum_{s \in S} Y_{d,s,u} &\le \mathrm{Capacity}_d &&\forall~d \in D \\ 
+    \sum_{s \in S} Y_{d,s,u} &\le \mathrm{FTCapacity}\,F_d + \mathrm{PTCapacity}\,P_d + C_{u,d} && \forall~d \in D
+\end{align*}
+
+\pagebreak
+\part{Solution}
+Solving this MILP model in Gurobi returns the following solution.
+This would cost WonderMarket \$12576018.00 each year (\$241846.50 per week).
+
+\section{Store Assignments}
+\begin{tabular}{l  r  r  r r r r r}
+    Store & DC0 & DC1 & DC2 & DC3 & DC4 & DC5 & DC6 \\
+    S0 &  &  &  & 100.0\% &  &  &  \\
+    S1 &  &  &  & 100.0\% &  &  &  \\
+    S2 &  &  &  & 100.0\% &  &  &  \\
+    S3 &  &  &  &  &  & 100.0\% &  \\
+    S4 &  &  &  & 100.0\% &  &  &  \\
+    S5 &  & 100.0\% &  &  &  &  &  \\
+    S6 &  & 100.0\% &  &  &  &  &  \\
+    S7 &  &  & 100.0\% &  &  &  &  \\
+    S8 &  &  & 100.0\% &  &  &  &  \\
+    S9 &  &  &  & 100.0\% &  &  &  \\
+\end{tabular} 
+
+\section{Distribution Centres}
+WonderMarket should close DC0 and build DC3 and DC5. DC1 and DC2 
+should remain open.
+
+\section{Labour}
+WonderMarket should hire the following teams for the whole year. \\[1em]
+\begin{tabular}{l  r  r }
+    DC & Part-time & Full-time \\
+    DC1 & 0 &2 \\ 
+    DC2  & 0 &2 \\ 
+    DC3 &  0& 8 \\
+    DC5 &  0&2 \\ 
+\end{tabular} \\[1em]
+Additionally, they should hire the following casual staff for certain 
+surges.\\[1em]
+\begin{tabular}{l  l  r }
+    Surge & DC & Casual \\
+    Surge 0 &DC5& 11  \\ 
+    Surge 1&DC2 & 20 \\ 
+    Surge 3&DC2 & 20 \\
+    Surge 4&DC1 & 42 \\ 
+    Surge 4&DC3 & 2 \\ 
+\end{tabular} 
+\end{document}
