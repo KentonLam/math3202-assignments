@@ -109,10 +109,10 @@ def get_all_actions(max_sum):
         t.extend(get_actions(s))
     return t
 
-Permutations = np.stack(get_all_actions(MaxTrucks*FridgesPerTruck))
+Permutations = get_all_actions(MaxTrucks*FridgesPerTruck)
 
 # all possible permutations of demands. each fridge can be bought 1-6 times.
-DemandPerms = np.stack(product(range(1, 7), range(1, 7), range(1, 7)))
+DemandPerms = list(product(range(1, 7), range(1, 7), range(1, 7)))
 
 ProbPerms = [] 
 for demand in DemandPerms:
@@ -120,37 +120,31 @@ for demand in DemandPerms:
     for i, n in enumerate(demand):
         p *= Demands[i][n-1]
     ProbPerms.append(p)
-ProbPerms = np.array(ProbPerms)
 
-non_zero = ProbPerms.nonzero() # indices whose probabilities are non-zero
-DemandPerms = DemandPerms[non_zero] # filter to non-zero probabilities
-ProbPerms = ProbPerms[non_zero]
-
-Profits = np.array(Profits)
+DemandProbPerms = tuple(
+    (DemandPerms[i], ProbPerms[i]) 
+    for i in range(len(ProbPerms)) 
+    if ProbPerms[i])
 
 @lru_cache(maxsize=None)
 def V3(t, s):
     if t == 4:
         return (0, 'done')
 
-    s = np.array(s)
-
     # print(' '*t, t, s)
     r_max = 0 
     r_action = None
     for action in Permutations: # a is a list of fridges to buy
-        current = s + action
-        if current.max() > 8:
+        current = tuple(s[f] + action[f] for f in F)
+        if max(current) > 8:
             continue
         # cost of storing held fridges and truck costs
-        e_profit = -current.sum()*StoreCost - 150*ceil(action.sum()/FridgesPerTruck)
-        for i, demand in enumerate(DemandPerms): # for each possible demand
-            p = ProbPerms[i]
+        e_profit = -sum(current)*StoreCost - 150*ceil(sum(action)/FridgesPerTruck)
+        for i, (demand, p) in enumerate(DemandProbPerms): # for each possible demand
+            assert p != 0
 
-            sold = np.minimum(demand, current) # element-wise minimum
-            v, _ = V3(t+1, tuple(current - sold))
-            profit = np.dot(Profits, sold)
-            e_profit += p * (profit + v)
+            sold = tuple(min(demand[f], current[f]) for f in F) # element-wise minimum
+            e_profit += p * (sum(Profits[f]*sold[f] for f in F) + V3(t+1, tuple(current[f] - sold[f] for f in F))[0])
         if e_profit > r_max:
             r_max = e_profit 
             r_action = action
@@ -160,7 +154,7 @@ def comm_3():
     start = datetime.now()
     print('Start:', start)
     print()
-    print(V3(0, (0, 0, 0)))
+    print(V3(2, (0, 0, 0)))
     end = datetime.now()
     print(V3.cache_info())
     print()
