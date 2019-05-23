@@ -47,7 +47,7 @@ def comm_1():
 
 # COMMUNICATION 2
 D = list(range(1, 7)) # 1, ..., 6
-Demands = [
+DemandProbs = [
     [0.13, 0.24, 0.29, 0.23, 0.11, 0],
     [0, 0.14, 0.22, 0.31, 0.24, 0.09],
     [0, 0.1, 0.22, 0.32, 0.23, 0.13]
@@ -66,7 +66,7 @@ def V2_fridge(f: int, t: int, s: int):
     for a in Actions2:
         # cost of storing old Fridges + newly bought Fridges
         e_profit = -StoreCost*(s+a) 
-        for n, p in zip(D, Demands[f]): # for each possible demand
+        for n, p in zip(D, DemandProbs[f]): # for each possible demand
             sold = min(n, s+a) # Fridges sold is limited by how many we have
             v, _ = V2_fridge(f, t+1, s+a - sold)
             e_profit += p * (Profits[f]*sold + v)
@@ -111,7 +111,7 @@ ActionsWithCosts = tuple(
 # each fridge can be bought 1-7 times (6 options).
 DemandsWithProbs = tuple(
     ( (i, j, k), p0*p1*p2 )
-    for (i, p0), (j, p1), (k, p2) in product(*[zip(D, Demands[f]) for f in F])
+    for (i, p0), (j, p1), (k, p2) in product(*[zip(D, DemandProbs[f]) for f in F])
     if p0 and p1 and p2
     # don't add permutations with probability 0 to the list.
 )
@@ -167,7 +167,7 @@ def comm_3():
     print('Model details:')
     print_trim('  Profits', Profits)
     print_trim('  Demands', D)
-    print_trim('  Demand probabilities', Demands)
+    print_trim('  Demand probabilities', DemandProbs)
     print_trim('  Action space', ActionPerms)
     print_trim('  Stochastic event space', DemandsWithProbs)
     print('  Stochastic probability sum:', sum(x[1] for x in DemandsWithProbs))
