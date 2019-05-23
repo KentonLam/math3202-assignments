@@ -7,7 +7,7 @@ print_fridges = lambda l: print(f'  A={l[0]}, E={l[1]}, L={l[2]}')
 print_dollars = lambda l: print(f'  A=${l[0]}, E=${l[1]}, L=${l[2]}')
 
 def print_solution(x, a, e, l):
-    print('Expected total profit: $', round(x, 2), sep='')
+    print('Expected remaining profit: $', round(x, 2), sep='')
     print()
     print('Optimal fridges to buy:')
     print_fridges([a, e, l])
