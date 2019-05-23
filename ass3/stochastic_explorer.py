@@ -49,6 +49,7 @@ def explorer():
         #     "| Enter space-separated numbers: a e l.")
         sol = ( (V2, V3)[comm-2] )(w-1, *cur_fridges)
         
+        print('============'*2)
         print('Week', w)
         print()
         print('Expected total profit: $', round(sol[0]+cur_profit, 2), sep='')
