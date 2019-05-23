@@ -111,20 +111,22 @@ The value function for a particular fridge can be written as
         & \quad + \sum_{d \in D} \left(\mathrm{DemandProbs}_{f,d} \times \left[\mathrm{Profit}_f\times\min(d, s+a)+  V_{f,t+1}(s+a-\min(n, s+a)) \right]\right)
         \Big\}
 \end{align*}
-with base case $V_{f,4}(s) = 0$. This functions was memoized using 
-Python's lru\_cache decorator. We then consider all fridges using 
+with base case $V_{f,4}(s) = 0$. This function was memoized using 
+Python's lru{\mathunderscore}cache decorator. We then consider all fridges using 
 \begin{align*}
     V_t(a, e, l) &= V_{0,t}(a) + V_{1,t}(e) + V_{2,t}(l).
 \end{align*}
 Computing $V_0(0,0,0)$ returns \$5282.92 as maximum expected profit which is obtained by 
 ordering 4, 5, 5 of Alaksa, Elsa and Lumi fridges respectively in the first week. Because this is 
 a stochastic dynamic programming problem, the complete list of optimal actions
-cannot be known in advance. You can use the attached stochastic\_explorer.py 
-to explore the optimal actions given certain demands in each week.
+cannot be known in advance. See appendix for a Python script to interactively explore the solution.
 
 Note that the summation computes an expected value over all demands.
 $\min(n, s+a)$ ensures that the number of fridges sold is limited by the smaller 
 of $n$ or $s+a$, the demand and number of fridges available respectively.
+
+This cannot be directly compared to communication 1 because comm 1 was 
+one week only and a non-stochastic DP problem. 
 
 We assumed at most 6 of a fridge type can be ordered per week. This is reasonable 
 because at most, 6 fridges are sold per week. If 7 fridges are ordered, one would always 
@@ -162,7 +164,7 @@ element-wise minimum of two $n$-dimensional vectors as
      \mathrm{emin}( \vec v, \vec u ) &:= \left( \min \left\{ v_1, u_1 \right\}, \min \left\{ v_2, u_2 \right\}, \ldots, \min \left\{ v_n, u_n \right\} \right).
 \end{align*}
 Also note that $\mathrm{Profit}$ can be treated as a 3-dimensional vector. 
-Then, we write the value function as 
+Then, we write the value function as $V_4(\vec s) = 0$, and for $t<4$,
 \begin{align*}
     V_{t}(\vec s) = 
     \max_{ \substack{\vec a \,\in\, A \\ \max \,(\vec s + \vec a)\, \le\, \mathrm{MaxStore} } }\Bigg\{& 
@@ -171,159 +173,61 @@ Then, we write the value function as
         & + \sum_{\vec d \in D} \Big[\Big(\prod_{f \in F}\mathrm{DemandProbs}_{f,d_f} \Big)\times \Big( \mathrm{Profit} \cdot \mathrm{emin} ( \vec d, \vec s + \vec a)   \\ 
         & \qquad + V_{t+1} \big(\vec s + \vec a - \mathrm{emin} (\vec d, \vec s + \vec a)\big)\,\Big) \Big]\,\,\Bigg\}
 \end{align*}
+Computing $V_0(\vec 0)$ results in an expected maximum profit of 
+\$4229.47. WonderMarket should buy 4, 5 and 5 of Alaska, Elsa and Lumi respectively 
+in the first week. Again, this is a stochastic problem and further actions 
+can only be stated with certainty once the outcome of the first week is known.
+An interactive explorer is included in the appendix.
 
-\section{More Notation}
-For a vector $\vec v$, let $v_i$ be the $i$-th component of the vector.
-We write the element-wise minimum of two $n$-dimensional vectors as 
+It is expected that this is less then communication 2 as we are now considering 
+truck costs on top of communication 2's costs. This 
+reduces the expected profit by \$1053.44.
+
+The algorithm implemented differs slightly from the above 
+formulation because it was further optimised to reduce runtime (see below).
+
+\subsection{Optimisations}
+Initially, the simple model ran in over 5 minutes. This was due to the large 
+action space (680) and large stochastic event space (potential demand scenarios, approximately $6^3=216$).
+These compounted, resulting in 146880 iterations per call of $V_t$.
+
+To shrink the stochastic event space, we defined the following memoized auxillary function.
 \begin{align*}
-     \mathrm{emin}( \vec v, \vec u ) &= \left( \min \left\{ v_1, u_1 \right\}, \min \left\{ v_2, u_2 \right\}, \ldots, \min \left\{ v_n, u_n \right\} \right)
+    \mathrm{capped{\mathunderscore}demand{\mathunderscore}probs}(\vec c) &:= \left\{ (\vec d, p(\vec c, \vec d)) ~|~  \vec d \in D,~d_f \le c_f ~\forall f \in F, ~ p(\vec c, \vec d) \ne 0\right\} \\ 
+    \text{where }\quad \quad p(\vec c, \vec d) &:= \sum_{\substack{\vec e \in D \\ \mathrm{emin}(\vec e, \vec c) = \vec d}} \prod_{f \in F}\mathrm{DemandProbs}_{f,e_f}
 \end{align*}
-Note that $\mathrm{Profit}$ is a 3-dimensional vector. 
+In words, for each tuple $(\vec d, p) \in \mathrm{capped{\mathunderscore}demand{\mathunderscore}probs}(\vec c)$,
+$\vec d$ is a tuple of demands which can be completely fulfilled given we currently have $\vec c$ 
+fridges. Moreover, for each $\vec e \in D$ where $\vec e$ is not possible, we add 
+the probability of $\vec e$ to the probability of $\mathrm{emin}(\vec e, \vec c) \in D$. 
+Also, we remove demands with probability 0 from the set.
 
-In our value function, we need to consider all possible permutations of demands 
-of each fridge type. We write the set of demand permutations as  
+This has significant speed ups, especially for calls of $V_t(\vec s)$ where the number 
+of fridges held is small, this reduces the number of iterations required to compute 
+the expected value. This reduced the runtime to under 10 seconds.
+
+Additionally, we augmented the action set $A$ with precomputed costs of storage and transport.
 \begin{align*}
-    \mathrm{DemandPerms} &= \left\{ 1, 2, \ldots, 6\right\}^3
-\end{align*}
-and denote the probability of each permutation $\vec d \in \mathrm{DemandPerms}$ 
-as 
-\begin{align*}
-    \mathrm{Prob}_\vec d &= \prod_{f \in F} \mathrm{DemandProbs}_{f, d_f}.
-\end{align*}
-
-\section{Value Function}
-The value function represents the maximum expected profit given a starting time 
-and state. It can be expressed as $V_4(\vec s) = 0$, then for $t < 4$,
-\begin{align*}
-    V_{t}(\vec s) = 
-    \max_{ \substack{\vec a \,\in\, \mathrm{Actions} \\ \max \,(\vec s + \vec a)\, \le\, \mathrm{MaxStore} } }\Bigg\{& 
-        -\mathrm{StoreCost}\times\sum_{f \in F} (s_f + a_f) \\ 
-        &-\mathrm{TruckCost}\times \ceil*{\frac{\sum_{f\in F} a_f}{\mathrm{FridgesPerTruck}}} \\ 
-        & + \sum_{\vec d \in \mathrm{DemandPerms}} \mathrm{Prob}_{\vec d} \times \Big( \mathrm{Profit} \cdot \mathrm{emin} ( \vec d, \vec s + \vec a)   \\ 
-        & \qquad + V_{t+1} (\vec s + \vec a - \mathrm{emin} (\vec d, \vec s + \vec a) )\Big) \,\,\Bigg\}
-\end{align*}
-
-\subsection{Derived Data}
-To simplify later calculations, we derived some data from the data given above.\\[0.8em]    
-\begin{tabular}{l l}
-    $\mathrm{SurgeMultiplier}_{u,s}$ & surge demand at store $s$ during surge $u$,  divided by regular \\ 
-    &  demand at store $s$. \\ 
-    &$\mathrm{SurgeMultiplier}_{u,s} = \mathrm{SurgeDemand}_{u,s} / \mathrm{Demand}_s $ \\
-    $\mathrm{NormalWeeks}$ & number of weeks in the year which have no surge scenario. \\ 
-    & $\mathrm{NormalWeeks} = 52-\sum_{u \in U} \mathrm{SurgeWeeks}_u $
-\end{tabular}
-
-\section{Variables}
-The following variables were used in the Gurobi model.\\[0.8em]
-\begin{tabular}{l l}
-    $B_{d}$ & binary variables for whether DC $d$ is active. \\ 
-    & (1 means if $d$ is new then $d$ is built; if $d$ 
-    already exists then $d$ is not closed). \\
-    $P_d$ & integer number of part-time teams employed at DC $d$ year-round. \\ 
-    $F_d$ & integer number of full-time teams employed at DC $d$ year-round. \\ 
-    $C_{u,d}$ & integer number of casual employeed employed at DC $d$  during surge $u$. \\
-    & (each casual employee is only employed for the duration of the surge). \\ 
-    $A_{d,s}$ & binary variable for whether DC $d$ delivers to store $s$. \\  
-    $X_{d,s}$ & integer truckloads to be sent from DC $d$ to store $s$ during normal demand. \\
-    $Y_{d,s,u}$ & integer truckloads to be sent from DC $d$ to store $s$ during 
-    surge scenario $u$.  \\ 
-    & ($X$ and $Y$ will be 0 or exactly match demand, so will be integers.)
-\end{tabular}
-\\[0.8em]
-
-\section{Objective}
-This calculates the total yearly cost, considering transport and labour costs.
-The objective is to \textit{minimise} the following function.
-\begin{align*}
-    \text{(normal transport cost)} \qquad&\quad \sum_{s \in S} \sum_{d \in D} \mathrm{NormalWeeks} \cdot \mathrm{Cost}_{d, s}  X_{d,s} \\ 
-    \text{(surge transport costs)} \qquad &+ \sum_{u \in U} \sum_{s \in S} \sum_{d \in D} \mathrm{SurgeWeeks}_u \mathrm{Cost}_{d, s} Y_{d,s,u} \\ 
-    \text{(full/part-time labour costs)} \qquad &+ 52 \sum_{d \in D} \mathrm{PTCost}\, P_d + 52 \sum_{d \in D}\mathrm{FTCost} \,F_d \\
-    \text{(casual labour costs)} \qquad &+\sum_{u \in U} \sum_{d \in D} \mathrm{CasualCost}\,\mathrm{SurgeWeeks}_u C_{u,d}
+    \mathrm{ActionsWithCosts} &:= \left\{ \left(\vec a, 
+    -\mathrm{StoreCost}\sum\vec a 
+        -\mathrm{TruckCost} \ceil*{\frac{\sum \vec a}{\mathrm{FridgesPerTruck}}} \right) ~\Big|~ \vec a \in A\right\}
 \end{align*}
 
-\section{Constraints}
-First, we have the constraint that all variables are non-negative and certain variables 
-are integers or binary. For all $d \in D,~s \in S, ~u \in U$, we have
+Then, the value function can be written as 
 \begin{align*}
-    B_d, P_d, F_d, C_{u,d}, A_{d,s}, X_{d,s}, Y_{d,s,u}  &\ge 0  \\ 
-    B_d, A_{d,s} &\in  \left\{ 0, 1\right\} \\ 
-    P_d, F_d, C_{u,d} &\in \mathbb Z
+    V_{t}(\vec s) &= 
+    \max_{ \substack{(\vec a, \mathrm{action{\mathunderscore}cost}) \,\in\, A \\ \max \,(\vec s + \vec a)\, \le\, \mathrm{MaxStore} } }\Bigg\{
+        -\mathrm{StoreCost}\sum\vec s  + \mathrm{action{\mathunderscore}cost}\\ 
+        &  \underset{(\vec d, p) \in \mathrm{capped{\mathunderscore}demand{\mathunderscore}probs}(\vec s + \vec a)}{\qquad\qquad \quad \quad + \sum \Big[p\times \Big( \mathrm{Profit} \cdot\vec d}   
+         + V_{t+1} \big(\vec s + \vec a - \vec d\big)\,\Big) \Big]\,\,\Bigg\}
 \end{align*}
-We link $X$ and $Y$ variables via $A$ and the known demand at each store. This ensures 
-each store receives all its supplies from one DC.
-\begin{align*}
-    X_{d,s} &= \mathrm{Demand}_s A_{d,s} && \forall~d \in D, ~s \in S
-\end{align*}
-We link $X$ and $Y$ via the surge multipliers data. This ensures for each store, 
-it receives deliveries from the same DCs in each scenario as during normal demand. 
-\begin{align*}
-    Y_{d,s,u} &= \mathrm{SurgeMultiplier}_{u,s} X_{d,s} && \forall~d \in D,~s \in S,~u \in U
-\end{align*}
-We ensure the solution is valid for normal demand considering 
-truckloads and capacities. Note that the northside capacity limit has been removed.
-\begin{align*}
-    \sum_{d \in D} X_{d,s} &\ge \mathrm{Demand}_{s} &&\forall~s \in S \\ 
-    \sum_{s \in S} X_{d,s} &\le \mathrm{Capacity}_d &&\forall~d \in D 
-\end{align*}
-Ensuring at most 2 new DCs are built and there are 4 DCs in total (3 or 2 old).
-\begin{align*}
-    \sum_{d \in \mathrm{NewDCs}} B_d &\le 2 \\ 
-    \sum_{d \in D} B_d &= 4 
-\end{align*}
-Ensuring enough teams are employed to meet normal demand at each DC.
-\begin{align*}
-    \sum_{s \in S} X_{d,s} &\le \mathrm{FTCapacity}\,F_d + \mathrm{PTCapacity}\,P_d && \forall~d \in D
-\end{align*}
-We ensure our assignments can scale up to each surge scenario while remaining 
-feasible with the given constraints. 
-For each $u \in U$,
-\begin{align*}
-    \sum_{d \in D} Y_{d,s,u} &\ge \mathrm{SurgeDemand}_{u,s} &&\forall~s \in S \\ 
-    \sum_{s \in S} Y_{d,s,u} &\le \mathrm{Capacity}_d &&\forall~d \in D \\ 
-    \sum_{s \in S} Y_{d,s,u} &\le \mathrm{FTCapacity}\,F_d + \mathrm{PTCapacity}\,P_d + C_{u,d} && \forall~d \in D
-\end{align*}
+In code, we manually expanded the vector operations.
 
-\pagebreak
-\part{Solution}
-Solving this MILP model in Gurobi returns the following solution.
-This would cost WonderMarket \$12576018.00 each year (\$241846.50 per week).
+\part{Appendix}
+We have included an interactive Python script alongside the technical model 
+so WonderMarket can explore the solution in the weeks to come. This is included
+in stochastic{\textunderscore}explorer.py. This should be placed into the same 
+folder as assignment{\textunderscore}dp.py. Usage is described in the report 
+to WonderMarket.
 
-\section{Store Assignments}
-\begin{tabular}{l  r  r  r r r r r}
-    Store & DC0 & DC1 & DC2 & DC3 & DC4 & DC5 & DC6 \\
-    S0 &  &  &  & 100.0\% &  &  &  \\
-    S1 &  &  &  & 100.0\% &  &  &  \\
-    S2 &  &  &  & 100.0\% &  &  &  \\
-    S3 &  &  &  &  &  & 100.0\% &  \\
-    S4 &  &  &  & 100.0\% &  &  &  \\
-    S5 &  & 100.0\% &  &  &  &  &  \\
-    S6 &  & 100.0\% &  &  &  &  &  \\
-    S7 &  &  & 100.0\% &  &  &  &  \\
-    S8 &  &  & 100.0\% &  &  &  &  \\
-    S9 &  &  &  & 100.0\% &  &  &  \\
-\end{tabular} 
-
-\section{Distribution Centres}
-WonderMarket should close DC0 and build DC3 and DC5. DC1 and DC2 
-should remain open.
-
-\section{Labour}
-WonderMarket should hire the following teams for the whole year. \\[1em]
-\begin{tabular}{l  r  r }
-    DC & Part-time & Full-time \\
-    DC1 & 0 &2 \\ 
-    DC2  & 0 &2 \\ 
-    DC3 &  0& 8 \\
-    DC5 &  0&2 \\ 
-\end{tabular} \\[1em]
-Additionally, they should hire the following casual staff for certain 
-surges.\\[1em]
-\begin{tabular}{l  l  r }
-    Surge & DC & Casual \\
-    Surge 0 &DC5& 11  \\ 
-    Surge 1&DC2 & 20 \\ 
-    Surge 3&DC2 & 20 \\
-    Surge 4&DC1 & 42 \\ 
-    Surge 4&DC3 & 2 \\ 
-\end{tabular} 
 \end{document}
