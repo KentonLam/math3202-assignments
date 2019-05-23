@@ -2,13 +2,15 @@ from assignment_dp import *
 
 from sys import exit
 
+
+print_fridges = lambda l: print(f'  A={l[0]}, E={l[1]}, L={l[2]}')
+print_dollars = lambda l: print(f'  A=${l[0]}, E=${l[1]}, L=${l[2]}')
+
 def print_solution(x, a, e, l):
-    print('Expected profit: $', round(x, 2), sep='')
+    print('Expected total profit: $', round(x, 2), sep='')
     print()
     print('Optimal fridges to buy:')
-    print('  Alaska:', a)
-    print('  Elsa:', e)
-    print('  Lumi:', e)
+    print_fridges([a, e, l])
 
 def ask_input(valid, map_, help_str=None):
     while True:
@@ -32,49 +34,68 @@ def explorer():
     comm = ask_input(lambda i: i in (2, 3), int, "Enter 2 or 3.")
         
     print('Exploring communication', comm)
-    print()
     n = comm
-    print(f'Enter space separated parameters to V(t, a, e, l).')
-    print('t = week, a = Alaska, e = Elsa, l = Lumi.')
-    print('a, e and l are the number stored at the start of week t.')
-    print('Weeks start at 0. Example: >>> 3 0 0 0')
-    print()
+    # print(f'| Enter how many fridges you have stored at the start of each week')
+    # print(f'| as space-separated numbers a e l.')
+    # print(f'| Example: >>> 0 0 0 for no fridges.')
+    # print()
+
+    
+
     cur_profit = 0
+    cur_fridges = (0, 0, 0)
+    w = 1
     while True:
-        print(f'Current profit: ${cur_profit}')
-        user_input = ask_input(
-            lambda x: len(x) == 4, 
-            lambda s: list(map(int, s.split())), 
-            "Enter space-separated numbers: t a e l.")
-        w = user_input[0]
-        sol = ( (V2, V3)[comm-2] )(*user_input)
-        print('Week', user_input[0])
+        
+        print()
+        # user_input = ask_input(
+        #     lambda x: len(x) == 3, 
+        #     lambda s: list(map(int, s.split())), 
+        #     "| Enter space-separated numbers: a e l.")
+        sol = ( (V2, V3)[comm-2] )(w-1, *cur_fridges)
+        
+        print('Week', w)
         print()
         print_solution(*sol)
         print()
-        if user_input[0] >= 4:
+        if w >= 4:
             print('End of trial.')
         else:
             new_store_cost = StoreCost*sum(sol[1:])
-            old_store_cost = StoreCost*sum(user_input[1:])
+            old_store_cost = StoreCost*sum(cur_fridges)
             print(f'Total storage cost: ${new_store_cost+old_store_cost}')
             print(f'  Currently stored: ${old_store_cost}')
             print(f'  Newly bought: ${new_store_cost}')
+        cur_fridges = [x+y for x, y in zip(cur_fridges, sol[1:])]
 
         print()
-        print(f'Enter actual sales in week {w} as')
-        print(f'space-separated numbers a e l.')
+        print('Available fridges: ')
+        print_fridges(cur_fridges)
+        print()
+        print(f'| Enter actual sales in week {w} as')
+        print(f'| space-separated numbers a e l.')
         sales = ask_input(
-            lambda x: len(x) == 3 and all(y >= 0 for y in x), 
+            lambda x: len(x) == 3 and all(m>= y >= 0 for m, y in zip(cur_fridges, x)), 
             lambda s: list(map(int, s.split())), 
-            "Enter space-separated numbers: a e l.")
+            "| Enter space-separated numbers: a e l.\n| Cannot exceed available fridges.")
         profit = [Profits[i]*x for i, x in enumerate(sales)]
         
-        print(f'Actual weekly profit: ${sum(profit)}')
-        print(f'  Alaska: ${profit[0]}')
-        print(f'  Elsa: ${profit[1]}')
-        print(f'  Lumi: ${profit[2]}')
+        print(f'Profit in week {w}: ${sum(profit)}')
+        print_dollars(profit)
+        cur_fridges = [x-y for x, y in zip(cur_fridges, sales)]
         cur_profit += sum(profit)
+        print(f'Cumulative profit: ${cur_profit}')
+        print()
+        print('Leftover fridges:')
+        print_fridges(cur_fridges)
+        input('Press enter to compute next week...')
+
+        w += 1
+        if w >= 5:
+            break 
+    print()
+    print('4 weeks elapsed.')
+    print(f'TOTAL PROFIT: ${cur_profit}')
 
 if __name__ == "__main__":
     explorer()
