@@ -4,9 +4,11 @@
 
 \usepackage{booktabs}
 
-\usepackage{lmodern}
-\renewcommand*\familydefault{\sfdefault} %% Only if the base font of the document is to be sans serif
 \usepackage[T1]{fontenc}
+
+\usepackage{lmodern}
+% \usepackage{cmbright}
+\renewcommand*\familydefault{\sfdefault} %% Only if the base font of the document is to be sans serif
 
 \author{Kenton Lam}
 \date{{MATH3202 Assignment 3 \\ Due 27/05/2019 1:00 pm}}
@@ -27,25 +29,16 @@
 \part{Model Definition}
 WonderMarket wishes to start selling fridges. For the time being, they are focusing 
 on 3 bespoke fridge options---named ``Alaska'', ``Elsa'' and ``Lumi''.
-Over a 4 week trial period, they need to decide how many fridges of each type 
-to purchase each week.
-
-After communication 9, we developed a detailed model to mathematically represent
-their objectives. This included considering each possible demand scenario to maximise 
-expected profit.
-
-\section{Sets}
-Let the 3 types of fridges be numbered as $0$ is Alaska, $1$ is Elsa and $2$ is Lumi.
-Denote this set as $F$.
 
 \section{Data}
 The following data has been provided to us by WonderMarket. 
 
 \begin{tabular}{l l}
+    $F$ & the set of fridge types. \\
     $\mathrm{Profit}_{f}$ & profit made by selling one of fridge $f$. \\
-    $\mathrm{Expected}_{f,n}$& expected number of fridge $f$ sold if $n$ are displayed (comm 1). \\
+    $\mathrm{Expected}_{f,n}$& expected number of fridge $f$ sold if $n$ are displayed (comm 1 only). \\
         & ($ 0 \le n \le 4$). \\ 
-    $\mathrm{Demands}_{f, n}$ & probability that $n$ units of fridge $f$ will be sold (comm 2).\\
+    $\mathrm{DemandProbs}_{f, n}$ & probability that $n$ units of fridge $f$ will be sold (comm 2).\\
         & ($ 1 \le n \le 6$). \\ 
     $\mathrm{StoreCost}$ & cost of storing one fridge for one week (comm 2). \\
     $\mathrm{FridgesPerTruck}$ & maximum fridges transported by one truck (comm 3). \\ 
@@ -54,29 +47,130 @@ The following data has been provided to us by WonderMarket.
     $\mathrm{MaxStore}$ & maximum number of each fridge type handled per week (comm 3). \\
 \end{tabular}
 
-\section{Stages}
-Our stage will be the number of weeks elapsed since the trial began. That is, 
-\begin{align*}
-    t = 0, 1, 2, 3, 4.
-\end{align*}
-Because this is only a 4 week trial, we stop once 4 weeks have elapsed.
+\section{Communication 1}
+WonderMarket wishes to display fridges. They can display up to 8 
+fridges and the amount of each fridge bought depends on how many 
+fridges of that type are displayed.
 
-\section{State}
-This is the state carried from one week to the next. Specifically, this is 
-number of each type of fridge they have in storage. Denote this as a 3-dimensional 
-vector $\vec s$, where each component is
+Here, the stages are the fridge type and the state is the number of 
+fridges remaining. The action describes the number of the current 
+fridge to display. We write 
 \begin{align*}
-    s_f &= \text{number of fridge $f$ stored.} 
+    f &= \text{current fridge} \\ 
+    r &= \text{remaining fridges} \\ 
+    A &= \left\{ 0, \ldots, 4\right\} = \text{all possible number of fridges display} 
 \end{align*}
 
-\section{Actions}
-At each time step, WonderMarket can order up to 14 fridges, distributed in any way 
-among the 3 types. These are the actions they can take. Thus, the action space is given by the set 
+Mathematically, we can write the value function as 
 \begin{align*}
-    \mathrm{Actions} &= \left\{ (i, j, k)  ~|~ i, j, k \in \mathbb Z_{\ge 0}, i+j+k \le \mathrm{FridgesPerTruck}\times \mathrm{MaxTrucks}\right\}.
+    V_f(r) &= \max_{a \in A ~|~a\le r} 
+    \left\{ \mathrm{Profit}_f \times \mathrm{Expected}_{f,a} + V_{f+1}(r-a)\right\}
 \end{align*}
-Let $\vec a \in \mathrm{Actions}$ denote one specific action.
+with the base cases of 
+\begin{align*}
+    V_3(r) = 0, \qquad V_f(0) = 0 \qquad \forall r, f.
+\end{align*}
+To optimise for WonderMarket, we computed $V_0(8)$ which will iterate through 
+the stage of each fridge (0 to 2) and with 8 available fridges. This resulted in 
+a maximum profit of \$1863.20 which is achieved by displaying 
+2 Alaska fridges, 3 Elsa fridges and 3 Lumi fridges.
 
+Note that we assumed at most 4 of a fridge type would be displayed. This is reasonable 
+as any fridges more than 4 do not increase expected sales. Therefore, it will 
+always be better to display some fridges of another type than more than 4 fridges 
+of one type.
+
+\section{Communication 2}
+In this communication, the focus moved from direct-to-customer sales to delivery.
+WonderMarket is running a 4 week trial of their refridgerator branch and 
+needs to order fridges to ship to their customers. There are costs 
+and constraints associated with storing fridges during this process. 
+
+In addition, 
+they cannot know the exact demand ahead of time so require us to optimise for 
+maximum expected profit. 
+
+We can consider each fridge independently of the others, so we write a value function 
+for one specific fridge then combine them later. For each fridge, 
+the stage is number of weeks elapsed, state is number of fridges stored at 
+the start of that week and actions represent the number of fridges bought. We also 
+have a set of possible demands.
+
+We write 
+\begin{align*}
+    t &= \text{weeks elapsed} \\ 
+    s &= \text{fridges of type $f$ stored at start of week} \\ 
+    A &= \left\{ 0, \ldots, 6\right\} = \text{all possible number of fridges to order} \\ 
+    D &= \left\{ 1, \ldots, 6\right\} = \text{all possible demands} 
+\end{align*}
+
+The value function for a particular fridge can be written as 
+\begin{align*}
+    V_{f,t}(s) &= \max_{a \in A} 
+    \Big\{ -\mathrm{StoreCost}\times(s+a) \\ 
+        & \quad + \sum_{d \in D} \left(\mathrm{DemandProbs}_{f,d} \times \left[\mathrm{Profit}_f\times\min(d, s+a)+  V_{f,t+1}(s+a-\min(n, s+a)) \right]\right)
+        \Big\}
+\end{align*}
+with base case $V_{f,4}(s) = 0$. This functions was memoized using 
+Python's lru\_cache decorator. We then consider all fridges using 
+\begin{align*}
+    V_t(a, e, l) &= V_{0,t}(a) + V_{1,t}(e) + V_{2,t}(l).
+\end{align*}
+Computing $V_0(0,0,0)$ returns \$5282.92 as maximum expected profit which is obtained by 
+ordering 4, 5, 5 of Alaksa, Elsa and Lumi fridges respectively in the first week. Because this is 
+a stochastic dynamic programming problem, the complete list of optimal actions
+cannot be known in advance. You can use the attached stochastic\_explorer.py 
+to explore the optimal actions given certain demands in each week.
+
+Note that the summation computes an expected value over all demands.
+$\min(n, s+a)$ ensures that the number of fridges sold is limited by the smaller 
+of $n$ or $s+a$, the demand and number of fridges available respectively.
+
+We assumed at most 6 of a fridge type can be ordered per week. This is reasonable 
+because at most, 6 fridges are sold per week. If 7 fridges are ordered, one would always 
+be left over to next week. However, it is cheaper to only order 6 then buy one 
+next week if required. Also, because WonderMarket is only just beginning their 
+fridge trial, we assume they have no fridge stock stored.
+
+\section{Communication 3}
+In addition to the requirements of communication 2, WonderMarket 
+needs to consider the logistics of transporting fridges to their warehouse. 
+At most, 7 fridges (possibly of mixed type) fit on a truck and at most 2 trucks 
+can be ordered per week. Each truck costs a flat fee of \$150. In 
+addition, at most 8 fridges of each type can be in the warehouse at a time. 
+This results in a maximum of 14 fridges ordered per week.
+
+Again, the stage is number of weeks elapsed. Our state will now be a 
+vector of fridges of each type currently stored. 
+Similarly, the action is number of each fridge bought in the current week
+and the set of demands now considers all 3 fridge types.
+
+Let $\sum \vec x$ be the sum of elements of the vector $\vec x$. 
+We write 
+\begin{align*}
+    t &= \text{weeks elapsed} \\ 
+    \vec s &= \text{fridges stored at start of week} \\ 
+    & \quad (\text{given}~\vec s, s_f = \text{fridges of type $f$ stored}) \\ 
+    A &= \left\{ \vec a \in \left\{ 0, \ldots, 14\right\}^3 ~|~ \sum \vec a \le 14 \right\}  = \text{all possible permutations of fridges to order} \\ 
+    & \quad (\text{given}~\vec a \in A, a_f \text{ is number of fridge $f$ ordered}) \\
+    D &= \left\{ 1, \ldots, 6\right\}^3 = \text{all possible demands}  \\ 
+    & \quad (\text{given}~\vec d \in D, d_f \text{ is demand of fridge $f$}) 
+\end{align*}
+To keep the notation neat, we define the 
+element-wise minimum of two $n$-dimensional vectors as 
+\begin{align*}
+     \mathrm{emin}( \vec v, \vec u ) &:= \left( \min \left\{ v_1, u_1 \right\}, \min \left\{ v_2, u_2 \right\}, \ldots, \min \left\{ v_n, u_n \right\} \right).
+\end{align*}
+Also note that $\mathrm{Profit}$ can be treated as a 3-dimensional vector. 
+Then, we write the value function as 
+\begin{align*}
+    V_{t}(\vec s) = 
+    \max_{ \substack{\vec a \,\in\, A \\ \max \,(\vec s + \vec a)\, \le\, \mathrm{MaxStore} } }\Bigg\{& 
+        -\mathrm{StoreCost}\times\sum(\vec s + \vec a) \\ 
+        &-\mathrm{TruckCost}\times \ceil*{\frac{\sum \vec a}{\mathrm{FridgesPerTruck}}} \\ 
+        & + \sum_{\vec d \in D} \Big[\Big(\prod_{f \in F}\mathrm{DemandProbs}_{f,d_f} \Big)\times \Big( \mathrm{Profit} \cdot \mathrm{emin} ( \vec d, \vec s + \vec a)   \\ 
+        & \qquad + V_{t+1} \big(\vec s + \vec a - \mathrm{emin} (\vec d, \vec s + \vec a)\big)\,\Big) \Big]\,\,\Bigg\}
+\end{align*}
 
 \section{More Notation}
 For a vector $\vec v$, let $v_i$ be the $i$-th component of the vector.
@@ -94,7 +188,7 @@ of each fridge type. We write the set of demand permutations as
 and denote the probability of each permutation $\vec d \in \mathrm{DemandPerms}$ 
 as 
 \begin{align*}
-    \mathrm{Prob}_\vec d &= \prod_{f \in F} \mathrm{Demands}_{f, d_f}.
+    \mathrm{Prob}_\vec d &= \prod_{f \in F} \mathrm{DemandProbs}_{f, d_f}.
 \end{align*}
 
 \section{Value Function}
