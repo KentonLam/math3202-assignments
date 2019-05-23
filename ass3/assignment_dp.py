@@ -54,7 +54,7 @@ StoreCost = 30
 Actions = (0, 1, 2, 3, 4, 5, 6)
 
 @lru_cache(maxsize=None)
-def V2(f: int, t: int, s: int):
+def V2_one(f: int, t: int, s: int):
     if t == 4:
         # return (-Profits[f]*s, ())
         return (0, 'done')
@@ -66,22 +66,23 @@ def V2(f: int, t: int, s: int):
         e_profit = -StoreCost*(s+a) 
         for n, p in zip(D, Demands[f]): # for each possible demand
             sold = min(n, s+a) # Fridges sold is limited by how many we have
-            v, _ = V2(f, t+1, s+a - sold)
+            v, _ = V2_one(f, t+1, s+a - sold)
             e_profit += p * (Profits[f]*sold + v)
         if e_profit > r_max:
             r_max = e_profit 
             r_action = a 
     return (r_max, r_action)
 
+def V2(t, a, e, l):
+    m0, a0 = V2_one(0, t, a)
+    m1, a1 = V2_one(1, t, e)
+    m2, a2 = V2_one(2, t, l)
+    return (m0+m1+m2, a0, a1, a2)
+
 def comm_2():
-    total = 0
-    for f in F:
-        sol = (V2(f, 0, 0))
-        total += sol[0]
-        print(Fridges[f], sol)
-    print()
-    print('Profit:', total)
-    print(V2.cache_info())
+    sol = V2(0, 0, 0, 0)
+    print('Solution:', sol)
+    print(V2_one.cache_info())
 
 # COMMUNICATION 3 
 FridgesPerTruck = 7 
@@ -183,24 +184,6 @@ def comm_3():
     print() 
     print('SOLUTION:')
     print(f'V{PARAMETERS} = {sol}')
-    print()
-    print('Enter space separated parameters to V(t, a, e, l).')
-    print('t = week, a = Alaska, e = Elsa, l = Lumi.')
-    print('Example: >>> 3 0 0 0')
-    while True:
-        try:
-            params = input('>>> ')
-        except (KeyboardInterrupt, EOFError):
-            print('\nTerminated.')
-            break
-        try:
-            params = tuple(int(x.strip()) for x in params.split())
-            p, *a = V3(*params)
-            print(f'V3{params}')
-            print('  profit =', p)
-            print('  action =', dict(zip('ael', a)))
-        except Exception as e:
-            print(e)
 
 def main():
     comms = (1, 2, 3)
