@@ -193,7 +193,7 @@ These compounted, resulting in 146880 iterations per call of $V_t$.
 
 To shrink the stochastic event space, we defined the following memoized auxillary function.
 \begin{align*}
-    \mathrm{capped{\mathunderscore}demand{\mathunderscore}probs}(\vec c) &:= \left\{ (\vec d, p(\vec c, \vec d)) ~|~  \vec d \in D,~d_f \le c_f ~\forall f \in F, ~ p(\vec c, \vec d) \ne 0\right\} \\ 
+    \mathrm{capped{\mathunderscore}demand{\mathunderscore}probs}(\vec c)  = \mathrm{c{\mathunderscore}d{\mathunderscore}p}(\vec c)&:= \left\{ (\vec d, p(\vec c, \vec d)) ~|~  \vec d \in D,~d_f \le c_f ~\forall f \in F, ~ p(\vec c, \vec d) \ne 0\right\} \\ 
     \text{where }\quad \quad p(\vec c, \vec d) &:= \sum_{\substack{\vec e \in D \\ \mathrm{emin}(\vec e, \vec c) = \vec d}} \prod_{f \in F}\mathrm{DemandProbs}_{f,e_f}
 \end{align*}
 In words, for each tuple $(\vec d, p) \in \mathrm{capped{\mathunderscore}demand{\mathunderscore}probs}(\vec c)$,
@@ -208,7 +208,7 @@ the expected value. This reduced the runtime to under 10 seconds.
 
 Additionally, we augmented the action set $A$ with precomputed costs of storage and transport.
 \begin{align*}
-    \mathrm{ActionsWithCosts} &:= \left\{ \left(\vec a, 
+    \mathrm{ActionsWithCosts} = \mathrm{AC} &:= \left\{ \left(\vec a, 
     -\mathrm{StoreCost}\sum\vec a 
         -\mathrm{TruckCost} \ceil*{\frac{\sum \vec a}{\mathrm{FridgesPerTruck}}} \right) ~\Big|~ \vec a \in A\right\}
 \end{align*}
@@ -216,9 +216,9 @@ Additionally, we augmented the action set $A$ with precomputed costs of storage 
 Then, the value function can be written as 
 \begin{align*}
     V_{t}(\vec s) &= 
-    \max_{ \substack{(\vec a, \mathrm{action{\mathunderscore}cost}) \,\in\, A \\ \max \,(\vec s + \vec a)\, \le\, \mathrm{MaxStore} } }\Bigg\{
+    \max_{ \substack{(\vec a, \mathrm{action{\mathunderscore}cost}) \,\in\, \mathrm{AC} \\ \max \,(\vec s + \vec a)\, \le\, \mathrm{MaxStore} } }\Bigg\{
         -\mathrm{StoreCost}\sum\vec s  + \mathrm{action{\mathunderscore}cost}\\ 
-        &  \underset{(\vec d, p) \in \mathrm{capped{\mathunderscore}demand{\mathunderscore}probs}(\vec s + \vec a)}{\qquad\qquad \quad \quad + \sum \Big[p\times \Big( \mathrm{Profit} \cdot\vec d}   
+        &  \underset{(\vec d, p) \in \mathrm{c{\mathunderscore}d{\mathunderscore}p}(\vec s + \vec a)}{\qquad\qquad \quad \quad + \sum \Big[p\times \Big( \mathrm{Profit} \cdot\vec d}   
          + V_{t+1} \big(\vec s + \vec a - \vec d\big)\,\Big) \Big]\,\,\Bigg\}
 \end{align*}
 In code, we manually expanded the vector operations.
