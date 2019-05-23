@@ -6,11 +6,6 @@ from sys import exit
 print_fridges = lambda l: print(f'  A={l[0]}, E={l[1]}, L={l[2]}')
 print_dollars = lambda l: print(f'  A=${l[0]}, E=${l[1]}, L=${l[2]}')
 
-def print_solution(x, a, e, l):
-    print('Expected remaining profit: $', round(x, 2), sep='')
-    print()
-    print('Optimal fridges to buy:')
-    print_fridges([a, e, l])
 
 def ask_input(valid, map_, help_str=None):
     while True:
@@ -56,16 +51,19 @@ def explorer():
         
         print('Week', w)
         print()
-        print_solution(*sol)
+        print('Expected total profit: $', round(sol[0]+cur_profit, 2), sep='')
+        print('  Current profit: $', round(cur_profit, 2), sep='')
+        print('  Expected future profit: $', round(sol[0], 2), sep='')
         print()
-        if w >= 4:
-            print('End of trial.')
-        else:
-            new_store_cost = StoreCost*sum(sol[1:])
-            old_store_cost = StoreCost*sum(cur_fridges)
-            print(f'Total storage cost: ${new_store_cost+old_store_cost}')
-            print(f'  Currently stored: ${old_store_cost}')
-            print(f'  Newly bought: ${new_store_cost}')
+        print('Optimal fridges to buy:')
+        print_fridges(sol[1:])
+        print()
+        
+        new_store_cost = StoreCost*sum(sol[1:])
+        old_store_cost = StoreCost*sum(cur_fridges)
+        print(f'Week storage cost: ${new_store_cost+old_store_cost}')
+        print(f'  Currently stored: ${old_store_cost}')
+        print(f'  Newly bought: ${new_store_cost}')
         cur_fridges = [x+y for x, y in zip(cur_fridges, sol[1:])]
 
         print()
@@ -88,11 +86,10 @@ def explorer():
         print()
         print('Leftover fridges:')
         print_fridges(cur_fridges)
-        input('Press enter to compute next week...')
-
         w += 1
         if w >= 5:
             break 
+        input('Press enter to compute next week...')
     print()
     print('4 weeks elapsed.')
     print(f'TOTAL PROFIT: ${cur_profit}')

@@ -20,6 +20,8 @@ Expected = [
 MAX_INDEX = len(Fridges)-1
 MAX_SOLD = len(Expected[0])
 
+Actions1 = range(MAX_SOLD)
+
 def V1(f: int, remaining: int) -> Tuple[int, str]:
     assert remaining >= 0
 
@@ -30,7 +32,7 @@ def V1(f: int, remaining: int) -> Tuple[int, str]:
 
     running_max = 0 
     running_action = None
-    for a in range(MAX_SOLD):
+    for a in Actions1:
         if a > remaining: break
         x, action = V1(f+1, remaining-a)
         x += Profits[f]*Expected[f][a]
@@ -51,7 +53,7 @@ Demands = [
     [0, 0.1, 0.22, 0.32, 0.23, 0.13]
 ]
 StoreCost = 30
-Actions = (0, 1, 2, 3, 4, 5, 6)
+Actions2 = (0, 1, 2, 3, 4, 5, 6)
 
 @lru_cache(maxsize=None)
 def V2_fridge(f: int, t: int, s: int):
@@ -61,7 +63,7 @@ def V2_fridge(f: int, t: int, s: int):
     
     r_max = 0 
     r_action = None
-    for a in Actions:
+    for a in Actions2:
         # cost of storing old Fridges + newly bought Fridges
         e_profit = -StoreCost*(s+a) 
         for n, p in zip(D, Demands[f]): # for each possible demand
