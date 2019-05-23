@@ -20,27 +20,27 @@ Expected = [
 MAX_INDEX = len(Fridges)-1
 MAX_SOLD = len(Expected[0])
 
-def solve_1(index: int, remaining: int) -> Tuple[int, str]:
+def V1(f: int, remaining: int) -> Tuple[int, str]:
     assert remaining >= 0
 
-    if index > MAX_INDEX or remaining == 0:
+    if f > MAX_INDEX or remaining == 0:
         return (0, ())
     
-    assert 0 <= index <= MAX_INDEX
+    assert 0 <= f <= MAX_INDEX
 
     running_max = 0 
     running_action = None
-    for i in range(MAX_SOLD):
-        if i > remaining: break
-        x, action = solve_1(index+1, remaining-i)
-        x += Profits[index]*Expected[index][i]
+    for a in range(MAX_SOLD):
+        if a > remaining: break
+        x, action = V1(f+1, remaining-a)
+        x += Profits[f]*Expected[f][a]
         if x > running_max:
-            running_action = (i, ) + action
+            running_action = (a, ) + action
             running_max = x
     return (running_max, running_action)
 
 def comm_1():
-    print(solve_1(0, 8))
+    print(V1(0, 8))
 
 
 # COMMUNICATION 2
@@ -54,7 +54,7 @@ StoreCost = 30
 Actions = (0, 1, 2, 3, 4, 5, 6)
 
 @lru_cache(maxsize=None)
-def V2_one(f: int, t: int, s: int):
+def V2_fridge(f: int, t: int, s: int):
     if t == 4:
         # return (-Profits[f]*s, ())
         return (0, 'done')
@@ -66,7 +66,7 @@ def V2_one(f: int, t: int, s: int):
         e_profit = -StoreCost*(s+a) 
         for n, p in zip(D, Demands[f]): # for each possible demand
             sold = min(n, s+a) # Fridges sold is limited by how many we have
-            v, _ = V2_one(f, t+1, s+a - sold)
+            v, _ = V2_fridge(f, t+1, s+a - sold)
             e_profit += p * (Profits[f]*sold + v)
         if e_profit > r_max:
             r_max = e_profit 
@@ -74,15 +74,15 @@ def V2_one(f: int, t: int, s: int):
     return (r_max, r_action)
 
 def V2(t, a, e, l):
-    m0, a0 = V2_one(0, t, a)
-    m1, a1 = V2_one(1, t, e)
-    m2, a2 = V2_one(2, t, l)
+    m0, a0 = V2_fridge(0, t, a)
+    m1, a1 = V2_fridge(1, t, e)
+    m2, a2 = V2_fridge(2, t, l)
     return (m0+m1+m2, a0, a1, a2)
 
 def comm_2():
     sol = V2(0, 0, 0, 0)
     print('Solution:', sol)
-    print(V2_one.cache_info())
+    print(V2_fridge.cache_info())
 
 # COMMUNICATION 3 
 FridgesPerTruck = 7 
