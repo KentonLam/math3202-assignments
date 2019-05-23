@@ -163,7 +163,8 @@ def comm_3():
 
     print('Model details:')
     print_trim('  Profits', Profits)
-    print_trim('  Demands', Demands)
+    print_trim('  Demands', D)
+    print_trim('  Demand probabilities', Demands)
     print_trim('  Action space', ActionPerms)
     print_trim('  Stochastic event space', DemandsWithProbs)
     print('  Stochastic probability sum:', sum(x[1] for x in DemandsWithProbs))
