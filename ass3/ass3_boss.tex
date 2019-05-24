@@ -206,6 +206,11 @@ This has significant speed ups, especially for calls of $V_t(\vec s)$ where the 
 of fridges held is small, this reduces the number of iterations required to compute 
 the expected value. This reduced the runtime to under 10 seconds.
 
+We extracted the profit calculations into another memoized function. 
+\begin{align*}
+    \mathrm{compute{\mathunderscore}profits} (\vec d) &:=\mathrm{Profit} \cdot\vec d.
+\end{align*}
+
 Additionally, we augmented the action set $A$ with precomputed costs of storage and transport.
 \begin{align*}
     \mathrm{ActionsWithCosts} = \mathrm{AC} &:= \left\{ \left(\vec a, 
@@ -218,10 +223,14 @@ Then, the value function can be written as
     V_{t}(\vec s) &= 
     \max_{ \substack{(\vec a, \mathrm{action{\mathunderscore}cost}) \,\in\, \mathrm{AC} \\ \max \,(\vec s + \vec a)\, \le\, \mathrm{MaxStore} } }\Bigg\{
         -\mathrm{StoreCost}\sum\vec s  + \mathrm{action{\mathunderscore}cost}\\ 
-        &  \underset{(\vec d, p) \in \mathrm{c{\mathunderscore}d{\mathunderscore}p}(\vec s + \vec a)}{\qquad\qquad \quad \quad + \sum \Big[p\times \Big( \mathrm{Profit} \cdot\vec d}   
+        &   + \sum_{(\vec d, p) \in \mathrm{c{\mathunderscore}d{\mathunderscore}p}(\vec s + \vec a)} \Big[p\times \Big( \mathrm{compute{\mathunderscore}profits} (\vec d)
          + V_{t+1} \big(\vec s + \vec a - \vec d\big)\,\Big) \Big]\,\,\Bigg\}
 \end{align*}
-In code, we manually expanded the vector operations.
+In code, we manually expanded the vector operations to avoid excessive lists and tuples. For example, 
+\begin{align*}
+    \vec s + \vec a - \vec d &= (s_i+a_i-d_i)_{i\in F} \\ 
+    \mathrm{Profit} \cdot\vec d &= \sum_{f \in F} (\mathrm{Profit}_f \times d_f)
+\end{align*}
 
 \part{Appendix}
 We have included an interactive Python script alongside the technical model 
