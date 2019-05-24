@@ -1,6 +1,8 @@
 from assignment_dp import *
 
 from sys import exit
+from math import ceil
+from datetime import datetime
 
 
 print_fridges = lambda l: print(f'  A={l[0]}, E={l[1]}, L={l[2]}')
@@ -28,7 +30,8 @@ def explorer():
     print('Select communication 2 or 3: ')
     comm = ask_input(lambda i: i in (2, 3), int, "Enter 2 or 3.")
         
-    print('Exploring communication', comm)
+    print(f'Analysing communication {comm}...')
+    
     n = comm
     # print(f'| Enter how many fridges you have stored at the start of each week')
     # print(f'| as space-separated numbers a e l.')
@@ -47,10 +50,14 @@ def explorer():
         #     lambda x: len(x) == 3, 
         #     lambda s: list(map(int, s.split())), 
         #     "| Enter space-separated numbers: a e l.")
+        start = datetime.now()
         sol = ( (V2, V3)[comm-2] )(w-1, *cur_fridges)
-        
+        end = datetime.now()
         print('============'*2)
-        print('Week', w)
+        print('WEEK', w)
+        print('============'*2)
+        
+        print(f'Took {round((end-start).total_seconds(), 4)} seconds.')
         print()
         print('Expected total profit: $', round(sol[0]+cur_profit, 2), sep='')
         print('  Current profit: $', round(cur_profit, 2), sep='')
@@ -66,7 +73,11 @@ def explorer():
         print(f'  Currently stored: ${old_store_cost}')
         print(f'  Newly bought: ${new_store_cost}')
         cur_fridges = [x+y for x, y in zip(cur_fridges, sol[1:])]
-
+        print()
+        if comm == 3:
+            truck_cost = TruckCost*ceil(sum(sol[1:])/FridgesPerTruck)
+            print('Week transport cost: $', truck_cost, sep='')
+            print()
         print()
         print('Available fridges: ')
         print_fridges(cur_fridges)
@@ -89,11 +100,20 @@ def explorer():
         print_fridges(cur_fridges)
         w += 1
         if w >= 5:
-            break 
-        input('Press enter to compute next week...')
-    print()
-    print('4 weeks elapsed.')
-    print(f'TOTAL PROFIT: ${cur_profit}')
+            print()
+            print('4 weeks elapsed.')
+            print(f'TOTAL PROFIT: ${cur_profit}')
+            print()
+            redo = input('Press enter to exit...')
+            if redo == 'restart':
+                cur_profit = 0
+                cur_fridges = (0, 0, 0)
+                w = 1
+            else:
+                break
+        else:
+            input('Press enter to compute next week...')
+    
 
 if __name__ == "__main__":
     explorer()

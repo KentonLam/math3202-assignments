@@ -4,6 +4,7 @@ from functools import lru_cache
 from itertools import product
 from math import ceil
 
+from sys import exit 
 from datetime import datetime
 
 Fridges = ['Alaska', 'Elsa', 'Lumi']
@@ -85,6 +86,18 @@ def comm_2():
     sol = V2(0, 0, 0, 0)
     print('Solution:', sol)
     print(V2_fridge.cache_info())
+
+    optimal = (4, 5, 5)
+
+    # verifying optimal strategy for all combinations of input values 
+    # to V_2
+    for f in F:
+        for a in Actions2:
+            for t in (0, 1, 2, 3):
+                if V2_fridge(f, t, a)[1] != max(optimal[f]-a, 0):
+                    print(f'WARNING: fridge {f} with state {a} fails strategy:', V2_fridge(f, t, a))
+        print(f'{Fridges[f]}, optimal={optimal[f]}. ', end='')
+    print()
 
 # COMMUNICATION 3 
 FridgesPerTruck = 7 
@@ -186,6 +199,12 @@ def comm_3():
     print() 
     print('SOLUTION:')
     print(f'V{PARAMETERS} = {sol}')
+
+    # for a in range(6):
+    #     for e in range(7):
+    #         for l in range(7):
+    #             ba, be, bl = V3(1, a, e, l)[1:]
+    #             print(a, e, l, ba, be, bl, a+ba, e+be, l+bl)
 
 def main():
     comms = (1, 2, 3)

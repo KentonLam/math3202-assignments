@@ -1,0 +1,3528 @@
+
+<expression label="[2, 4, 5, 0, 0, 0, 0]" exp="(2, 4, 5)" type="point"/>
+<element type="point3d" label="[2, 4, 5, 0, 0, 0, 0]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="0" g="255" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="2" y="4" z="5" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[2, 4, 6, 0, 0, 0, 0]" exp="(2, 4, 6)" type="point"/>
+<element type="point3d" label="[2, 4, 6, 0, 0, 0, 0]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="0" g="255" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="2" y="4" z="6" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[2, 5, 5, 0, 0, 0, 0]" exp="(2, 5, 5)" type="point"/>
+<element type="point3d" label="[2, 5, 5, 0, 0, 0, 0]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="0" g="255" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="2" y="5" z="5" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[2, 5, 6, 0, 0, 0, 0]" exp="(2, 5, 6)" type="point"/>
+<element type="point3d" label="[2, 5, 6, 0, 0, 0, 0]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="0" g="255" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="2" y="5" z="6" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[2, 6, 5, 0, 0, 0, 0]" exp="(2, 6, 5)" type="point"/>
+<element type="point3d" label="[2, 6, 5, 0, 0, 0, 0]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="0" g="255" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="2" y="6" z="5" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[2, 6, 6, 0, 0, 0, 0]" exp="(2, 6, 6)" type="point"/>
+<element type="point3d" label="[2, 6, 6, 0, 0, 0, 0]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="0" g="255" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="2" y="6" z="6" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[3, 3, 6, 0, 0, 0, 0]" exp="(3, 3, 6)" type="point"/>
+<element type="point3d" label="[3, 3, 6, 0, 0, 0, 0]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="0" g="255" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="3" y="3" z="6" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[3, 4, 4, 0, 0, 0, 0]" exp="(3, 4, 4)" type="point"/>
+<element type="point3d" label="[3, 4, 4, 0, 0, 0, 0]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="0" g="255" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="3" y="4" z="4" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[3, 4, 5, 0, 0, 0, 0]" exp="(3, 4, 5)" type="point"/>
+<element type="point3d" label="[3, 4, 5, 0, 0, 0, 0]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="0" g="255" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="3" y="4" z="5" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[3, 4, 6, 0, 0, 0, 0]" exp="(3, 4, 6)" type="point"/>
+<element type="point3d" label="[3, 4, 6, 0, 0, 0, 0]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="0" g="255" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="3" y="4" z="6" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[3, 5, 4, 0, 0, 0, 0]" exp="(3, 5, 4)" type="point"/>
+<element type="point3d" label="[3, 5, 4, 0, 0, 0, 0]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="0" g="255" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="3" y="5" z="4" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[3, 5, 5, 0, 0, 0, 0]" exp="(3, 5, 5)" type="point"/>
+<element type="point3d" label="[3, 5, 5, 0, 0, 0, 0]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="0" g="255" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="3" y="5" z="5" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[3, 5, 6, 0, 0, 0, 0]" exp="(3, 5, 6)" type="point"/>
+<element type="point3d" label="[3, 5, 6, 0, 0, 0, 0]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="0" g="255" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="3" y="5" z="6" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[3, 6, 4, 0, 0, 0, 0]" exp="(3, 6, 4)" type="point"/>
+<element type="point3d" label="[3, 6, 4, 0, 0, 0, 0]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="0" g="255" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="3" y="6" z="4" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[3, 6, 5, 0, 0, 0, 0]" exp="(3, 6, 5)" type="point"/>
+<element type="point3d" label="[3, 6, 5, 0, 0, 0, 0]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="0" g="255" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="3" y="6" z="5" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[3, 6, 6, 0, 0, 0, 0]" exp="(3, 6, 6)" type="point"/>
+<element type="point3d" label="[3, 6, 6, 0, 0, 0, 0]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="0" g="255" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="3" y="6" z="6" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[4, 3, 5, 0, 0, 0, 0]" exp="(4, 3, 5)" type="point"/>
+<element type="point3d" label="[4, 3, 5, 0, 0, 0, 0]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="0" g="255" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="4" y="3" z="5" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[4, 3, 6, 0, 0, 0, 0]" exp="(4, 3, 6)" type="point"/>
+<element type="point3d" label="[4, 3, 6, 0, 0, 0, 0]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="0" g="255" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="4" y="3" z="6" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[4, 4, 4, 0, 0, 0, 0]" exp="(4, 4, 4)" type="point"/>
+<element type="point3d" label="[4, 4, 4, 0, 0, 0, 0]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="0" g="255" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="4" y="4" z="4" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[4, 4, 5, 0, 0, 0, 0]" exp="(4, 4, 5)" type="point"/>
+<element type="point3d" label="[4, 4, 5, 0, 0, 0, 0]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="0" g="255" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="4" y="4" z="5" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[4, 4, 6, 0, 0, 0, 0]" exp="(4, 4, 6)" type="point"/>
+<element type="point3d" label="[4, 4, 6, 0, 0, 0, 0]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="0" g="255" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="4" y="4" z="6" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[4, 5, 4, 0, 0, 0, 0]" exp="(4, 5, 4)" type="point"/>
+<element type="point3d" label="[4, 5, 4, 0, 0, 0, 0]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="0" g="255" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="4" y="5" z="4" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[4, 5, 5, 0, 0, 0, 0]" exp="(4, 5, 5)" type="point"/>
+<element type="point3d" label="[4, 5, 5, 0, 0, 0, 0]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="0" g="255" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="4" y="5" z="5" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[4, 5, 6, 0, 0, 0, 0]" exp="(4, 5, 6)" type="point"/>
+<element type="point3d" label="[4, 5, 6, 0, 0, 0, 0]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="0" g="255" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="4" y="5" z="6" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[4, 6, 4, 0, 0, 0, 0]" exp="(4, 6, 4)" type="point"/>
+<element type="point3d" label="[4, 6, 4, 0, 0, 0, 0]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="0" g="255" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="4" y="6" z="4" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[4, 6, 5, 0, 0, 0, 0]" exp="(4, 6, 5)" type="point"/>
+<element type="point3d" label="[4, 6, 5, 0, 0, 0, 0]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="0" g="255" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="4" y="6" z="5" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[4, 6, 6, 0, 0, 0, 0]" exp="(4, 6, 6)" type="point"/>
+<element type="point3d" label="[4, 6, 6, 0, 0, 0, 0]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="0" g="255" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="4" y="6" z="6" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[5, 3, 5, 0, 0, 0, 0]" exp="(5, 3, 5)" type="point"/>
+<element type="point3d" label="[5, 3, 5, 0, 0, 0, 0]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="0" g="255" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="5" y="3" z="5" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[5, 3, 6, 0, 0, 0, 0]" exp="(5, 3, 6)" type="point"/>
+<element type="point3d" label="[5, 3, 6, 0, 0, 0, 0]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="0" g="255" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="5" y="3" z="6" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[5, 4, 4, 0, 0, 0, 0]" exp="(5, 4, 4)" type="point"/>
+<element type="point3d" label="[5, 4, 4, 0, 0, 0, 0]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="0" g="255" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="5" y="4" z="4" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[5, 4, 5, 0, 0, 0, 0]" exp="(5, 4, 5)" type="point"/>
+<element type="point3d" label="[5, 4, 5, 0, 0, 0, 0]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="0" g="255" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="5" y="4" z="5" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[5, 4, 6, 0, 0, 0, 0]" exp="(5, 4, 6)" type="point"/>
+<element type="point3d" label="[5, 4, 6, 0, 0, 0, 0]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="0" g="255" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="5" y="4" z="6" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[5, 5, 4, 0, 0, 0, 0]" exp="(5, 5, 4)" type="point"/>
+<element type="point3d" label="[5, 5, 4, 0, 0, 0, 0]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="0" g="255" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="5" y="5" z="4" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[5, 5, 5, 0, 0, 0, 0]" exp="(5, 5, 5)" type="point"/>
+<element type="point3d" label="[5, 5, 5, 0, 0, 0, 0]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="0" g="255" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="5" y="5" z="5" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[5, 5, 6, 0, 0, 0, 0]" exp="(5, 5, 6)" type="point"/>
+<element type="point3d" label="[5, 5, 6, 0, 0, 0, 0]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="0" g="255" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="5" y="5" z="6" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[5, 6, 4, 0, 0, 0, 0]" exp="(5, 6, 4)" type="point"/>
+<element type="point3d" label="[5, 6, 4, 0, 0, 0, 0]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="0" g="255" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="5" y="6" z="4" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[5, 6, 5, 0, 0, 0, 0]" exp="(5, 6, 5)" type="point"/>
+<element type="point3d" label="[5, 6, 5, 0, 0, 0, 0]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="0" g="255" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="5" y="6" z="5" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[5, 6, 6, 0, 0, 0, 0]" exp="(5, 6, 6)" type="point"/>
+<element type="point3d" label="[5, 6, 6, 0, 0, 0, 0]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="0" g="255" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="5" y="6" z="6" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[5, 6, 3, 0, 0, 3, 3]" exp="(5, 6, 3)" type="point"/>
+<element type="point3d" label="[5, 6, 3, 0, 0, 3, 3]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="54" g="200" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="5" y="6" z="3" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[1, 6, 6, 4, 0, 0, 4]" exp="(1, 6, 6)" type="point"/>
+<element type="point3d" label="[1, 6, 6, 4, 0, 0, 4]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="72" g="182" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="1" y="6" z="6" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[4, 6, 3, 1, 0, 3, 4]" exp="(4, 6, 3)" type="point"/>
+<element type="point3d" label="[4, 6, 3, 1, 0, 3, 4]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="72" g="182" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="4" y="6" z="3" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[5, 2, 6, 0, 4, 0, 4]" exp="(5, 2, 6)" type="point"/>
+<element type="point3d" label="[5, 2, 6, 0, 4, 0, 4]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="72" g="182" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="5" y="2" z="6" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[5, 5, 3, 0, 1, 3, 4]" exp="(5, 5, 3)" type="point"/>
+<element type="point3d" label="[5, 5, 3, 0, 1, 3, 4]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="72" g="182" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="5" y="5" z="3" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[5, 6, 2, 0, 0, 4, 4]" exp="(5, 6, 2)" type="point"/>
+<element type="point3d" label="[5, 6, 2, 0, 0, 4, 4]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="72" g="182" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="5" y="6" z="2" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[0, 6, 6, 5, 0, 0, 5]" exp="(0, 6, 6)" type="point"/>
+<element type="point3d" label="[0, 6, 6, 5, 0, 0, 5]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="91" g="163" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="0" y="6" z="6" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[1, 5, 6, 4, 1, 0, 5]" exp="(1, 5, 6)" type="point"/>
+<element type="point3d" label="[1, 5, 6, 4, 1, 0, 5]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="91" g="163" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="1" y="5" z="6" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[1, 6, 5, 4, 0, 1, 5]" exp="(1, 6, 5)" type="point"/>
+<element type="point3d" label="[1, 6, 5, 4, 0, 1, 5]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="91" g="163" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="1" y="6" z="5" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[2, 6, 4, 3, 0, 2, 5]" exp="(2, 6, 4)" type="point"/>
+<element type="point3d" label="[2, 6, 4, 3, 0, 2, 5]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="91" g="163" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="2" y="6" z="4" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[3, 6, 3, 2, 0, 3, 5]" exp="(3, 6, 3)" type="point"/>
+<element type="point3d" label="[3, 6, 3, 2, 0, 3, 5]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="91" g="163" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="3" y="6" z="3" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[4, 2, 6, 1, 4, 0, 5]" exp="(4, 2, 6)" type="point"/>
+<element type="point3d" label="[4, 2, 6, 1, 4, 0, 5]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="91" g="163" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="4" y="2" z="6" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[4, 5, 3, 1, 1, 3, 5]" exp="(4, 5, 3)" type="point"/>
+<element type="point3d" label="[4, 5, 3, 1, 1, 3, 5]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="91" g="163" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="4" y="5" z="3" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[4, 6, 2, 1, 0, 4, 5]" exp="(4, 6, 2)" type="point"/>
+<element type="point3d" label="[4, 6, 2, 1, 0, 4, 5]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="91" g="163" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="4" y="6" z="2" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[5, 1, 6, 0, 5, 0, 5]" exp="(5, 1, 6)" type="point"/>
+<element type="point3d" label="[5, 1, 6, 0, 5, 0, 5]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="91" g="163" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="5" y="1" z="6" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[5, 2, 5, 0, 4, 1, 5]" exp="(5, 2, 5)" type="point"/>
+<element type="point3d" label="[5, 2, 5, 0, 4, 1, 5]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="91" g="163" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="5" y="2" z="5" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[5, 3, 4, 0, 3, 2, 5]" exp="(5, 3, 4)" type="point"/>
+<element type="point3d" label="[5, 3, 4, 0, 3, 2, 5]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="91" g="163" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="5" y="3" z="4" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[5, 4, 3, 0, 2, 3, 5]" exp="(5, 4, 3)" type="point"/>
+<element type="point3d" label="[5, 4, 3, 0, 2, 3, 5]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="91" g="163" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="5" y="4" z="3" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[5, 5, 2, 0, 1, 4, 5]" exp="(5, 5, 2)" type="point"/>
+<element type="point3d" label="[5, 5, 2, 0, 1, 4, 5]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="91" g="163" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="5" y="5" z="2" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[5, 6, 1, 0, 0, 5, 5]" exp="(5, 6, 1)" type="point"/>
+<element type="point3d" label="[5, 6, 1, 0, 0, 5, 5]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="91" g="163" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="5" y="6" z="1" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[0, 5, 6, 5, 1, 0, 6]" exp="(0, 5, 6)" type="point"/>
+<element type="point3d" label="[0, 5, 6, 5, 1, 0, 6]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="109" g="145" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="0" y="5" z="6" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[0, 6, 5, 5, 0, 1, 6]" exp="(0, 6, 5)" type="point"/>
+<element type="point3d" label="[0, 6, 5, 5, 0, 1, 6]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="109" g="145" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="0" y="6" z="5" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[1, 4, 6, 4, 2, 0, 6]" exp="(1, 4, 6)" type="point"/>
+<element type="point3d" label="[1, 4, 6, 4, 2, 0, 6]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="109" g="145" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="1" y="4" z="6" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[1, 5, 5, 4, 1, 1, 6]" exp="(1, 5, 5)" type="point"/>
+<element type="point3d" label="[1, 5, 5, 4, 1, 1, 6]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="109" g="145" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="1" y="5" z="5" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[1, 6, 4, 4, 0, 2, 6]" exp="(1, 6, 4)" type="point"/>
+<element type="point3d" label="[1, 6, 4, 4, 0, 2, 6]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="109" g="145" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="1" y="6" z="4" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[2, 3, 6, 3, 3, 0, 6]" exp="(2, 3, 6)" type="point"/>
+<element type="point3d" label="[2, 3, 6, 3, 3, 0, 6]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="109" g="145" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="2" y="3" z="6" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[2, 5, 4, 3, 1, 2, 6]" exp="(2, 5, 4)" type="point"/>
+<element type="point3d" label="[2, 5, 4, 3, 1, 2, 6]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="109" g="145" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="2" y="5" z="4" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[2, 6, 3, 3, 0, 3, 6]" exp="(2, 6, 3)" type="point"/>
+<element type="point3d" label="[2, 6, 3, 3, 0, 3, 6]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="109" g="145" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="2" y="6" z="3" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[3, 2, 6, 2, 4, 0, 6]" exp="(3, 2, 6)" type="point"/>
+<element type="point3d" label="[3, 2, 6, 2, 4, 0, 6]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="109" g="145" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="3" y="2" z="6" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[3, 3, 5, 2, 3, 1, 6]" exp="(3, 3, 5)" type="point"/>
+<element type="point3d" label="[3, 3, 5, 2, 3, 1, 6]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="109" g="145" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="3" y="3" z="5" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[3, 5, 3, 2, 1, 3, 6]" exp="(3, 5, 3)" type="point"/>
+<element type="point3d" label="[3, 5, 3, 2, 1, 3, 6]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="109" g="145" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="3" y="5" z="3" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[3, 6, 2, 2, 0, 4, 6]" exp="(3, 6, 2)" type="point"/>
+<element type="point3d" label="[3, 6, 2, 2, 0, 4, 6]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="109" g="145" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="3" y="6" z="2" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[4, 1, 6, 1, 5, 0, 6]" exp="(4, 1, 6)" type="point"/>
+<element type="point3d" label="[4, 1, 6, 1, 5, 0, 6]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="109" g="145" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="4" y="1" z="6" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[4, 2, 5, 1, 4, 1, 6]" exp="(4, 2, 5)" type="point"/>
+<element type="point3d" label="[4, 2, 5, 1, 4, 1, 6]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="109" g="145" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="4" y="2" z="5" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[4, 3, 4, 1, 3, 2, 6]" exp="(4, 3, 4)" type="point"/>
+<element type="point3d" label="[4, 3, 4, 1, 3, 2, 6]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="109" g="145" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="4" y="3" z="4" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[4, 4, 3, 1, 2, 3, 6]" exp="(4, 4, 3)" type="point"/>
+<element type="point3d" label="[4, 4, 3, 1, 2, 3, 6]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="109" g="145" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="4" y="4" z="3" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[4, 5, 2, 1, 1, 4, 6]" exp="(4, 5, 2)" type="point"/>
+<element type="point3d" label="[4, 5, 2, 1, 1, 4, 6]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="109" g="145" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="4" y="5" z="2" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[4, 6, 1, 1, 0, 5, 6]" exp="(4, 6, 1)" type="point"/>
+<element type="point3d" label="[4, 6, 1, 1, 0, 5, 6]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="109" g="145" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="4" y="6" z="1" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[5, 0, 6, 0, 6, 0, 6]" exp="(5, 0, 6)" type="point"/>
+<element type="point3d" label="[5, 0, 6, 0, 6, 0, 6]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="109" g="145" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="5" y="0" z="6" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[5, 1, 5, 0, 5, 1, 6]" exp="(5, 1, 5)" type="point"/>
+<element type="point3d" label="[5, 1, 5, 0, 5, 1, 6]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="109" g="145" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="5" y="1" z="5" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[5, 2, 4, 0, 4, 2, 6]" exp="(5, 2, 4)" type="point"/>
+<element type="point3d" label="[5, 2, 4, 0, 4, 2, 6]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="109" g="145" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="5" y="2" z="4" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[5, 3, 3, 0, 3, 3, 6]" exp="(5, 3, 3)" type="point"/>
+<element type="point3d" label="[5, 3, 3, 0, 3, 3, 6]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="109" g="145" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="5" y="3" z="3" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[5, 4, 2, 0, 2, 4, 6]" exp="(5, 4, 2)" type="point"/>
+<element type="point3d" label="[5, 4, 2, 0, 2, 4, 6]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="109" g="145" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="5" y="4" z="2" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[5, 5, 1, 0, 1, 5, 6]" exp="(5, 5, 1)" type="point"/>
+<element type="point3d" label="[5, 5, 1, 0, 1, 5, 6]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="109" g="145" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="5" y="5" z="1" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[5, 6, 0, 0, 0, 6, 6]" exp="(5, 6, 0)" type="point"/>
+<element type="point3d" label="[5, 6, 0, 0, 0, 6, 6]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="109" g="145" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="5" y="6" z="0" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[0, 0, 4, 3, 4, 0, 7]" exp="(0, 0, 4)" type="point"/>
+<element type="point3d" label="[0, 0, 4, 3, 4, 0, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="0" y="0" z="4" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[0, 0, 5, 3, 4, 0, 7]" exp="(0, 0, 5)" type="point"/>
+<element type="point3d" label="[0, 0, 5, 3, 4, 0, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="0" y="0" z="5" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[0, 0, 6, 3, 4, 0, 7]" exp="(0, 0, 6)" type="point"/>
+<element type="point3d" label="[0, 0, 6, 3, 4, 0, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="0" y="0" z="6" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[0, 1, 3, 3, 3, 1, 7]" exp="(0, 1, 3)" type="point"/>
+<element type="point3d" label="[0, 1, 3, 3, 3, 1, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="0" y="1" z="3" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[0, 1, 4, 3, 3, 1, 7]" exp="(0, 1, 4)" type="point"/>
+<element type="point3d" label="[0, 1, 4, 3, 3, 1, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="0" y="1" z="4" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[0, 1, 5, 3, 4, 0, 7]" exp="(0, 1, 5)" type="point"/>
+<element type="point3d" label="[0, 1, 5, 3, 4, 0, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="0" y="1" z="5" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[0, 1, 6, 3, 4, 0, 7]" exp="(0, 1, 6)" type="point"/>
+<element type="point3d" label="[0, 1, 6, 3, 4, 0, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="0" y="1" z="6" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[0, 2, 2, 3, 2, 2, 7]" exp="(0, 2, 2)" type="point"/>
+<element type="point3d" label="[0, 2, 2, 3, 2, 2, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="0" y="2" z="2" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[0, 2, 3, 3, 2, 2, 7]" exp="(0, 2, 3)" type="point"/>
+<element type="point3d" label="[0, 2, 3, 3, 2, 2, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="0" y="2" z="3" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[0, 2, 4, 3, 3, 1, 7]" exp="(0, 2, 4)" type="point"/>
+<element type="point3d" label="[0, 2, 4, 3, 3, 1, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="0" y="2" z="4" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[0, 2, 5, 4, 3, 0, 7]" exp="(0, 2, 5)" type="point"/>
+<element type="point3d" label="[0, 2, 5, 4, 3, 0, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="0" y="2" z="5" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[0, 2, 6, 4, 3, 0, 7]" exp="(0, 2, 6)" type="point"/>
+<element type="point3d" label="[0, 2, 6, 4, 3, 0, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="0" y="2" z="6" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[0, 3, 1, 3, 1, 3, 7]" exp="(0, 3, 1)" type="point"/>
+<element type="point3d" label="[0, 3, 1, 3, 1, 3, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="0" y="3" z="1" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[0, 3, 2, 3, 1, 3, 7]" exp="(0, 3, 2)" type="point"/>
+<element type="point3d" label="[0, 3, 2, 3, 1, 3, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="0" y="3" z="2" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[0, 3, 3, 3, 2, 2, 7]" exp="(0, 3, 3)" type="point"/>
+<element type="point3d" label="[0, 3, 3, 3, 2, 2, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="0" y="3" z="3" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[0, 3, 4, 4, 2, 1, 7]" exp="(0, 3, 4)" type="point"/>
+<element type="point3d" label="[0, 3, 4, 4, 2, 1, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="0" y="3" z="4" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[0, 3, 5, 4, 2, 1, 7]" exp="(0, 3, 5)" type="point"/>
+<element type="point3d" label="[0, 3, 5, 4, 2, 1, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="0" y="3" z="5" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[0, 3, 6, 5, 2, 0, 7]" exp="(0, 3, 6)" type="point"/>
+<element type="point3d" label="[0, 3, 6, 5, 2, 0, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="0" y="3" z="6" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[0, 4, 0, 3, 0, 4, 7]" exp="(0, 4, 0)" type="point"/>
+<element type="point3d" label="[0, 4, 0, 3, 0, 4, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="0" y="4" z="0" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[0, 4, 1, 3, 0, 4, 7]" exp="(0, 4, 1)" type="point"/>
+<element type="point3d" label="[0, 4, 1, 3, 0, 4, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="0" y="4" z="1" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[0, 4, 2, 3, 1, 3, 7]" exp="(0, 4, 2)" type="point"/>
+<element type="point3d" label="[0, 4, 2, 3, 1, 3, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="0" y="4" z="2" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[0, 4, 3, 4, 1, 2, 7]" exp="(0, 4, 3)" type="point"/>
+<element type="point3d" label="[0, 4, 3, 4, 1, 2, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="0" y="4" z="3" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[0, 4, 4, 4, 1, 2, 7]" exp="(0, 4, 4)" type="point"/>
+<element type="point3d" label="[0, 4, 4, 4, 1, 2, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="0" y="4" z="4" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[0, 4, 5, 5, 1, 1, 7]" exp="(0, 4, 5)" type="point"/>
+<element type="point3d" label="[0, 4, 5, 5, 1, 1, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="0" y="4" z="5" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[0, 4, 6, 5, 2, 0, 7]" exp="(0, 4, 6)" type="point"/>
+<element type="point3d" label="[0, 4, 6, 5, 2, 0, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="0" y="4" z="6" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[0, 5, 0, 3, 0, 4, 7]" exp="(0, 5, 0)" type="point"/>
+<element type="point3d" label="[0, 5, 0, 3, 0, 4, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="0" y="5" z="0" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[0, 5, 1, 3, 0, 4, 7]" exp="(0, 5, 1)" type="point"/>
+<element type="point3d" label="[0, 5, 1, 3, 0, 4, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="0" y="5" z="1" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[0, 5, 2, 4, 0, 3, 7]" exp="(0, 5, 2)" type="point"/>
+<element type="point3d" label="[0, 5, 2, 4, 0, 3, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="0" y="5" z="2" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[0, 5, 3, 4, 0, 3, 7]" exp="(0, 5, 3)" type="point"/>
+<element type="point3d" label="[0, 5, 3, 4, 0, 3, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="0" y="5" z="3" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[0, 5, 4, 5, 0, 2, 7]" exp="(0, 5, 4)" type="point"/>
+<element type="point3d" label="[0, 5, 4, 5, 0, 2, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="0" y="5" z="4" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[0, 5, 5, 5, 1, 1, 7]" exp="(0, 5, 5)" type="point"/>
+<element type="point3d" label="[0, 5, 5, 5, 1, 1, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="0" y="5" z="5" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[0, 6, 0, 3, 0, 4, 7]" exp="(0, 6, 0)" type="point"/>
+<element type="point3d" label="[0, 6, 0, 3, 0, 4, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="0" y="6" z="0" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[0, 6, 1, 3, 0, 4, 7]" exp="(0, 6, 1)" type="point"/>
+<element type="point3d" label="[0, 6, 1, 3, 0, 4, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="0" y="6" z="1" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[0, 6, 2, 4, 0, 3, 7]" exp="(0, 6, 2)" type="point"/>
+<element type="point3d" label="[0, 6, 2, 4, 0, 3, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="0" y="6" z="2" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[0, 6, 3, 4, 0, 3, 7]" exp="(0, 6, 3)" type="point"/>
+<element type="point3d" label="[0, 6, 3, 4, 0, 3, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="0" y="6" z="3" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[0, 6, 4, 5, 0, 2, 7]" exp="(0, 6, 4)" type="point"/>
+<element type="point3d" label="[0, 6, 4, 5, 0, 2, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="0" y="6" z="4" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[1, 0, 3, 2, 4, 1, 7]" exp="(1, 0, 3)" type="point"/>
+<element type="point3d" label="[1, 0, 3, 2, 4, 1, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="1" y="0" z="3" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[1, 0, 4, 2, 4, 1, 7]" exp="(1, 0, 4)" type="point"/>
+<element type="point3d" label="[1, 0, 4, 2, 4, 1, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="1" y="0" z="4" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[1, 0, 5, 2, 5, 0, 7]" exp="(1, 0, 5)" type="point"/>
+<element type="point3d" label="[1, 0, 5, 2, 5, 0, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="1" y="0" z="5" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[1, 0, 6, 2, 5, 0, 7]" exp="(1, 0, 6)" type="point"/>
+<element type="point3d" label="[1, 0, 6, 2, 5, 0, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="1" y="0" z="6" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[1, 1, 2, 2, 3, 2, 7]" exp="(1, 1, 2)" type="point"/>
+<element type="point3d" label="[1, 1, 2, 2, 3, 2, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="1" y="1" z="2" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[1, 1, 3, 2, 3, 2, 7]" exp="(1, 1, 3)" type="point"/>
+<element type="point3d" label="[1, 1, 3, 2, 3, 2, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="1" y="1" z="3" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[1, 1, 4, 2, 4, 1, 7]" exp="(1, 1, 4)" type="point"/>
+<element type="point3d" label="[1, 1, 4, 2, 4, 1, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="1" y="1" z="4" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[1, 1, 5, 3, 4, 0, 7]" exp="(1, 1, 5)" type="point"/>
+<element type="point3d" label="[1, 1, 5, 3, 4, 0, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="1" y="1" z="5" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[1, 1, 6, 3, 4, 0, 7]" exp="(1, 1, 6)" type="point"/>
+<element type="point3d" label="[1, 1, 6, 3, 4, 0, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="1" y="1" z="6" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[1, 2, 1, 2, 2, 3, 7]" exp="(1, 2, 1)" type="point"/>
+<element type="point3d" label="[1, 2, 1, 2, 2, 3, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="1" y="2" z="1" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[1, 2, 2, 2, 2, 3, 7]" exp="(1, 2, 2)" type="point"/>
+<element type="point3d" label="[1, 2, 2, 2, 2, 3, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="1" y="2" z="2" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[1, 2, 3, 2, 3, 2, 7]" exp="(1, 2, 3)" type="point"/>
+<element type="point3d" label="[1, 2, 3, 2, 3, 2, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="1" y="2" z="3" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[1, 2, 4, 3, 3, 1, 7]" exp="(1, 2, 4)" type="point"/>
+<element type="point3d" label="[1, 2, 4, 3, 3, 1, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="1" y="2" z="4" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[1, 2, 5, 3, 3, 1, 7]" exp="(1, 2, 5)" type="point"/>
+<element type="point3d" label="[1, 2, 5, 3, 3, 1, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="1" y="2" z="5" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[1, 2, 6, 4, 3, 0, 7]" exp="(1, 2, 6)" type="point"/>
+<element type="point3d" label="[1, 2, 6, 4, 3, 0, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="1" y="2" z="6" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[1, 3, 0, 2, 1, 4, 7]" exp="(1, 3, 0)" type="point"/>
+<element type="point3d" label="[1, 3, 0, 2, 1, 4, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="1" y="3" z="0" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[1, 3, 1, 2, 1, 4, 7]" exp="(1, 3, 1)" type="point"/>
+<element type="point3d" label="[1, 3, 1, 2, 1, 4, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="1" y="3" z="1" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[1, 3, 2, 2, 2, 3, 7]" exp="(1, 3, 2)" type="point"/>
+<element type="point3d" label="[1, 3, 2, 2, 2, 3, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="1" y="3" z="2" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[1, 3, 3, 3, 2, 2, 7]" exp="(1, 3, 3)" type="point"/>
+<element type="point3d" label="[1, 3, 3, 3, 2, 2, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="1" y="3" z="3" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[1, 3, 4, 3, 2, 2, 7]" exp="(1, 3, 4)" type="point"/>
+<element type="point3d" label="[1, 3, 4, 3, 2, 2, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="1" y="3" z="4" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[1, 3, 5, 4, 2, 1, 7]" exp="(1, 3, 5)" type="point"/>
+<element type="point3d" label="[1, 3, 5, 4, 2, 1, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="1" y="3" z="5" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[1, 3, 6, 4, 3, 0, 7]" exp="(1, 3, 6)" type="point"/>
+<element type="point3d" label="[1, 3, 6, 4, 3, 0, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="1" y="3" z="6" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[1, 4, 0, 2, 0, 5, 7]" exp="(1, 4, 0)" type="point"/>
+<element type="point3d" label="[1, 4, 0, 2, 0, 5, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="1" y="4" z="0" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[1, 4, 1, 2, 1, 4, 7]" exp="(1, 4, 1)" type="point"/>
+<element type="point3d" label="[1, 4, 1, 2, 1, 4, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="1" y="4" z="1" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[1, 4, 2, 3, 1, 3, 7]" exp="(1, 4, 2)" type="point"/>
+<element type="point3d" label="[1, 4, 2, 3, 1, 3, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="1" y="4" z="2" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[1, 4, 3, 3, 1, 3, 7]" exp="(1, 4, 3)" type="point"/>
+<element type="point3d" label="[1, 4, 3, 3, 1, 3, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="1" y="4" z="3" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[1, 4, 4, 4, 1, 2, 7]" exp="(1, 4, 4)" type="point"/>
+<element type="point3d" label="[1, 4, 4, 4, 1, 2, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="1" y="4" z="4" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[1, 4, 5, 4, 2, 1, 7]" exp="(1, 4, 5)" type="point"/>
+<element type="point3d" label="[1, 4, 5, 4, 2, 1, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="1" y="4" z="5" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[1, 5, 0, 2, 0, 5, 7]" exp="(1, 5, 0)" type="point"/>
+<element type="point3d" label="[1, 5, 0, 2, 0, 5, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="1" y="5" z="0" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[1, 5, 1, 3, 0, 4, 7]" exp="(1, 5, 1)" type="point"/>
+<element type="point3d" label="[1, 5, 1, 3, 0, 4, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="1" y="5" z="1" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[1, 5, 2, 3, 0, 4, 7]" exp="(1, 5, 2)" type="point"/>
+<element type="point3d" label="[1, 5, 2, 3, 0, 4, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="1" y="5" z="2" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[1, 5, 3, 4, 0, 3, 7]" exp="(1, 5, 3)" type="point"/>
+<element type="point3d" label="[1, 5, 3, 4, 0, 3, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="1" y="5" z="3" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[1, 5, 4, 4, 1, 2, 7]" exp="(1, 5, 4)" type="point"/>
+<element type="point3d" label="[1, 5, 4, 4, 1, 2, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="1" y="5" z="4" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[1, 6, 0, 2, 0, 5, 7]" exp="(1, 6, 0)" type="point"/>
+<element type="point3d" label="[1, 6, 0, 2, 0, 5, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="1" y="6" z="0" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[1, 6, 1, 3, 0, 4, 7]" exp="(1, 6, 1)" type="point"/>
+<element type="point3d" label="[1, 6, 1, 3, 0, 4, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="1" y="6" z="1" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[1, 6, 2, 3, 0, 4, 7]" exp="(1, 6, 2)" type="point"/>
+<element type="point3d" label="[1, 6, 2, 3, 0, 4, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="1" y="6" z="2" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[1, 6, 3, 4, 0, 3, 7]" exp="(1, 6, 3)" type="point"/>
+<element type="point3d" label="[1, 6, 3, 4, 0, 3, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="1" y="6" z="3" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[2, 0, 2, 1, 4, 2, 7]" exp="(2, 0, 2)" type="point"/>
+<element type="point3d" label="[2, 0, 2, 1, 4, 2, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="2" y="0" z="2" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[2, 0, 3, 1, 4, 2, 7]" exp="(2, 0, 3)" type="point"/>
+<element type="point3d" label="[2, 0, 3, 1, 4, 2, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="2" y="0" z="3" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[2, 0, 4, 1, 5, 1, 7]" exp="(2, 0, 4)" type="point"/>
+<element type="point3d" label="[2, 0, 4, 1, 5, 1, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="2" y="0" z="4" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[2, 0, 5, 2, 5, 0, 7]" exp="(2, 0, 5)" type="point"/>
+<element type="point3d" label="[2, 0, 5, 2, 5, 0, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="2" y="0" z="5" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[2, 0, 6, 2, 5, 0, 7]" exp="(2, 0, 6)" type="point"/>
+<element type="point3d" label="[2, 0, 6, 2, 5, 0, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="2" y="0" z="6" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[2, 1, 1, 1, 3, 3, 7]" exp="(2, 1, 1)" type="point"/>
+<element type="point3d" label="[2, 1, 1, 1, 3, 3, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="2" y="1" z="1" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[2, 1, 2, 1, 3, 3, 7]" exp="(2, 1, 2)" type="point"/>
+<element type="point3d" label="[2, 1, 2, 1, 3, 3, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="2" y="1" z="2" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[2, 1, 3, 1, 4, 2, 7]" exp="(2, 1, 3)" type="point"/>
+<element type="point3d" label="[2, 1, 3, 1, 4, 2, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="2" y="1" z="3" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[2, 1, 4, 2, 4, 1, 7]" exp="(2, 1, 4)" type="point"/>
+<element type="point3d" label="[2, 1, 4, 2, 4, 1, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="2" y="1" z="4" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[2, 1, 5, 2, 4, 1, 7]" exp="(2, 1, 5)" type="point"/>
+<element type="point3d" label="[2, 1, 5, 2, 4, 1, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="2" y="1" z="5" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[2, 1, 6, 3, 4, 0, 7]" exp="(2, 1, 6)" type="point"/>
+<element type="point3d" label="[2, 1, 6, 3, 4, 0, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="2" y="1" z="6" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[2, 2, 0, 1, 2, 4, 7]" exp="(2, 2, 0)" type="point"/>
+<element type="point3d" label="[2, 2, 0, 1, 2, 4, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="2" y="2" z="0" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[2, 2, 1, 1, 2, 4, 7]" exp="(2, 2, 1)" type="point"/>
+<element type="point3d" label="[2, 2, 1, 1, 2, 4, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="2" y="2" z="1" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[2, 2, 2, 1, 3, 3, 7]" exp="(2, 2, 2)" type="point"/>
+<element type="point3d" label="[2, 2, 2, 1, 3, 3, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="2" y="2" z="2" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[2, 2, 3, 2, 3, 2, 7]" exp="(2, 2, 3)" type="point"/>
+<element type="point3d" label="[2, 2, 3, 2, 3, 2, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="2" y="2" z="3" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[2, 2, 4, 2, 3, 2, 7]" exp="(2, 2, 4)" type="point"/>
+<element type="point3d" label="[2, 2, 4, 2, 3, 2, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="2" y="2" z="4" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[2, 2, 5, 3, 3, 1, 7]" exp="(2, 2, 5)" type="point"/>
+<element type="point3d" label="[2, 2, 5, 3, 3, 1, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="2" y="2" z="5" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[2, 2, 6, 3, 4, 0, 7]" exp="(2, 2, 6)" type="point"/>
+<element type="point3d" label="[2, 2, 6, 3, 4, 0, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="2" y="2" z="6" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[2, 3, 0, 1, 1, 5, 7]" exp="(2, 3, 0)" type="point"/>
+<element type="point3d" label="[2, 3, 0, 1, 1, 5, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="2" y="3" z="0" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[2, 3, 1, 1, 2, 4, 7]" exp="(2, 3, 1)" type="point"/>
+<element type="point3d" label="[2, 3, 1, 1, 2, 4, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="2" y="3" z="1" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[2, 3, 2, 2, 2, 3, 7]" exp="(2, 3, 2)" type="point"/>
+<element type="point3d" label="[2, 3, 2, 2, 2, 3, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="2" y="3" z="2" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[2, 3, 3, 2, 2, 3, 7]" exp="(2, 3, 3)" type="point"/>
+<element type="point3d" label="[2, 3, 3, 2, 2, 3, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="2" y="3" z="3" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[2, 3, 4, 3, 2, 2, 7]" exp="(2, 3, 4)" type="point"/>
+<element type="point3d" label="[2, 3, 4, 3, 2, 2, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="2" y="3" z="4" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[2, 3, 5, 3, 3, 1, 7]" exp="(2, 3, 5)" type="point"/>
+<element type="point3d" label="[2, 3, 5, 3, 3, 1, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="2" y="3" z="5" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[2, 4, 0, 1, 1, 5, 7]" exp="(2, 4, 0)" type="point"/>
+<element type="point3d" label="[2, 4, 0, 1, 1, 5, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="2" y="4" z="0" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[2, 4, 1, 2, 1, 4, 7]" exp="(2, 4, 1)" type="point"/>
+<element type="point3d" label="[2, 4, 1, 2, 1, 4, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="2" y="4" z="1" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[2, 4, 2, 2, 1, 4, 7]" exp="(2, 4, 2)" type="point"/>
+<element type="point3d" label="[2, 4, 2, 2, 1, 4, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="2" y="4" z="2" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[2, 4, 3, 3, 1, 3, 7]" exp="(2, 4, 3)" type="point"/>
+<element type="point3d" label="[2, 4, 3, 3, 1, 3, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="2" y="4" z="3" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[2, 4, 4, 3, 2, 2, 7]" exp="(2, 4, 4)" type="point"/>
+<element type="point3d" label="[2, 4, 4, 3, 2, 2, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="2" y="4" z="4" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[2, 5, 0, 2, 0, 5, 7]" exp="(2, 5, 0)" type="point"/>
+<element type="point3d" label="[2, 5, 0, 2, 0, 5, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="2" y="5" z="0" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[2, 5, 1, 2, 0, 5, 7]" exp="(2, 5, 1)" type="point"/>
+<element type="point3d" label="[2, 5, 1, 2, 0, 5, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="2" y="5" z="1" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[2, 5, 2, 3, 0, 4, 7]" exp="(2, 5, 2)" type="point"/>
+<element type="point3d" label="[2, 5, 2, 3, 0, 4, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="2" y="5" z="2" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[2, 5, 3, 3, 1, 3, 7]" exp="(2, 5, 3)" type="point"/>
+<element type="point3d" label="[2, 5, 3, 3, 1, 3, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="2" y="5" z="3" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[2, 6, 0, 2, 0, 5, 7]" exp="(2, 6, 0)" type="point"/>
+<element type="point3d" label="[2, 6, 0, 2, 0, 5, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="2" y="6" z="0" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[2, 6, 1, 2, 0, 5, 7]" exp="(2, 6, 1)" type="point"/>
+<element type="point3d" label="[2, 6, 1, 2, 0, 5, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="2" y="6" z="1" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[2, 6, 2, 3, 0, 4, 7]" exp="(2, 6, 2)" type="point"/>
+<element type="point3d" label="[2, 6, 2, 3, 0, 4, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="2" y="6" z="2" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[3, 0, 1, 0, 4, 3, 7]" exp="(3, 0, 1)" type="point"/>
+<element type="point3d" label="[3, 0, 1, 0, 4, 3, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="3" y="0" z="1" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[3, 0, 2, 0, 4, 3, 7]" exp="(3, 0, 2)" type="point"/>
+<element type="point3d" label="[3, 0, 2, 0, 4, 3, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="3" y="0" z="2" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[3, 0, 3, 0, 5, 2, 7]" exp="(3, 0, 3)" type="point"/>
+<element type="point3d" label="[3, 0, 3, 0, 5, 2, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="3" y="0" z="3" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[3, 0, 4, 1, 5, 1, 7]" exp="(3, 0, 4)" type="point"/>
+<element type="point3d" label="[3, 0, 4, 1, 5, 1, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="3" y="0" z="4" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[3, 0, 5, 1, 5, 1, 7]" exp="(3, 0, 5)" type="point"/>
+<element type="point3d" label="[3, 0, 5, 1, 5, 1, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="3" y="0" z="5" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[3, 0, 6, 2, 5, 0, 7]" exp="(3, 0, 6)" type="point"/>
+<element type="point3d" label="[3, 0, 6, 2, 5, 0, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="3" y="0" z="6" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[3, 1, 0, 0, 3, 4, 7]" exp="(3, 1, 0)" type="point"/>
+<element type="point3d" label="[3, 1, 0, 0, 3, 4, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="3" y="1" z="0" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[3, 1, 1, 0, 3, 4, 7]" exp="(3, 1, 1)" type="point"/>
+<element type="point3d" label="[3, 1, 1, 0, 3, 4, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="3" y="1" z="1" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[3, 1, 2, 0, 4, 3, 7]" exp="(3, 1, 2)" type="point"/>
+<element type="point3d" label="[3, 1, 2, 0, 4, 3, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="3" y="1" z="2" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[3, 1, 3, 1, 4, 2, 7]" exp="(3, 1, 3)" type="point"/>
+<element type="point3d" label="[3, 1, 3, 1, 4, 2, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="3" y="1" z="3" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[3, 1, 4, 1, 4, 2, 7]" exp="(3, 1, 4)" type="point"/>
+<element type="point3d" label="[3, 1, 4, 1, 4, 2, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="3" y="1" z="4" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[3, 1, 5, 2, 4, 1, 7]" exp="(3, 1, 5)" type="point"/>
+<element type="point3d" label="[3, 1, 5, 2, 4, 1, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="3" y="1" z="5" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[3, 1, 6, 2, 5, 0, 7]" exp="(3, 1, 6)" type="point"/>
+<element type="point3d" label="[3, 1, 6, 2, 5, 0, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="3" y="1" z="6" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[3, 2, 0, 0, 2, 5, 7]" exp="(3, 2, 0)" type="point"/>
+<element type="point3d" label="[3, 2, 0, 0, 2, 5, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="3" y="2" z="0" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[3, 2, 1, 0, 3, 4, 7]" exp="(3, 2, 1)" type="point"/>
+<element type="point3d" label="[3, 2, 1, 0, 3, 4, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="3" y="2" z="1" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[3, 2, 2, 1, 3, 3, 7]" exp="(3, 2, 2)" type="point"/>
+<element type="point3d" label="[3, 2, 2, 1, 3, 3, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="3" y="2" z="2" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[3, 2, 3, 1, 3, 3, 7]" exp="(3, 2, 3)" type="point"/>
+<element type="point3d" label="[3, 2, 3, 1, 3, 3, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="3" y="2" z="3" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[3, 2, 4, 2, 3, 2, 7]" exp="(3, 2, 4)" type="point"/>
+<element type="point3d" label="[3, 2, 4, 2, 3, 2, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="3" y="2" z="4" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[3, 2, 5, 2, 4, 1, 7]" exp="(3, 2, 5)" type="point"/>
+<element type="point3d" label="[3, 2, 5, 2, 4, 1, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="3" y="2" z="5" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[3, 3, 0, 0, 2, 5, 7]" exp="(3, 3, 0)" type="point"/>
+<element type="point3d" label="[3, 3, 0, 0, 2, 5, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="3" y="3" z="0" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[3, 3, 1, 1, 2, 4, 7]" exp="(3, 3, 1)" type="point"/>
+<element type="point3d" label="[3, 3, 1, 1, 2, 4, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="3" y="3" z="1" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[3, 3, 2, 1, 2, 4, 7]" exp="(3, 3, 2)" type="point"/>
+<element type="point3d" label="[3, 3, 2, 1, 2, 4, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="3" y="3" z="2" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[3, 3, 3, 2, 2, 3, 7]" exp="(3, 3, 3)" type="point"/>
+<element type="point3d" label="[3, 3, 3, 2, 2, 3, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="3" y="3" z="3" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[3, 3, 4, 2, 3, 2, 7]" exp="(3, 3, 4)" type="point"/>
+<element type="point3d" label="[3, 3, 4, 2, 3, 2, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="3" y="3" z="4" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[3, 4, 0, 1, 1, 5, 7]" exp="(3, 4, 0)" type="point"/>
+<element type="point3d" label="[3, 4, 0, 1, 1, 5, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="3" y="4" z="0" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[3, 4, 1, 1, 1, 5, 7]" exp="(3, 4, 1)" type="point"/>
+<element type="point3d" label="[3, 4, 1, 1, 1, 5, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="3" y="4" z="1" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[3, 4, 2, 2, 1, 4, 7]" exp="(3, 4, 2)" type="point"/>
+<element type="point3d" label="[3, 4, 2, 2, 1, 4, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="3" y="4" z="2" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[3, 4, 3, 2, 2, 3, 7]" exp="(3, 4, 3)" type="point"/>
+<element type="point3d" label="[3, 4, 3, 2, 2, 3, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="3" y="4" z="3" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[3, 5, 0, 1, 0, 6, 7]" exp="(3, 5, 0)" type="point"/>
+<element type="point3d" label="[3, 5, 0, 1, 0, 6, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="3" y="5" z="0" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[3, 5, 1, 2, 0, 5, 7]" exp="(3, 5, 1)" type="point"/>
+<element type="point3d" label="[3, 5, 1, 2, 0, 5, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="3" y="5" z="1" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[3, 5, 2, 2, 1, 4, 7]" exp="(3, 5, 2)" type="point"/>
+<element type="point3d" label="[3, 5, 2, 2, 1, 4, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="3" y="5" z="2" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[3, 6, 0, 1, 0, 6, 7]" exp="(3, 6, 0)" type="point"/>
+<element type="point3d" label="[3, 6, 0, 1, 0, 6, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="3" y="6" z="0" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[3, 6, 1, 2, 0, 5, 7]" exp="(3, 6, 1)" type="point"/>
+<element type="point3d" label="[3, 6, 1, 2, 0, 5, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="3" y="6" z="1" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[4, 0, 1, 0, 4, 3, 7]" exp="(4, 0, 1)" type="point"/>
+<element type="point3d" label="[4, 0, 1, 0, 4, 3, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="4" y="0" z="1" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[4, 0, 2, 0, 4, 3, 7]" exp="(4, 0, 2)" type="point"/>
+<element type="point3d" label="[4, 0, 2, 0, 4, 3, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="4" y="0" z="2" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[4, 0, 3, 0, 5, 2, 7]" exp="(4, 0, 3)" type="point"/>
+<element type="point3d" label="[4, 0, 3, 0, 5, 2, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="4" y="0" z="3" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[4, 0, 4, 0, 5, 2, 7]" exp="(4, 0, 4)" type="point"/>
+<element type="point3d" label="[4, 0, 4, 0, 5, 2, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="4" y="0" z="4" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[4, 0, 5, 1, 5, 1, 7]" exp="(4, 0, 5)" type="point"/>
+<element type="point3d" label="[4, 0, 5, 1, 5, 1, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="4" y="0" z="5" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[4, 0, 6, 1, 6, 0, 7]" exp="(4, 0, 6)" type="point"/>
+<element type="point3d" label="[4, 0, 6, 1, 6, 0, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="4" y="0" z="6" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[4, 1, 0, 0, 3, 4, 7]" exp="(4, 1, 0)" type="point"/>
+<element type="point3d" label="[4, 1, 0, 0, 3, 4, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="4" y="1" z="0" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[4, 1, 1, 0, 3, 4, 7]" exp="(4, 1, 1)" type="point"/>
+<element type="point3d" label="[4, 1, 1, 0, 3, 4, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="4" y="1" z="1" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[4, 1, 2, 0, 4, 3, 7]" exp="(4, 1, 2)" type="point"/>
+<element type="point3d" label="[4, 1, 2, 0, 4, 3, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="4" y="1" z="2" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[4, 1, 3, 0, 4, 3, 7]" exp="(4, 1, 3)" type="point"/>
+<element type="point3d" label="[4, 1, 3, 0, 4, 3, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="4" y="1" z="3" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[4, 1, 4, 1, 4, 2, 7]" exp="(4, 1, 4)" type="point"/>
+<element type="point3d" label="[4, 1, 4, 1, 4, 2, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="4" y="1" z="4" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[4, 1, 5, 1, 5, 1, 7]" exp="(4, 1, 5)" type="point"/>
+<element type="point3d" label="[4, 1, 5, 1, 5, 1, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="4" y="1" z="5" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[4, 2, 0, 0, 2, 5, 7]" exp="(4, 2, 0)" type="point"/>
+<element type="point3d" label="[4, 2, 0, 0, 2, 5, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="4" y="2" z="0" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[4, 2, 1, 0, 3, 4, 7]" exp="(4, 2, 1)" type="point"/>
+<element type="point3d" label="[4, 2, 1, 0, 3, 4, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="4" y="2" z="1" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[4, 2, 2, 0, 3, 4, 7]" exp="(4, 2, 2)" type="point"/>
+<element type="point3d" label="[4, 2, 2, 0, 3, 4, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="4" y="2" z="2" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[4, 2, 3, 1, 3, 3, 7]" exp="(4, 2, 3)" type="point"/>
+<element type="point3d" label="[4, 2, 3, 1, 3, 3, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="4" y="2" z="3" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[4, 2, 4, 1, 4, 2, 7]" exp="(4, 2, 4)" type="point"/>
+<element type="point3d" label="[4, 2, 4, 1, 4, 2, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="4" y="2" z="4" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[4, 3, 0, 0, 2, 5, 7]" exp="(4, 3, 0)" type="point"/>
+<element type="point3d" label="[4, 3, 0, 0, 2, 5, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="4" y="3" z="0" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[4, 3, 1, 0, 2, 5, 7]" exp="(4, 3, 1)" type="point"/>
+<element type="point3d" label="[4, 3, 1, 0, 2, 5, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="4" y="3" z="1" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[4, 3, 2, 1, 2, 4, 7]" exp="(4, 3, 2)" type="point"/>
+<element type="point3d" label="[4, 3, 2, 1, 2, 4, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="4" y="3" z="2" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[4, 3, 3, 1, 3, 3, 7]" exp="(4, 3, 3)" type="point"/>
+<element type="point3d" label="[4, 3, 3, 1, 3, 3, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="4" y="3" z="3" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[4, 4, 0, 0, 1, 6, 7]" exp="(4, 4, 0)" type="point"/>
+<element type="point3d" label="[4, 4, 0, 0, 1, 6, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="4" y="4" z="0" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[4, 4, 1, 1, 1, 5, 7]" exp="(4, 4, 1)" type="point"/>
+<element type="point3d" label="[4, 4, 1, 1, 1, 5, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="4" y="4" z="1" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[4, 4, 2, 1, 2, 4, 7]" exp="(4, 4, 2)" type="point"/>
+<element type="point3d" label="[4, 4, 2, 1, 2, 4, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="4" y="4" z="2" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[4, 5, 0, 1, 0, 6, 7]" exp="(4, 5, 0)" type="point"/>
+<element type="point3d" label="[4, 5, 0, 1, 0, 6, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="4" y="5" z="0" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[4, 5, 1, 1, 1, 5, 7]" exp="(4, 5, 1)" type="point"/>
+<element type="point3d" label="[4, 5, 1, 1, 1, 5, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="4" y="5" z="1" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[4, 6, 0, 1, 0, 6, 7]" exp="(4, 6, 0)" type="point"/>
+<element type="point3d" label="[4, 6, 0, 1, 0, 6, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="4" y="6" z="0" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[5, 0, 1, 0, 4, 3, 7]" exp="(5, 0, 1)" type="point"/>
+<element type="point3d" label="[5, 0, 1, 0, 4, 3, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="5" y="0" z="1" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[5, 0, 2, 0, 4, 3, 7]" exp="(5, 0, 2)" type="point"/>
+<element type="point3d" label="[5, 0, 2, 0, 4, 3, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="5" y="0" z="2" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[5, 0, 3, 0, 5, 2, 7]" exp="(5, 0, 3)" type="point"/>
+<element type="point3d" label="[5, 0, 3, 0, 5, 2, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="5" y="0" z="3" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[5, 0, 4, 0, 5, 2, 7]" exp="(5, 0, 4)" type="point"/>
+<element type="point3d" label="[5, 0, 4, 0, 5, 2, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="5" y="0" z="4" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[5, 0, 5, 0, 6, 1, 7]" exp="(5, 0, 5)" type="point"/>
+<element type="point3d" label="[5, 0, 5, 0, 6, 1, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="5" y="0" z="5" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[5, 1, 0, 0, 3, 4, 7]" exp="(5, 1, 0)" type="point"/>
+<element type="point3d" label="[5, 1, 0, 0, 3, 4, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="5" y="1" z="0" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[5, 1, 1, 0, 3, 4, 7]" exp="(5, 1, 1)" type="point"/>
+<element type="point3d" label="[5, 1, 1, 0, 3, 4, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="5" y="1" z="1" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[5, 1, 2, 0, 4, 3, 7]" exp="(5, 1, 2)" type="point"/>
+<element type="point3d" label="[5, 1, 2, 0, 4, 3, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="5" y="1" z="2" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[5, 1, 3, 0, 4, 3, 7]" exp="(5, 1, 3)" type="point"/>
+<element type="point3d" label="[5, 1, 3, 0, 4, 3, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="5" y="1" z="3" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[5, 1, 4, 0, 5, 2, 7]" exp="(5, 1, 4)" type="point"/>
+<element type="point3d" label="[5, 1, 4, 0, 5, 2, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="5" y="1" z="4" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[5, 2, 0, 0, 2, 5, 7]" exp="(5, 2, 0)" type="point"/>
+<element type="point3d" label="[5, 2, 0, 0, 2, 5, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="5" y="2" z="0" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[5, 2, 1, 0, 3, 4, 7]" exp="(5, 2, 1)" type="point"/>
+<element type="point3d" label="[5, 2, 1, 0, 3, 4, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="5" y="2" z="1" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[5, 2, 2, 0, 3, 4, 7]" exp="(5, 2, 2)" type="point"/>
+<element type="point3d" label="[5, 2, 2, 0, 3, 4, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="5" y="2" z="2" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[5, 2, 3, 0, 4, 3, 7]" exp="(5, 2, 3)" type="point"/>
+<element type="point3d" label="[5, 2, 3, 0, 4, 3, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="5" y="2" z="3" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[5, 3, 0, 0, 2, 5, 7]" exp="(5, 3, 0)" type="point"/>
+<element type="point3d" label="[5, 3, 0, 0, 2, 5, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="5" y="3" z="0" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[5, 3, 1, 0, 2, 5, 7]" exp="(5, 3, 1)" type="point"/>
+<element type="point3d" label="[5, 3, 1, 0, 2, 5, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="5" y="3" z="1" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[5, 3, 2, 0, 3, 4, 7]" exp="(5, 3, 2)" type="point"/>
+<element type="point3d" label="[5, 3, 2, 0, 3, 4, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="5" y="3" z="2" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[5, 4, 0, 0, 1, 6, 7]" exp="(5, 4, 0)" type="point"/>
+<element type="point3d" label="[5, 4, 0, 0, 1, 6, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="5" y="4" z="0" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[5, 4, 1, 0, 2, 5, 7]" exp="(5, 4, 1)" type="point"/>
+<element type="point3d" label="[5, 4, 1, 0, 2, 5, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="5" y="4" z="1" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[5, 5, 0, 0, 1, 6, 7]" exp="(5, 5, 0)" type="point"/>
+<element type="point3d" label="[5, 5, 0, 0, 1, 6, 7]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="127" g="127" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="5" y="5" z="0" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[5, 0, 0, 0, 6, 6, 12]" exp="(5, 0, 0)" type="point"/>
+<element type="point3d" label="[5, 0, 0, 0, 6, 6, 12]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="218" g="36" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="5" y="0" z="0" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[4, 0, 0, 1, 6, 6, 13]" exp="(4, 0, 0)" type="point"/>
+<element type="point3d" label="[4, 0, 0, 1, 6, 6, 13]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="236" g="18" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="4" y="0" z="0" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[0, 0, 0, 4, 5, 5, 14]" exp="(0, 0, 0)" type="point"/>
+<element type="point3d" label="[0, 0, 0, 4, 5, 5, 14]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="255" g="0" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="0" y="0" z="0" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[0, 0, 1, 4, 5, 5, 14]" exp="(0, 0, 1)" type="point"/>
+<element type="point3d" label="[0, 0, 1, 4, 5, 5, 14]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="255" g="0" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="0" y="0" z="1" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[0, 0, 2, 5, 5, 4, 14]" exp="(0, 0, 2)" type="point"/>
+<element type="point3d" label="[0, 0, 2, 5, 5, 4, 14]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="255" g="0" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="0" y="0" z="2" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[0, 0, 3, 5, 6, 3, 14]" exp="(0, 0, 3)" type="point"/>
+<element type="point3d" label="[0, 0, 3, 5, 6, 3, 14]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="255" g="0" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="0" y="0" z="3" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[0, 1, 0, 4, 4, 6, 14]" exp="(0, 1, 0)" type="point"/>
+<element type="point3d" label="[0, 1, 0, 4, 4, 6, 14]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="255" g="0" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="0" y="1" z="0" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[0, 1, 1, 5, 4, 5, 14]" exp="(0, 1, 1)" type="point"/>
+<element type="point3d" label="[0, 1, 1, 5, 4, 5, 14]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="255" g="0" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="0" y="1" z="1" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[0, 1, 2, 5, 5, 4, 14]" exp="(0, 1, 2)" type="point"/>
+<element type="point3d" label="[0, 1, 2, 5, 5, 4, 14]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="255" g="0" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="0" y="1" z="2" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[0, 2, 0, 5, 3, 6, 14]" exp="(0, 2, 0)" type="point"/>
+<element type="point3d" label="[0, 2, 0, 5, 3, 6, 14]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="255" g="0" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="0" y="2" z="0" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[0, 2, 1, 5, 4, 5, 14]" exp="(0, 2, 1)" type="point"/>
+<element type="point3d" label="[0, 2, 1, 5, 4, 5, 14]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="255" g="0" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="0" y="2" z="1" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[0, 3, 0, 5, 3, 6, 14]" exp="(0, 3, 0)" type="point"/>
+<element type="point3d" label="[0, 3, 0, 5, 3, 6, 14]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="255" g="0" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="0" y="3" z="0" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[1, 0, 0, 3, 5, 6, 14]" exp="(1, 0, 0)" type="point"/>
+<element type="point3d" label="[1, 0, 0, 3, 5, 6, 14]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="255" g="0" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="1" y="0" z="0" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[1, 0, 1, 4, 5, 5, 14]" exp="(1, 0, 1)" type="point"/>
+<element type="point3d" label="[1, 0, 1, 4, 5, 5, 14]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="255" g="0" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="1" y="0" z="1" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[1, 0, 2, 4, 6, 4, 14]" exp="(1, 0, 2)" type="point"/>
+<element type="point3d" label="[1, 0, 2, 4, 6, 4, 14]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="255" g="0" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="1" y="0" z="2" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[1, 1, 0, 4, 4, 6, 14]" exp="(1, 1, 0)" type="point"/>
+<element type="point3d" label="[1, 1, 0, 4, 4, 6, 14]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="255" g="0" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="1" y="1" z="0" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[1, 1, 1, 4, 5, 5, 14]" exp="(1, 1, 1)" type="point"/>
+<element type="point3d" label="[1, 1, 1, 4, 5, 5, 14]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="255" g="0" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="1" y="1" z="1" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[1, 2, 0, 4, 4, 6, 14]" exp="(1, 2, 0)" type="point"/>
+<element type="point3d" label="[1, 2, 0, 4, 4, 6, 14]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="255" g="0" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="1" y="2" z="0" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[2, 0, 0, 3, 5, 6, 14]" exp="(2, 0, 0)" type="point"/>
+<element type="point3d" label="[2, 0, 0, 3, 5, 6, 14]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="255" g="0" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="2" y="0" z="0" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[2, 0, 1, 3, 6, 5, 14]" exp="(2, 0, 1)" type="point"/>
+<element type="point3d" label="[2, 0, 1, 3, 6, 5, 14]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="255" g="0" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="2" y="0" z="1" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[2, 1, 0, 3, 5, 6, 14]" exp="(2, 1, 0)" type="point"/>
+<element type="point3d" label="[2, 1, 0, 3, 5, 6, 14]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="255" g="0" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="2" y="1" z="0" w="1"/>
+	<pointSize val="5"/>
+</element>
+
+
+<expression label="[3, 0, 0, 2, 6, 6, 14]" exp="(3, 0, 0)" type="point"/>
+<element type="point3d" label="[3, 0, 0, 2, 6, 6, 14]">
+	<show object="true" label="false" ev="4"/>
+	<objColor r="255" g="0" b="0" alpha="0"/>
+	<layer val="0"/>
+	<labelMode val="0"/>
+	<animation step="1" speed="1" type="0" playing="false"/>
+	<coords x="3" y="0" z="0" w="1"/>
+	<pointSize val="5"/>
+</element>
+

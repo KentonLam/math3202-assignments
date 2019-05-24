@@ -7,7 +7,7 @@
 \usepackage[T1]{fontenc}
 
 \author{Kenton Lam}
-\date{{MATH3202 Assignment 2 \\ Due 03/05/2019 1:00 pm}}
+\date{{MATH3202 Assignment 3 \\ Due 27/05/2019 1:00 pm}}
 \title{WonderMarket \\ 
 Section B -- Client Report}
 
@@ -15,44 +15,96 @@ Section B -- Client Report}
 \begin{document}
 \maketitle
 \begin{abstract}
-    In this report, we propose a solution to optimise your supply chain logistics, 
-    to minimise costs while ensuring all demands are met.
+    In this report, we propose a solution to optimise your refridgerator logistics 
+    and maximise expected profit. 
 \end{abstract}
 
 \part{Solution}
-We have considered your requirements of weekly demand, DC capacity, surge demands, 
-proposed new DCs and labour costs.
-We propose the following strategy for each communication.
+We have considered the customer-facing aspect of fridges put on display 
+as well as the logistics of your fridge deliveries. We have arrived at the 
+following optimal solutions for each communication.
 
-\section{Communication 5}
-For this communication, we consider surge scenarios but without the northside capacity 
-limit. 
-Additionally, we require each store to be assigned to only one distribution centre. 
+\section{Communication 1}
+In this communication, we know how much profit each fridge can be sold for
+and how expected sales vary with the types of fridges placed on display.
+Only 8 fridges can be displayed in total.
 
-This resulted in a cost of \$205688 per week with the assignments below. This is \$6901 
-more expensive than communication 4, which means the requirement of one DC per store 
-costs more than the savings from removing the northside limit.\\[1em]
-\begin{tabular}{l  r  r  r }
-    Store & DC0 & DC1 & DC2 \\
-    S0 &  &  & 100\% \\
-    S1 & 100\% &  &  \\
-    S2 &  &  & 100\% \\
-    S3 &  & 100\% &  \\
-    S4 & 100\% &  &  \\
-    S5 &  & 100\% &  \\
-    S6 &  & 100\% &  \\
-    S7 & 100\% &  &  \\
-    S8 & 100\% &  &  \\
-    S9 & 100\% &  &  \\
-\end{tabular}
-\pagebreak
+The maximum expected profit is \$1863.20. This is achieved by displaying 
+2 Alaska fridges, 3 Elsa fridges and 3 Lumi fridges. 
+In this case, on average you will sell 3.1, 4.2 and 4.1 of Alaska, Elsa and 
+Lumi fridges respectively, leading to the profit of 
+\begin{align*}
+    \text{expected profit} &= 3.1\times \$140+4.2\times\$147+4.1\times \$198 = \$1863.20.
+\end{align*}
 
-\section{Communication 6}
-In this communication, we consider 4 possible sites for a new DC. 
-We add these to our model to determine which (if any) of the new 
-DCs would reduce our cost the most.
-Our model would only recommend opening a new DC if it reduced 
-the total cost from communication 5.
+
+
+\section{Communication 2}
+In this communication, the focus moved from direct-to-customer sales to delivery
+processes. Because customer demand is not known in advance, we need to 
+balance ordering and storing them with having enough fridges to meet 
+future demand. We will consider a period of 4 weeks.
+
+Using the demand distribution you provided us, the maximum expected profit 
+over 4 weeks is \$5282.92 (assuming no fridges to start with). This is done by buying 
+4 Alaska fridges, 5 Elsa fridges and 5 Lumi fridges in the first week.
+
+Moreover, in any week, your optimal strategy is 
+to have 4, 5 and 5 fridges respectively of each type available.
+This means if you have less than this amount stored at the start of a 
+week, buy exactly enough to make up this amount. We have verified that 
+this is optimal for all feasible demand scenarios.
+
+\subsection{Insights}
+In general stochastic (uncertain)
+optimisation problems, the solution cannot be expressed so simply (see communication 3).
+However, the simplicity of this solution is reasonable because
+each fridge does not affect the sales or deliveries of the other fridge types
+and demand remains constant through all weeks.
+
+\section{Communication 3}
+In this communication, we need to consider the costs of transporting fridges to 
+the storage warehouse where they are held before being sent to customers. 
+Each truck costs \$150 and has a  limited capacity of 7 fridges. At most 2 trucks 
+will be ordered per week and at most 8 fridges of each type can be processed 
+at the warehouse. A truck can hold any combination of fridge types so we need 
+to consider all fridge types together.
+
+Assuming you currently have no fridges, the maximum expected profit is 
+\$4229.46 and you should purchase 4, 5 and 5 respectively in week 1. 
+
+In this case, the solution is more complicated. Because each fridge affects 
+other fridges and each fridge sells for a different amount, your buying strategy 
+is more nuanced. With this in mind, we have developed an interactive 
+solution explorer. You input the amount you sell each week and it recommends 
+the optimal buying strategy for the next week. Please see the appendix.
+
+\subsection{Insights}
+In all cases, you should never exceed 5 Alaska fridges, 6 Elsa or 6 Lumi fridges.
+These are the maximum which can be sold per week. Buying any more than this amount 
+will require excess stock to be stored to the next week, raising costs. 
+
+Although the optimal strategy is varied, the there is a threshold below which you 
+should order more fridges. Because trucks cost money, you should order 
+fridges in batches of 7 or 14 unless it violates the above rule.
+
+To try visualise this multi-dimensional data, we have included a 3D plot below. 
+This is at the beginning of the first week and the axes are number of each fridge type stored. Red is Alaska, green is Elsa 
+and blue is Lumi. The colour of each dot represents how many fridges 
+should be ordered on a scale with green being 0 and red being 14.
+\begin{center}
+\includegraphics[width=20em]{cube.png}
+\end{center}
+Here, you can see that there are approximately diagonal thresholds where 
+transitions between truckloads ordered occur. However, these aren't exact; 
+for example even if you have 5 Alaska fridges but no other fridges, you should 
+still order 2 truckloads.
+
+Broadly, the optimal actions are grouped into 3 bunches---0, 1 and 2 truckloads. 
+Most of the cases in each group will order the maximum possible but 
+occasionally, you will want to order less due to the first paragraph in this section.
+
+
 
 We determined \textbf{opening DC3} would be best. This 
  would reduce the weekly cost to 
@@ -182,7 +234,7 @@ Again, the store and DC assignments are the same as communications
 Below, you can find a table showing the weekly breakdowns of normal 
 demand and surge scenarios. Note that the full-time and part-time 
 teams are employed for all 52 weeks each year. \\[1.5em]
-\includegraphics[width=33em]{table.PNG}
+
 
 \section{General Observations}
 While optimising the assignments with the data you provided us, we made 
