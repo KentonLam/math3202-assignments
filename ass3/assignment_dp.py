@@ -58,7 +58,7 @@ Actions2 = (0, 1, 2, 3, 4, 5, 6)
 
 @lru_cache(maxsize=None)
 def V2_fridge(f: int, t: int, s: int):
-    if t == 4:
+    if t >= 4:
         # return (-Profits[f]*s, ())
         return (0, 'done')
     
