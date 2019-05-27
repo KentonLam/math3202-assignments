@@ -43,7 +43,7 @@ def V1(f: int, remaining: int) -> Tuple[int, str]:
     return (running_max, running_action)
 
 def comm_1():
-    print(V1(0, 8))
+    print(V1(0, 9))
 
 
 # COMMUNICATION 2
@@ -156,7 +156,8 @@ def V3(t, s0, s1, s2):
         # aN is the number of fridge N bought (part of action).
         # dN is the number of fridge N in demand.
 
-        # cost of storing existing fridges as well as newly bought fridges.
+        # upfront cost of storing existing fridges as well as newly bought fridges.
+        # action_cost contains cost of transporting and storing new fridges.
         (-(s0+s1+s2)*StoreCost + action_cost
         + sum(  # for each demand scenario, compute the profit of that 
                 # scenario, weighted by the probability of it occuring.
@@ -167,7 +168,7 @@ def V3(t, s0, s1, s2):
         ), a0, a1, a2)
         for (a0, a1, a2), action_cost in ActionsWithCosts
         # ensure currently held fridges never exceed 8
-        if s0+a0 <= 8 and s1+a1 <= 8 and s2+a2 <= 8
+        if s0+a0 <= MaxStore and s1+a1 <= MaxStore and s2+a2 <= MaxStore
     )
 
 
