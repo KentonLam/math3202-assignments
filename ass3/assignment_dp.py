@@ -43,7 +43,7 @@ def V1(f: int, remaining: int) -> Tuple[int, str]:
     return (running_max, running_action)
 
 def comm_1():
-    print(V1(0, 9))
+    print(V1(0, 8))
 
 
 # COMMUNICATION 2
